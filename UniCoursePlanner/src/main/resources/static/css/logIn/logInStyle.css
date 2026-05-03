@@ -71,17 +71,27 @@ body {
 	border-radius: 25px;
 	
 	padding: 20px;
-	margin: 10px;
+	margin: 10px 0 10px 0;
 	
 	font-size: 20px;
 	font-weight: bold;
 	
 	background: #4da6ff;
 	color: white;
+	cursor: pointer;
+	
+	transition: 0.3s;
+}
+
+.forgot-link {
+    display: block;
+    text-align: right;
 }
 
 .logInContainer a {
 	color: black;
 	text-decoration: none;
 	font-weight: bold;
+	
+	margin-top: 10px;
 }
