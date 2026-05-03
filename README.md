@@ -10,3 +10,10 @@ Folien:
   - Noten
   - Kalender
   - Semesterplaner
+
+Menü:
+  - Stundenplan
+  - Noten
+  - Kalender
+  - Semesterplaner
+  - Profile: Settings, LogOut
