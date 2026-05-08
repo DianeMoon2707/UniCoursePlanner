@@ -4,8 +4,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-public class LogInController {
-
+public class LogInController
+{
 	private static final String LOGIN_PAGE_ADRESS = "page/logIn/index";
 	
 	@GetMapping("/")
