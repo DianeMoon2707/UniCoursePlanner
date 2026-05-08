@@ -6,7 +6,8 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class LogInController {
 
-	private static final String LOGIN_PAGE_ADRESS = "/page/logIn/index";
+	private static final String LOGIN_PAGE_ADRESS = "page/logIn/index";
+	
 	@GetMapping("/")
 	public String loadLogInPage()
 	{
