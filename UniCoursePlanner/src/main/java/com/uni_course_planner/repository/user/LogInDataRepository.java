@@ -1,5 +1,7 @@
 package com.uni_course_planner.repository.user;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -11,10 +13,9 @@ import com.uni_course_planner.relation.user.LogInData;
 public interface LogInDataRepository extends JpaRepository<LogInData, Long>
 {
 	@Query("""
-		SELECT CASE WHEN COUNT(l) > 0 THEN true ELSE false END 
+		SELECT l 
 		FROM log_in_data l 
-		WHERE l.username = :username 
-			AND l.password = :password
+		WHERE l.username = :username
 			""")
-	boolean existsByLogInData(@Param("username") String username, @Param("password") String password);
+	Optional<LogInData> findLogInDataByUsername(@Param("username") String username);
 }

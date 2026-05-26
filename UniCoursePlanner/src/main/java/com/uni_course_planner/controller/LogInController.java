@@ -9,6 +9,7 @@ import com.uni_course_planner.service.relation.user.UserService;
 public class LogInController
 {
 	private static final String LOGIN_PAGE_ADDRESS = "page/logIn/index";
+	private static final String HOME_PAGE_ADDRESS = "page/home/home";
 	
 	private UserService userService;
 	
@@ -30,13 +31,11 @@ public class LogInController
 	{
 		if(userService.checkLogInData(userField, passwordField) == true)
 		{
-			System.out.println("Existiert!");
+			return HOME_PAGE_ADDRESS;
 		}
 		else
 		{
-			System.out.println("Nicht existend!");
+			return LOGIN_PAGE_ADDRESS;
 		}
-		
-		return "login";
 	}
 }
