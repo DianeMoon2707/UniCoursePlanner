@@ -8,7 +8,8 @@ import com.uni_course_planner.service.relation.user.UserService;
 @Controller
 public class RegisterController 
 {
-	private static final String REGISTER_PAGE_ADRESS = "page/logIn/register";
+	private static final String REGISTER_PAGE_ADDRESS = "page/logIn/register";
+	private static final String LOGIN_PAGE_ADDRESS = "page/logIn/index";
 	
 	private UserService userService;
 	
@@ -17,10 +18,10 @@ public class RegisterController
 		this.userService = userService;
 	}
 
-	@GetMapping(REGISTER_PAGE_ADRESS)
+	@GetMapping(REGISTER_PAGE_ADDRESS)
 	public String loadRegisterPage()
 	{
-		return REGISTER_PAGE_ADRESS;
+		return REGISTER_PAGE_ADDRESS;
 	}
 	
 	@PostMapping("/register")
@@ -29,9 +30,7 @@ public class RegisterController
 			@RequestParam(name="email-field") String emailField,
 			@RequestParam(name="password-field") String passwordField)
 	{
-		System.out.println("Email: " + emailField);
-		userService.registerUser(emailField);
-		
-		return REGISTER_PAGE_ADRESS;
+		userService.registerUser(emailField, userField, passwordField);		
+		return LOGIN_PAGE_ADDRESS;
 	}
 }

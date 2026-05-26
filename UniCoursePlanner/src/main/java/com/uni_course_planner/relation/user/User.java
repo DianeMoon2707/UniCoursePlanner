@@ -1,4 +1,4 @@
-package com.uni_course_planner.relation;
+package com.uni_course_planner.relation.user;
 
 import jakarta.persistence.*;
 
@@ -13,7 +13,9 @@ public class User
 	
 	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private LogInData logInData;
-
+	
+	protected User() {}
+	
 	public User(String email) 
 	{
 		this.email = email;

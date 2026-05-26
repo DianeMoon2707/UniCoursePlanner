@@ -1,4 +1,4 @@
-package com.uni_course_planner.relation;
+package com.uni_course_planner.relation.user;
 
 import jakarta.persistence.*;
 
@@ -8,22 +8,22 @@ public class LogInData
 	@Id
 	private Long id;
 	
-	@Column(unique=true, nullable=false)
+	@Column(unique = true, nullable = false)
 	private String username;
 	
-	@Column(nullable=false)
+	@Column(nullable = false)
 	private String password;
 	
 	@MapsId
 	@OneToOne
     @JoinColumn(name = "id")
     private User user;
-
+	
+	protected LogInData() {}
+	
 	public LogInData(User user, String username, String password)
 	{
 		this.user = user;
-		
-		this.id = user.getId();
 		this.username = username;
 		this.password = password;
 	}
