@@ -34,7 +34,7 @@ public class LogInController
 		}
 		else
 		{
-			System.out.println("Existiert nicht!");
+			System.out.println("Nicht existend!");
 		}
 		
 		return "login";
