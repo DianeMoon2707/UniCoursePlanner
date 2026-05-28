@@ -1,6 +1,7 @@
 package com.uni_course_planner.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import com.uni_course_planner.service.relation.user.UserService;
@@ -9,7 +10,7 @@ import com.uni_course_planner.service.relation.user.UserService;
 public class LogInController
 {
 	private static final String LOGIN_PAGE_ADDRESS = "page/logIn/index";
-	private static final String HOME_PAGE_ADDRESS = "page/home/home";
+	private static final String HOME_PAGE_ADDRESS = "page/core/home";
 	
 	private UserService userService;
 	
@@ -27,14 +28,18 @@ public class LogInController
 	@PostMapping("/login")
 	public String proofLogInData(
 			@RequestParam(name="user-field") String userField,
-			@RequestParam(name="password-field") String passwordField)
+			@RequestParam(name="password-field") String passwordField,
+			Model model)
 	{
-		if(userService.checkLogInData(userField, passwordField) == true)
+		boolean loginSuccess = userService.checkLogInData(userField, passwordField);
+		
+		if(loginSuccess == true)
 		{
-			return HOME_PAGE_ADDRESS;
+			return "redirect:" + HOME_PAGE_ADDRESS;
 		}
 		else
 		{
+			model.addAttribute("error", "Benutzername oder Passwort falsch"); 
 			return LOGIN_PAGE_ADDRESS;
 		}
 	}
