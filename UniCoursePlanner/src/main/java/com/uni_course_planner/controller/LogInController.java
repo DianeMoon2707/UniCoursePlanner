@@ -1,21 +1,22 @@
 package com.uni_course_planner.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
-public class LogInController {
+import com.uni_course_planner.constants.views.PageAddress;
 
-	private static final String LOGIN_PAGE_ADRESS = "/page/logIn/index";
+@Controller
+public class LogInController
+{	
 	@GetMapping("/")
-	public String loadLogInPage()
+	public String loadLogInPage(Model model, @RequestParam(required = false) String error)
 	{
-		return LOGIN_PAGE_ADRESS;
-	}
-	
-	@PostMapping("/login")
-	public String proofLogInData()
-	{
-		return "login";
+		if(error != null)
+		{
+			model.addAttribute("error", "Benutzername oder Passwort falsch");
+		}
+		
+		return PageAddress.LOGIN_PAGE_ADDRESS;
 	}
 }
