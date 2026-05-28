@@ -1,7 +1,5 @@
 package com.uni_course_planner.service.relation.user;
 
-import java.util.Optional;
-
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,18 +32,9 @@ public class UserService
 		logInDataRep.save(new LogInData(user, username, hashedPassword));
 	}
 	
-	// User finden
-	public boolean checkLogInData(String username, String password)
+	//User laden
+	public LogInData getUserByUsername(String username)
 	{
-		Optional<LogInData> logInUser = logInDataRep.findLogInDataByUsername(username);
-		
-		if(!logInUser.isPresent())
-		{
-			return false;
-		}
-		else
-		{
-			return passwordEncoder.matches(password, logInUser.get().getPassword());
-		}			
+		return logInDataRep.findLogInDataByUsername(username).get();
 	}
 }

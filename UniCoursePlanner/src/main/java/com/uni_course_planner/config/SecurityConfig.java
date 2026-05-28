@@ -2,20 +2,57 @@ package com.uni_course_planner.config;
 
 import org.springframework.context.annotation.*;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+import com.uni_course_planner.constants.views.LinkAddress;
+import com.uni_course_planner.service.relation.user.CustomUserDetailsService;
+
 @Configuration
-@EnableWebSecurity
 public class SecurityConfig 
 {
+	private final CustomUserDetailsService userDetailsService;
+	
+	public SecurityConfig(CustomUserDetailsService userDetailsService) 
+	{
+		this.userDetailsService = userDetailsService;
+	}
+
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception 
 	{
-		http.authorizeHttpRequests(auth -> auth.anyRequest().permitAll())
-		.csrf(csrf -> csrf.disable());
+		http.authorizeHttpRequests(
+			//Öffentliche Seiten
+			auth -> auth.requestMatchers(
+					LinkAddress.LOGIN_PAGE_ADDRESS,
+					LinkAddress.REGISTER_PAGE_ADDRESS,
+                    "/css/**",
+                    "/js/**").permitAll().anyRequest().authenticated()
+		)
+		//Eigenes LogIn
+		.formLogin(form -> form
+			.loginPage(LinkAddress.LOGIN_PAGE_ADDRESS)
+			.loginProcessingUrl("/login")
+			.usernameParameter("user-field")
+		    .passwordParameter("password-field")
+			.defaultSuccessUrl(LinkAddress.HOME_PAGE_ADDRESS, true)
+			.failureUrl(LinkAddress.LOGIN_PAGE_ADDRESS + "?error=true")
+			.permitAll()
+		)
+		//Remember me für 7 Tage
+		.rememberMe(r -> r
+			.key("my-secret-key")
+			.alwaysRemember(true)
+			.tokenValiditySeconds(604800)
+			.userDetailsService(userDetailsService)
+			.rememberMeParameter("remember-me")
+		)
+		//Später LogOut
+		
+		//User-Service registrieren
+		.userDetailsService(userDetailsService);
+		
 		
 		return http.build();
     }
