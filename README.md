@@ -1,10 +1,10 @@
 # UniCoursePlanner
 University Course planning platform with scheduling and ECTS tracking.
 
-# Spezifikation:
-Folien:
+# Folien:
   - LogIn
   - Register
+  - Passwort vergessen
   - Profile
   - Stundenplan
   - Noten
