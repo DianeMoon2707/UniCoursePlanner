@@ -1,4 +1,4 @@
-package com.uni_course_planner.controller;
+package com.uni_course_planner.controller.login;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;

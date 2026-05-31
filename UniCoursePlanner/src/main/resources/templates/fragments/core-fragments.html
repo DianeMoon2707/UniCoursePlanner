@@ -3,14 +3,31 @@
 		<div class="logo">Uni-Course-Planner</div>
 		<ul class="menue-list">
 			<li><a th:href="@{/page/core/home}">Home</a></li>
-			<li><a th:href="@{/page/core/home}">Modulübersicht</a></li>
-			<li><a th:href="@{/page/core/home}">Stundenplan</a></li>
-			<li><a th:href="@{/page/core/home}">Kalender</a></li>
-			<li><a th:href="@{/page/core/home}">Leistungspunkte</a></li>
+			<li><a th:href="@{/page/core/modul}">Modulübersicht</a></li>
+			<li><a th:href="@{/page/core/stundenplan}">Stundenplan</a></li>
+			<li><a th:href="@{/page/core/kalender}">Kalender</a></li>
+			<li><a th:href="@{/page/core/leistungspunkte}">Leistungspunkte</a></li>
 		</ul>
 		
-		<a class="menue-btn" th:href="@{/page/core/home}" title="Profil">
+		<a class="menue-btn" th:href="@{/page/core/profil}" title="Profil">
 			<i class="bi bi-person"></i>
 		</a>
 	</nav>
+</div>
+
+<div th:fragment="table">
+	<table class="main-table">
+		<thead>
+			<tr>
+				<th th:each="headline : ${headlineTable}" 
+					th:text="${headline.name}">
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="content : ${tableContent}">
+				<td th:text="${content.name}"></td>
+			</tr>
+		</tbody>
+	</table>
 </div>
