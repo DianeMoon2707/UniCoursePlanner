@@ -1,0 +1,11 @@
+<div th:fragment="insert-mask">
+	<form th:action="@{/insert}" method="post">
+		<div th:each="field : ${fields}">
+			<label th:for="${field.input}" th:text="${field.label}"></label>
+			<input th:id="${field.input}" th:name="${field.input}" th:type="${field.type.htmlType}">
+			<br>			
+		</div>
+		
+		<button>Speichern</button>
+	</form>
+</div>
