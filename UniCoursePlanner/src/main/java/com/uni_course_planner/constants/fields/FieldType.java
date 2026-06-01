@@ -3,7 +3,8 @@ package com.uni_course_planner.constants.fields;
 public enum FieldType 
 {
 	TEXT("text"),
-	NUMBER("number");
+	NUMBER("number"),
+	CHECKBOX("checkbox");
 	
 	private String htmlType;
 	

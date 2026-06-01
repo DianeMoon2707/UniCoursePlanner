@@ -52,13 +52,6 @@ public class InsertController
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		LogInData currentUser = userService.getUserByUsername(auth.getName());
 		
-		System.out.println(insertMap);
-		System.out.println(currentUser.getUsername());
-		
-		insertMap.forEach((k,v) ->
-	    	System.out.println("Key=" + k + ", Value=" + v)
-		);
-		
 		serviceFactory.getInsertService(insertType).save(insertMap, currentUser);
 		return PageAddress.MODUL_PAGE_ADDRESS;
 		

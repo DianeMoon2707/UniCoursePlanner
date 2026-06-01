@@ -1,6 +1,10 @@
 package com.uni_course_planner.relation.modul.modul;
 
+import java.util.List;
+
 import jakarta.persistence.*;
+
+import com.uni_course_planner.relation.modul.event_type.*;
 
 @Entity(name = "modul")
 public class Modul 
@@ -13,6 +17,9 @@ public class Modul
 	
 	@Column(nullable = false)
 	private int lp;
+	
+	@OneToMany(mappedBy = "modul", cascade = CascadeType.REMOVE, orphanRemoval = true)
+	private List<EventType> eventTypes;
 	
 	protected Modul() {}
 

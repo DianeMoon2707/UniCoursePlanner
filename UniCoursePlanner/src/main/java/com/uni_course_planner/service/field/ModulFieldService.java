@@ -15,7 +15,10 @@ public class ModulFieldService extends FieldService
 	{
 		List<FieldDTO> insertMask = List.of(
 			new FieldDTO("Modulname:", ModulField.MODULNAME.getHtmlName(), FieldType.TEXT),
-			new FieldDTO("Leistungspunkte:", ModulField.LP.getHtmlName(), FieldType.NUMBER)
+			new FieldDTO("Leistungspunkte:", ModulField.LP.getHtmlName(), FieldType.NUMBER),
+			new FieldDTO("Vorlesung:", ModulField.VL.getHtmlName(), FieldType.CHECKBOX),
+			new FieldDTO("Übung:", ModulField.UB.getHtmlName(), FieldType.CHECKBOX),
+			new FieldDTO("Seminar:", ModulField.SEM.getHtmlName(), FieldType.CHECKBOX)
 		);
 		
 		return insertMask;
