@@ -14,6 +14,8 @@ public class ModulId implements Serializable
 	@Column(name = "modul_id")
 	private Long modulId;
 
+	public ModulId() {}
+	
 	public ModulId(Long userId, Long modulId)
 	{
 		this.userId = userId;

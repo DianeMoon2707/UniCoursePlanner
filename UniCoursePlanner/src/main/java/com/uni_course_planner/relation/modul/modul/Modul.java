@@ -8,7 +8,7 @@ public class Modul
 	@EmbeddedId
 	private ModulId mId;
 	
-	@Column(unique = true, nullable = false)
+	@Column(nullable = false)
 	private String modulname;
 	
 	@Column(nullable = false)

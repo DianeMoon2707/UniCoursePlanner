@@ -7,7 +7,7 @@ import com.uni_course_planner.relation.user.User;
 
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Integer>
+public interface UserRepository extends JpaRepository<User, Long>
 {
 
 }
