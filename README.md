@@ -23,4 +23,12 @@ University Course planning platform with scheduling and ECTS tracking.
 - Baue Home-Folie (muss nur existieren und kein Content haben)
 - Baue Security-Config (Authentification, Remember Me) => Remember Me funktioniert noch nicht
 - Remember me
-- Baue Home-Folie (Menü + Content)
+- Baue Home-Folie (Menü + Content) + Controller
+- Baue Modul-Folie (nur Insert-/Delete-/Edit-Button) + Controller
+- Erstelle Relation + Repository + Service für Modul
+- Baue Insert-Popup für Modul
+- Baue Insert-Maske
+- Baue Feld-Service, um Maskenfelder zu definieren
+- Baue InsertService nach Strategy-Pattern
+- Erstelle Relation + Repository für EventType (Zusatzinfos für Modul)
+- Nehme Checkboxen mit auf in den Insert-Popup für Modul
