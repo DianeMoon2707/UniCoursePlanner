@@ -4,8 +4,7 @@
 		<title>Daten erstellen</title>
 	</head>
 	<body>
-		<h1 th:text="${headline}"></h1>
-		<div th:replace="~{fragments/input-mask-fragments :: insert-mask}"></div>
+		<div th:replace="~{${fragmentPath} :: insert-mask}"></div>
 		
 		<script th:src="@{/js/popup/popup-actions.js}"></script>
 		

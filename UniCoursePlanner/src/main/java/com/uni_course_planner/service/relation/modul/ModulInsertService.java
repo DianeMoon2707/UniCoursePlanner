@@ -1,12 +1,11 @@
 package com.uni_course_planner.service.relation.modul;
 
-import java.util.Map;
-
 import org.springframework.stereotype.Service;
 
-import com.uni_course_planner.constants.fields.mask.*;
 import com.uni_course_planner.constants.modul.EventTypes;
 import com.uni_course_planner.constants.popup.InsertType;
+import com.uni_course_planner.dto.FieldDTO;
+import com.uni_course_planner.dto.fields.*;
 import com.uni_course_planner.relation.modul.event_type.*;
 import com.uni_course_planner.relation.modul.modul.*;
 import com.uni_course_planner.relation.user.LogInData;
@@ -14,7 +13,7 @@ import com.uni_course_planner.repository.modul.*;
 import com.uni_course_planner.service.popup.strategy.InsertStrategy;
 
 @Service
-public class ModulInsertService implements InsertStrategy 
+public class ModulInsertService implements InsertStrategy
 {
 	private ModulRepository modulRep;
 	private EventTypeRepository eventTypeRep;
@@ -30,34 +29,36 @@ public class ModulInsertService implements InsertStrategy
 	{
 		return InsertType.MODUL;
 	}
-
+	
 	@Override
-	public void save(Map<String, String> insertMap, LogInData user) 
+	public FieldDTO createDTO()
 	{
-		String modulname = insertMap.get(ModulField.MODULNAME.getHtmlName());
-		int lp = Integer.parseInt(insertMap.get(ModulField.LP.getHtmlName()));
-		Long mId = modulRep.getMaxModulId() + 1;
+		return new ModulDTO();
+	}
+	
+	@Override
+	public void save(FieldDTO dto, LogInData user) 
+	{
+		ModulDTO modulDTO = (ModulDTO) dto;
+		Long mId = modulRep.getMaxModulId(user.getId()) + 1;
 		
 		Modul modul = new Modul(
 				new ModulId(user.getId(), mId),
-				modulname,
-				lp
+				modulDTO.getModulname(),
+				modulDTO.getLp()
 			);
 		
 		modulRep.save(modul);
-		this.saveEvents(insertMap, modul);
+		this.saveEvents(modulDTO, modul);
 	}
 	
-	private void saveEvents(Map<String, String> insertMap, Modul modul)
+	private void saveEvents(ModulDTO modulDTO, Modul modul)
 	{
-		for(EventTypes type : EventTypes.values())
+		for(EventTypes type : modulDTO.getEventTypes())
 		{
-			if(insertMap.containsKey(EventTypes.getLowerCase(type)))
-			{
-				EventTypeId eId = new EventTypeId(modul.getmId(), type);
-				EventType et = new EventType(eId, modul);
-				eventTypeRep.save(et);
-			}
+			EventTypeId eId = new EventTypeId(modul.getmId(), type);
+			EventType et = new EventType(eId, modul);
+			eventTypeRep.save(et);
 		}
 	}
 }

@@ -1,0 +1,24 @@
+<div th:fragment="insert-mask">
+	<h1>Neues Modul speichern</h1>
+	
+	<form id="insertForm" th:action="@{/insert}" method="post" th:object="${fieldDTO}">
+		<input type="hidden" name="insertType" th:value="${insertType}">
+		
+		<h2>Standarddaten</h2>
+		
+		<label>Modulname: </label>
+		<input th:field="*{modulname}"> <br>
+		
+		<label>Leistungspunkte: </label>
+		<input th:field="*{lp}" type="number" min="0"> <br>
+		
+		<h2>Veranstaltungsformen</h2>
+		
+		<div th:each="type : ${T(com.uni_course_planner.constants.modul.EventTypes).values()}">
+			<label th:text="${type.description}"></label>
+			<input th:field="*{eventTypes}" type="checkbox" th:value="${type}">
+		</div>
+		
+		<button>Speichern</button>
+	</form>
+</div>
