@@ -26,9 +26,8 @@ University Course planning platform with scheduling and ECTS tracking.
 - Baue Home-Folie (Menü + Content) + Controller
 - Baue Modul-Folie (nur Insert-/Delete-/Edit-Button) + Controller
 - Erstelle Relation + Repository + Service für Modul
-- Baue Insert-Popup für Modul
-- Baue Insert-Maske
-- Baue Feld-Service, um Maskenfelder zu definieren
+- Baue Insert-Popup für Modul (Felder + JS für Schließen des Fensters)
+- Baue DTOs
 - Baue InsertService nach Strategy-Pattern
 - Erstelle Relation + Repository für EventType (Zusatzinfos für Modul)
-- Nehme Checkboxen mit auf in den Insert-Popup für Modul
+- Baue Tabelle zum Anzeigen der Module
