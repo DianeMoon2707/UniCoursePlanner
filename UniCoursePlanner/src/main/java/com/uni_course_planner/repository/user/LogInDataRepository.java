@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import com.uni_course_planner.relation.user.LogInData;
 
-
 @Repository
 public interface LogInDataRepository extends JpaRepository<LogInData, Long>
 {

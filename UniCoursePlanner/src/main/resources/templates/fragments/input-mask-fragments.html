@@ -1,0 +1,21 @@
+<div th:fragment="insert-mask">
+	<form id="insertForm" th:action="@{/insert}" method="post">
+		<div th:each="field : ${fields}">
+			<label th:for="${field.input}" th:text="${field.label}"></label>
+			
+			<div th:switch="${field.type.htmlType}">
+				<input th:case="'checkbox'"
+					th:id="${field.input}" th:name="${field.input}" 
+					type="checkbox" th:value="${field.input}">
+					
+				<input th:case="*"
+					th:id="${field.input}" th:name="${field.input}" 
+					th:type="${field.type.htmlType}">
+			</div>
+			
+			<br>			
+		</div>
+		
+		<button>Speichern</button>
+	</form>
+</div>
