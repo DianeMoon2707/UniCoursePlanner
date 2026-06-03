@@ -1,28 +1,18 @@
 package com.uni_course_planner.constants.popup;
 
-import com.uni_course_planner.service.field.FieldService;
-import com.uni_course_planner.service.field.ModulFieldService;
-
-public enum InsertType
+public enum InsertType 
 {
-	MODUL("Neues Modul anlegen", ModulFieldService.class);
+	MODUL("fragments/popup/modul-popup");
 	
-	private final String headline;
-	private final Class<? extends FieldService> serviceClass;
+	private String fragmentFile;
 	
-	InsertType(String headline, Class<? extends FieldService> serviceClass)
+	InsertType(String fragmentFile)
 	{
-		this.headline = headline;
-		this.serviceClass = serviceClass;
-	}
-	
-	public String getHeadline()
-	{
-		return headline;
+		this.fragmentFile = fragmentFile;
 	}
 
-	public Class<? extends FieldService> getServiceClass() 
+	public String getFragmentFile() 
 	{
-		return serviceClass;
+		return fragmentFile;
 	}
 }

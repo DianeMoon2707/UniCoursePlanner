@@ -1,0 +1,24 @@
+<div th:fragment="insert-mask">
+	<h1>Neues Modul speichern</h1>
+	
+	<form id="insertForm" th:action="@{/insert}" method="post">
+		<h2>Standarddaten</h2>
+		<label for="modulname">Modulname: </label>
+		<input id="modulname" name="modulname"> <br>
+		
+		<label for="lp">Leistungspunkte: </label>
+		<input id="lp" name="lp" type="number" min="0"> <br>
+		
+		<h2>Veranstaltungsformen</h2>
+		<label for="vl">Vorlesung: </label>
+		<input id="vl" name="vl" type="checkbox" value="vl"><br>
+		
+		<label for="ub">Übung: </label>
+		<input id="ub" name="ub" type="checkbox" value="ub"><br>
+		
+		<label for="sem">Seminar: </label>
+		<input id="sem" name="sem" type="checkbox" value="sem"><br>
+		
+		<button>Speichern</button>
+	</form>
+</div>
