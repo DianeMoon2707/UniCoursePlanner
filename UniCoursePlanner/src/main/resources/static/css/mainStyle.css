@@ -79,9 +79,70 @@ nav {
 .content {
 	padding: 0 20px 0 20px;
 	font-weight: 500;
+	
+	display: flex;
+	flex-direction: column;
 }
 
 .content h1 {
 	text-decoration: underline;
-	margin-bottom: 20px;
+	margin-bottom: 40px;
+	
+	display: flex;
+}
+
+/* Buttons */
+.data-handling-btn {
+	display: flex;
+	justify-content: flex-end;
+	
+	margin-top: 40px;
+	
+	gap: 1rem;
+}
+
+.data-handling-btn button {
+	font-size: 2rem;	
+	border: 2px solid black;
+}
+
+.bi-plus-circle{
+	color: #228b22;
+}
+
+.bi-pencil{
+	color: #ffd700;
+}
+
+.bi-trash{
+	color: #ee0000;
+}
+
+/* Table */
+.content table {
+	width: 100%;
+	margin: 0 auto;
+	
+	border: 1px solid black;
+	border-collapse: collapse;
+	
+	overflow-y: auto;
+	overflow-x: auto;
+}
+
+.content th,
+.content td {
+	border: 1px solid black;
+	padding: 10px;
+	
+	text-align: center;
+}
+
+.content th {
+	background-color: #008b8b;
+	color: white;
+}
+
+.content tr:hover {
+	background-color: #b0e2ff;
 }

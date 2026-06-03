@@ -32,6 +32,16 @@ public class ModulId implements Serializable
 		this.modulId = modulId;
 	}
 
+	public Long getUserId() 
+	{
+		return userId;
+	}
+
+	public void setUserId(Long userId) 
+	{
+		this.userId = userId;
+	}
+
 	@Override
 	public int hashCode() 
 	{
