@@ -26,7 +26,11 @@
 						<td hidden th:text="${modul.user_id}"></td>
 						<td th:text="${modul.modulname}"></td>
 						<td th:text="${modul.lp}"></td>
-						<td th:text="${modul.eventTypes}"></td>
+						<td>
+							<ul>
+								<li th:each="event : ${modul.eventTypes}" th:text="${event.description}">
+							</ul>
+						</td>
 					</tr>
 				</tbody>
 			</table>

@@ -143,6 +143,13 @@ nav {
 	color: white;
 }
 
+.content td ul {
+	margin: 0;
+	padding-left: 20px;
+	list-style-position: inside;
+	text-align: left;
+}
+
 .content tr:hover {
 	background-color: #b0e2ff;
 }
