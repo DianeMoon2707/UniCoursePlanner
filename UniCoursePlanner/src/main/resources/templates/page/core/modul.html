@@ -10,20 +10,45 @@
 		
 		<div class="content">
 			<h1>Module</h1>
-			<!--<div th:replace="~{fragments/core-fragments :: table}"></div>-->
+			<table>
+				<thead>
+					<tr>
+						<th hidden>Modul_ID</th>
+						<th hidden>User_ID</th>
+						<th>Modul</th>
+						<th>Leistungspunkte</th>
+						<th>Veranstaltungsarten</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="modul : ${module}">
+						<td hidden th:text="${modul.modul_id}"></td>
+						<td hidden th:text="${modul.user_id}"></td>
+						<td th:text="${modul.modulname}"></td>
+						<td th:text="${modul.lp}"></td>
+						<td>
+							<ul>
+								<li th:each="event : ${modul.eventTypes}" th:text="${event.description}">
+							</ul>
+						</td>
+					</tr>
+				</tbody>
+			</table>
 			
-			<button class="data-handling-btn" type="button"
-				onclick="window.open('/popup/insert?insertType=MODUL', '_blank', 'width=500,height=400')">
-				<i class="bi bi-plus-circle"></i>
-			</button>
-			
-			<button class="data-handling-btn" type="button">
-				<i class="bi bi-pencil"></i>
-			</button>
-			
-			<button class="data-handling-btn" type="button">
-				<i class="bi bi-trash"></i>
-			</button>
+			<div class="data-handling-btn">
+				<button type="button"
+					onclick="window.open('/popup/insert?insertType=MODUL', '_blank', 'width=500,height=400')">
+					<i class="bi bi-plus-circle"></i>
+				</button>
+				
+				<button type="button">
+					<i class="bi bi-pencil"></i>
+				</button>
+				
+				<button type="button">
+					<i class="bi bi-trash"></i>
+				</button>
+			</div>
 		</div>
 	</body>
 </html>

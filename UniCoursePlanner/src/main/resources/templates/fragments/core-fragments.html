@@ -14,20 +14,3 @@
 		</a>
 	</nav>
 </div>
-
-<div th:fragment="table">
-	<table class="main-table">
-		<thead>
-			<tr>
-				<th th:each="headline : ${headlineTable}" 
-					th:text="${headline.name}">
-				</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr th:each="content : ${tableContent}">
-				<td th:text="${content.name}"></td>
-			</tr>
-		</tbody>
-	</table>
-</div>

@@ -1,5 +1,7 @@
 package com.uni_course_planner.repository.modul;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -11,4 +13,7 @@ public interface ModulRepository extends JpaRepository<Modul, ModulId>
 {
 	@Query("SELECT COALESCE(MAX(m.mId.modulId), 0) FROM modul m WHERE m.mId.userId = :userId")
 	Long getMaxModulId(@Param("userId") Long user);
+	
+	@Query("SELECT m FROM modul m WHERE m.mId.userId = :userId")
+	List<Modul> findAllByUserId(@Param("userId") Long user);
 }
