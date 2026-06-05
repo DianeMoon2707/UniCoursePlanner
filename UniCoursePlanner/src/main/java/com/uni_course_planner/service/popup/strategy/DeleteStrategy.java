@@ -4,9 +4,9 @@ import com.uni_course_planner.constants.views.PopupType;
 import com.uni_course_planner.dto.FieldDTO;
 import com.uni_course_planner.relation.user.LogInData;
 
-public interface InsertStrategy
+public interface DeleteStrategy 
 {
 	public PopupType getType();
-	FieldDTO createDTO();
-	public void save(FieldDTO dto, LogInData currentUser);
+	FieldDTO createDTO(String rowData);
+	public void delete(FieldDTO dto, LogInData currentUser);
 }

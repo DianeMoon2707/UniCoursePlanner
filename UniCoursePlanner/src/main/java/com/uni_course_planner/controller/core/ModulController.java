@@ -22,7 +22,7 @@ public class ModulController
 		this.userService = userService;
 		this.modulTableService = modulTableService;
 	}
-
+	
 	@GetMapping(PageAddress.MODUL_PAGE_ADDRESS)
 	public String loadModulPage(Model model)
 	{

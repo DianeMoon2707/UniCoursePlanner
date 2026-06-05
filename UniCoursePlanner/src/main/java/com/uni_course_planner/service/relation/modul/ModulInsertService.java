@@ -3,9 +3,9 @@ package com.uni_course_planner.service.relation.modul;
 import org.springframework.stereotype.Service;
 
 import com.uni_course_planner.constants.modul.EventTypes;
-import com.uni_course_planner.constants.popup.InsertType;
+import com.uni_course_planner.constants.views.PopupType;
 import com.uni_course_planner.dto.FieldDTO;
-import com.uni_course_planner.dto.fields.*;
+import com.uni_course_planner.dto.modul.*;
 import com.uni_course_planner.relation.modul.event_type.*;
 import com.uni_course_planner.relation.modul.modul.*;
 import com.uni_course_planner.relation.user.LogInData;
@@ -25,9 +25,9 @@ public class ModulInsertService implements InsertStrategy
 	}
 	
 	@Override
-	public InsertType getType()
+	public PopupType getType()
 	{
-		return InsertType.MODUL;
+		return PopupType.MODUL;
 	}
 	
 	@Override

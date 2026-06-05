@@ -17,6 +17,7 @@ function submitPopupForm(formId, url)
 			if(response.ok) 
 			{
 				window.close();
+				window.opener.location.reload();
 			} 
 			else 
 			{

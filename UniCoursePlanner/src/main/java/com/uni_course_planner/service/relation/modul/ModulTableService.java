@@ -5,7 +5,7 @@ import java.util.*;
 import org.springframework.stereotype.Service;
 
 import com.uni_course_planner.constants.modul.EventTypes;
-import com.uni_course_planner.dto.fields.ModulDTO;
+import com.uni_course_planner.dto.modul.ModulDTOWithID;
 import com.uni_course_planner.relation.modul.event_type.EventType;
 import com.uni_course_planner.relation.modul.modul.Modul;
 import com.uni_course_planner.repository.modul.*;
@@ -22,9 +22,9 @@ public class ModulTableService
 		this.eventTypeRep = eventTypeRep;
 	}
 	
-	public List<ModulDTO> fillModulTable(Long user)
+	public List<ModulDTOWithID> fillModulTable(Long user)
 	{
-		List<ModulDTO> tableData = new ArrayList<ModulDTO>();
+		List<ModulDTOWithID> tableData = new ArrayList<ModulDTOWithID>();
 		
 		List<Modul> module = modulRep.findAllByUserId(user);
 		
@@ -39,12 +39,12 @@ public class ModulTableService
 			}
 			
 			tableData.add(
-				new ModulDTO(
-					modul.getmId().getModulId(),
-					modul.getmId().getUserId(),
+				new ModulDTOWithID(
 					modul.getModulname(),
 					modul.getLp(),
-					eventSet
+					eventSet,
+					modul.getmId().getModulId(),
+					modul.getmId().getUserId()
 				));
 		}
 		

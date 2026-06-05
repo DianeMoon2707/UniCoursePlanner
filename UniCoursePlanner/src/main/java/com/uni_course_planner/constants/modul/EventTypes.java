@@ -22,4 +22,18 @@ public enum EventTypes
 	{
 		return type.toString().toLowerCase();
 	}
+	
+	public static EventTypes fromDescriptionToEnum(String description)
+	{
+		String normalized = description.trim();
+		
+		for(EventTypes type : EventTypes.values())
+		{
+			if(type.getDescription().equals(normalized))
+			{
+				return type;
+			}
+		}
+		throw new IllegalArgumentException("Unbekannte Beschreibung: " + description);
+	}
 }
