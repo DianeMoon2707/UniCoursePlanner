@@ -21,7 +21,7 @@ function submitPopupForm(formId, url)
 			} 
 			else 
 			{
-				alert("Fehler beim Speichern");
+				alert("Fehler beim Schließen");
 			}
 		})
 		.catch(err => {

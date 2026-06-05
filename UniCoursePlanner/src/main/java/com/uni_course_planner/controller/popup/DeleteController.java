@@ -29,8 +29,14 @@ public class DeleteController
 	}
 	
 	@ModelAttribute("fieldDTO")
-	public FieldDTO fieldDTO(@RequestParam PopupType deleteType, @RequestParam String rowData) 
+	public FieldDTO fieldDTO(@RequestParam PopupType deleteType, @RequestParam(required = false) String rowData) 
 	{
+		if(rowData == null)
+		{
+			System.out.println("Find");
+			return serviceFactory.getDeleteService(deleteType).createDTO();
+		}
+		
 	    return serviceFactory.getDeleteService(deleteType).createDTO(rowData);
 	}
 	
@@ -49,7 +55,7 @@ public class DeleteController
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		LogInData currentUser = userService.getUserByUsername(auth.getName());
 		
-		serviceFactory.getDeleteService(deleteType).delete(fieldDTO, currentUser);
+		serviceFactory.getDeleteService(deleteType).delete(fieldDTO);
 		return PageAddress.MODUL_PAGE_ADDRESS;
 	}
 }
