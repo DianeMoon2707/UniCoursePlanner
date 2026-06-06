@@ -1,12 +1,12 @@
-package com.uni_course_planner.constants.popup;
+package com.uni_course_planner.constants.views;
 
-public enum InsertType 
+public enum PopupType 
 {
 	MODUL("fragments/popup/modul-popup");
 	
 	private String fragmentFile;
 	
-	InsertType(String fragmentFile)
+	PopupType(String fragmentFile)
 	{
 		this.fragmentFile = fragmentFile;
 	}

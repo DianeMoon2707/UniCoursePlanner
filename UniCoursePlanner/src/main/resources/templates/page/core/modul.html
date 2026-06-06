@@ -10,7 +10,10 @@
 		
 		<div class="content">
 			<h1>Module</h1>
-			<table>
+			
+			<input hidden id="rowData">
+			
+			<table id="main-table">
 				<thead>
 					<tr>
 						<th hidden>Modul_ID</th>
@@ -21,7 +24,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="modul : ${module}">
+					<tr th:each="modul : ${module}" th:onclick="rowClicked(this)">
 						<td hidden th:text="${modul.modul_id}"></td>
 						<td hidden th:text="${modul.user_id}"></td>
 						<td th:text="${modul.modulname}"></td>
@@ -41,14 +44,18 @@
 					<i class="bi bi-plus-circle"></i>
 				</button>
 				
-				<button type="button">
+				<button type="button"
+					onclick="window.open('/popup/edit?editType=MODUL', '_blank', 'width=500,height=400')">
 					<i class="bi bi-pencil"></i>
 				</button>
 				
-				<button type="button">
+				<button type="button" onclick="openDeletePopup()">
 					<i class="bi bi-trash"></i>
 				</button>
 			</div>
 		</div>
+		
+		<script th:src="@{/js/tableScripts/tablerow-action.js}"></script>
+		<script th:src="@{/js/popup/popup-opening.js}"></script>
 	</body>
 </html>

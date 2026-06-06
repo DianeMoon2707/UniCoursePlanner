@@ -150,6 +150,12 @@ nav {
 	text-align: left;
 }
 
-.content tr:hover {
+.content tr:hover:not(.selected) {
 	background-color: #b0e2ff;
+	cursor: pointer;
+}
+
+.content tr.selected {
+	background-color: #87cefa;
+	cursor: pointer;
 }

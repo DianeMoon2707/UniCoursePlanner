@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Daten löschen</title>
+	</head>
+	<body>
+		<div th:replace="~{${fragmentPath} :: delete-mask}"></div>
+		
+		<script th:src="@{/js/popup/popup-actions.js}"></script>
+		
+		<script> submitPopupForm("deleteForm", "/delete"); </script>
+	</body>
+</html>

@@ -9,4 +9,6 @@ public final class PageAddress
 	public static final String MODUL_PAGE_ADDRESS = "page/core/modul";
 	
 	public static final String INSERT_POPUP_ADDRESS = "popup/insert";
+	public static final String EDIT_POPUP_ADDRESS = "popup/edit";
+	public static final String DELETE_POPUP_ADDRESS = "popup/delete";
 }

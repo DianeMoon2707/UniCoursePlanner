@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import com.uni_course_planner.constants.popup.InsertType;
+import com.uni_course_planner.constants.views.PopupType;
 import com.uni_course_planner.constants.views.PageAddress;
 import com.uni_course_planner.dto.FieldDTO;
 import com.uni_course_planner.relation.user.LogInData;
@@ -26,13 +26,13 @@ public class InsertController
 	}
 
 	@ModelAttribute("fieldDTO")
-	public FieldDTO fieldDTO(@RequestParam InsertType insertType) 
+	public FieldDTO fieldDTO(@RequestParam PopupType insertType) 
 	{
-	    return serviceFactory.get(insertType).createDTO();
+	    return serviceFactory.getInsertService(insertType).createDTO();
 	}
 	
 	@GetMapping(PageAddress.INSERT_POPUP_ADDRESS)
-	public String showInsertPopup(@RequestParam InsertType insertType, Model model)
+	public String showInsertPopup(@RequestParam PopupType insertType, Model model)
 	{		
 		model.addAttribute("fragmentPath", insertType.getFragmentFile());		
 		model.addAttribute("insertType", insertType);
@@ -41,12 +41,12 @@ public class InsertController
 	}
 	
 	@PostMapping("/insert")
-	public String insert(@RequestParam InsertType insertType, @ModelAttribute FieldDTO fieldDTO)
+	public String insert(@RequestParam PopupType insertType, @ModelAttribute FieldDTO fieldDTO)
 	{
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		LogInData currentUser = userService.getUserByUsername(auth.getName());
 		
-		serviceFactory.get(insertType).save(fieldDTO, currentUser);
+		serviceFactory.getInsertService(insertType).save(fieldDTO, currentUser);
 		return PageAddress.MODUL_PAGE_ADDRESS;
 	}
 }
