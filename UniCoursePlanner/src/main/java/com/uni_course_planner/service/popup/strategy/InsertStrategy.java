@@ -7,6 +7,6 @@ import com.uni_course_planner.relation.user.LogInData;
 public interface InsertStrategy
 {
 	public PopupType getType();
-	FieldDTO createDTO();
+	public FieldDTO createDTO();
 	public void save(FieldDTO dto, LogInData currentUser);
 }

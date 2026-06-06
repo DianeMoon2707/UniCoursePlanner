@@ -4,7 +4,7 @@ function openDeletePopup()
 	window.open(
 		"/popup/delete?deleteType=MODUL&rowData=" + rowData,
 		"_blank",
-		"width=500,height=400"
+		"width=600,height=500"
 	);
 }
 
@@ -12,8 +12,8 @@ function openEditPopup()
 {
 	const rowData = encodeURIComponent(document.getElementById("rowData").value);
 	window.open(
-		"/popup/delete?editType=MODUL&rowData=" + rowData,
+		"/popup/edit?editType=MODUL&rowData=" + rowData,
 		"_blank",
-		"width=500,height=400"
+		"width=600,height=500"
 	);
 }
