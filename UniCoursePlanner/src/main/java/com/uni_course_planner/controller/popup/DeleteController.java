@@ -33,7 +33,6 @@ public class DeleteController
 	{
 		if(rowData == null)
 		{
-			System.out.println("Find");
 			return serviceFactory.getDeleteService(deleteType).createDTO();
 		}
 		
@@ -55,7 +54,7 @@ public class DeleteController
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		LogInData currentUser = userService.getUserByUsername(auth.getName());
 		
-		serviceFactory.getDeleteService(deleteType).delete(fieldDTO);
+		serviceFactory.getDeleteService(deleteType).delete(fieldDTO, currentUser);
 		return PageAddress.MODUL_PAGE_ADDRESS;
 	}
 }

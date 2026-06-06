@@ -10,12 +10,23 @@ import com.uni_course_planner.constants.modul.EventTypes;
 import com.uni_course_planner.constants.views.PopupType;
 import com.uni_course_planner.dto.FieldDTO;
 import com.uni_course_planner.dto.modul.ModulDTOWithID;
+import com.uni_course_planner.relation.modul.event_type.EventTypeId;
+import com.uni_course_planner.relation.modul.modul.ModulId;
+import com.uni_course_planner.relation.user.LogInData;
+import com.uni_course_planner.repository.modul.*;
 import com.uni_course_planner.service.popup.strategy.DeleteStrategy;
-
 
 @Service
 public class ModulDeleteService implements DeleteStrategy
 {
+	private ModulRepository modulRep;
+	private EventTypeRepository eventTypeRep;
+
+	public ModulDeleteService(ModulRepository modulRep, EventTypeRepository eventTypeRep) 
+	{
+		this.modulRep = modulRep;
+		this.eventTypeRep = eventTypeRep;
+	}
 
 	@Override
 	public PopupType getType() 
@@ -26,7 +37,7 @@ public class ModulDeleteService implements DeleteStrategy
 	@Override
 	public FieldDTO createDTO() 
 	{
-		return new ModulDTOWithID("nichts", 0, new HashSet<EventTypes>(),1L, 1L);
+		return new ModulDTOWithID("", 0, new HashSet<EventTypes>(),1L, 1L);
 	}
 	
 	@Override
@@ -63,11 +74,21 @@ public class ModulDeleteService implements DeleteStrategy
 	}
 
 	@Override
-	public void delete(FieldDTO dto) 
+	public void delete(FieldDTO dto, LogInData user) 
 	{
 		ModulDTOWithID modulDTO = (ModulDTOWithID)dto;
 		
-		Set<EventTypes> selected = modulDTO.getEventTypes();
-		System.out.println(selected);
+		ModulId mId = new ModulId(user.getId(), modulDTO.getModul_id());
+		Set<EventTypes> selectedEvents = modulDTO.getEventTypes();
+
+		for(EventTypes type : selectedEvents)
+		{
+			eventTypeRep.deleteById(new EventTypeId(mId, type));
+		}
+		
+		if(!eventTypeRep.existsByMId(mId))
+		{
+			modulRep.deleteById(mId);
+		}
 	}
 }
