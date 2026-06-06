@@ -40,7 +40,7 @@ public class DeleteController
 	}
 	
 	@GetMapping(PageAddress.DELETE_POPUP_ADDRESS)
-	public String showDELETEPopup(@RequestParam PopupType deleteType, Model model)
+	public String showDeletePopup(@RequestParam PopupType deleteType, Model model)
 	{		
 		model.addAttribute("fragmentPath", deleteType.getFragmentFile());		
 		model.addAttribute("deleteType", deleteType);

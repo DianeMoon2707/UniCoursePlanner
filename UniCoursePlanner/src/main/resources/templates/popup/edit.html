@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Daten bearbeiten</title>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+		<link rel="stylesheet" th:href="@{/css/popupStyle.css}">	
+	</head>
+	<body>
+		<div th:replace="~{${fragmentPath} :: edit-mask}"></div>
+		
+		<script th:src="@{/js/popup/popup-actions.js}"></script>
+		
+		<script> submitPopupForm("editForm", "/edit"); </script>
+	</body>
+</html>

@@ -7,6 +7,7 @@ import com.uni_course_planner.relation.user.LogInData;
 public interface EditStrategy 
 {
 	public PopupType getType();
-	FieldDTO createDTO();
+	public FieldDTO createDTO();
+	public FieldDTO createDTO(String rowData);
 	public void edit(FieldDTO dto, LogInData currentUser);
 }

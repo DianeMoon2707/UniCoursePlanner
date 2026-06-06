@@ -7,7 +7,7 @@ import com.uni_course_planner.relation.user.LogInData;
 public interface DeleteStrategy 
 {
 	public PopupType getType();
-	FieldDTO createDTO(String rowData);
-	public void delete(FieldDTO dto, LogInData user);
 	public FieldDTO createDTO();
+	public FieldDTO createDTO(String rowData);
+	public void delete(FieldDTO dto, LogInData user);
 }
