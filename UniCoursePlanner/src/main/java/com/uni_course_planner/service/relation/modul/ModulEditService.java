@@ -1,7 +1,6 @@
 package com.uni_course_planner.service.relation.modul;
 
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 import org.springframework.stereotype.Service;
 
@@ -11,12 +10,23 @@ import com.uni_course_planner.constants.modul.EventTypes;
 import com.uni_course_planner.constants.views.PopupType;
 import com.uni_course_planner.dto.FieldDTO;
 import com.uni_course_planner.dto.modul.ModulDTOWithEdit;
+import com.uni_course_planner.relation.modul.modul.*;
+import com.uni_course_planner.relation.modul.event_type.*;
 import com.uni_course_planner.relation.user.LogInData;
+import com.uni_course_planner.repository.modul.*;
 import com.uni_course_planner.service.popup.strategy.EditStrategy;
 
 @Service
 public class ModulEditService implements EditStrategy
 {
+	private ModulRepository modulRep;
+	private EventTypeRepository eventTypeRep;
+
+	public ModulEditService(ModulRepository modulRep, EventTypeRepository eventTypeRep) 
+	{
+		this.modulRep = modulRep;
+		this.eventTypeRep = eventTypeRep;
+	}
 
 	@Override
 	public PopupType getType() 
@@ -69,8 +79,22 @@ public class ModulEditService implements EditStrategy
 	@Override
 	public void edit(FieldDTO dto, LogInData currentUser) 
 	{
-		// TODO Auto-generated method stub
+		ModulDTOWithEdit modulDTO = (ModulDTOWithEdit)dto;
+		ModulId mId = new ModulId(currentUser.getId(), modulDTO.getModul_id());
+		Modul modul = modulRep.findById(mId).orElseThrow();
 		
+		//Standarddaten
+		modul.setModulname(modulDTO.getModulnameNeu());
+		modul.setLp(modulDTO.getLpNeu());
+		
+		modulRep.save(modul);
+		
+		//EventTypes
+		for(EventTypes type : modulDTO.getEventTypes())
+		{
+			EventTypeId eId = new EventTypeId(mId, type);
+			eventTypeRep.save(new EventType(eId, modul));
+		}
 	}
 	
 }

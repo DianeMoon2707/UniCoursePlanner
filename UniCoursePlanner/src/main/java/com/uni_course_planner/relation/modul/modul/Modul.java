@@ -30,18 +30,33 @@ public class Modul
 		this.lp = lp;
 	}
 
-	public ModulId getmId()
+	public ModulId getmId() 
 	{
 		return mId;
 	}
 
-	public String getModulname() 
+	public void setmId(ModulId mId) 
+	{
+		this.mId = mId;
+	}
+
+	public String getModulname()
 	{
 		return modulname;
+	}
+
+	public void setModulname(String modulname) 
+	{
+		this.modulname = modulname;
 	}
 
 	public int getLp() 
 	{
 		return lp;
+	}
+
+	public void setLp(int lp) 
+	{
+		this.lp = lp;
 	}
 }

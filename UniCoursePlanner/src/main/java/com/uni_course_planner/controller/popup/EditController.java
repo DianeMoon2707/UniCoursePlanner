@@ -50,7 +50,7 @@ public class EditController
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		LogInData currentUser = userService.getUserByUsername(auth.getName());
 		
-		//serviceFactory.getEditService(editType).delete(fieldDTO, currentUser);
+		serviceFactory.getEditService(editType).edit(fieldDTO, currentUser);
 		return PageAddress.MODUL_PAGE_ADDRESS;
 	}
 }
