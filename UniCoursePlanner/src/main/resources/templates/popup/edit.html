@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Daten bearbeiten</title>
+	</head>
+	<body>
+		<div th:replace="~{${fragmentPath} :: edit-mask}"></div>
+		
+		<script th:src="@{/js/popup/popup-actions.js}"></script>
+		
+		<script> submitPopupForm("editForm", "/edit"); </script>
+	</body>
+</html>

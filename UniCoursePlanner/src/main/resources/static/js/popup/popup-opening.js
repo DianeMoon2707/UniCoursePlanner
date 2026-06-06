@@ -7,3 +7,13 @@ function openDeletePopup()
 		"width=500,height=400"
 	);
 }
+
+function openEditPopup()
+{
+	const rowData = encodeURIComponent(document.getElementById("rowData").value);
+	window.open(
+		"/popup/delete?editType=MODUL&rowData=" + rowData,
+		"_blank",
+		"width=500,height=400"
+	);
+}
