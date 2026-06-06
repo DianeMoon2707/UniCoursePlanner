@@ -1,10 +1,11 @@
-function openDeletePopup()
+const POPUP_OPTIONS = "width=800,height=700";
+
+function openInsertPopup()
 {
-	const rowData = encodeURIComponent(document.getElementById("rowData").value);
 	window.open(
-		"/popup/delete?deleteType=MODUL&rowData=" + rowData,
-		"_blank",
-		"width=600,height=500"
+		"/popup/insert?insertType=MODUL", 
+		"_blank", 
+		POPUP_OPTIONS
 	);
 }
 
@@ -14,6 +15,16 @@ function openEditPopup()
 	window.open(
 		"/popup/edit?editType=MODUL&rowData=" + rowData,
 		"_blank",
-		"width=600,height=500"
+		POPUP_OPTIONS
+	);
+}
+
+function openDeletePopup()
+{
+	const rowData = encodeURIComponent(document.getElementById("rowData").value);
+	window.open(
+		"/popup/delete?deleteType=MODUL&rowData=" + rowData,
+		"_blank",
+		POPUP_OPTIONS
 	);
 }

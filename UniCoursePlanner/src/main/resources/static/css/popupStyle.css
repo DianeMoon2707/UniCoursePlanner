@@ -1,0 +1,31 @@
+body{
+	background-image: linear-gradient(to bottom, #ab82ff, white);
+	min-height: 100vh;
+	
+	font-size: 22px;
+}
+
+h1{
+	text-decoration: underline;
+}
+
+input {
+	margin-bottom: 10px;
+	font-size: 18px;
+}
+
+input:read-only {
+	background-color: lightgray;
+}
+
+input[type=checkbox] {
+	transform: scale(1.5);
+}
+
+button {
+	margin-top: 20px;
+	font-size: 18px;
+	border: 3px solid black;
+	
+	cursor: pointer;
+}
