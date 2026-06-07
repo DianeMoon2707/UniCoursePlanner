@@ -17,38 +17,26 @@
 				<thead>
 					<tr>
 						<th hidden>Modul_ID</th>
-						<th hidden>User_ID</th>
 						<th>Modul</th>
 						<th>Leistungspunkte</th>
-						<th>Veranstaltungsarten</th>
+						<th>Note</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="modul : ${module}" th:onclick="rowClicked(this)">
-						<td hidden th:text="${modul.modul_id}"></td>
-						<td hidden th:text="${modul.user_id}"></td>
-						<td th:text="${modul.modulname}"></td>
-						<td th:text="${modul.lp}"></td>
-						<td>
-							<ul>
-								<li th:each="event : ${modul.eventTypes}" th:text="${event.description}">
-							</ul>
-						</td>
+					<tr th:each="modulnote : ${modulnoten}" th:onclick="rowClicked(this)">
+						<td hidden th:text="${modulnote.modul_id}"></td>
+						<td th:text="${modulnote.modulname}"></td>
+						<td th:text="${modulnote.lp}"></td>
+						<td th:text="${modulnote.grade ?: '-'}"></td>
 					</tr>
 				</tbody>
 			</table>
 			
-			<div class="data-handling-btn">
-				<button type="button" onclick="openInsertPopup()">
-					<i class="bi bi-plus-circle"></i>
-				</button>
-				
+			<p id="${lp_gesamt}">Leistungspunkte:</p>
+			
+			<div class="data-handling-btn">				
 				<button type="button" onclick="openEditPopup()">
 					<i class="bi bi-pencil"></i>
-				</button>
-				
-				<button type="button" onclick="openDeletePopup()">
-					<i class="bi bi-trash"></i>
 				</button>
 			</div>
 		</div>
