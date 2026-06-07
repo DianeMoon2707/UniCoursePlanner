@@ -6,7 +6,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-import com.uni_course_planner.constants.views.LinkAddress;
+import com.uni_course_planner.constants.views.PageAddress;
 import com.uni_course_planner.service.relation.user.CustomUserDetailsService;
 
 @Configuration
@@ -25,25 +25,24 @@ public class SecurityConfig
 		http.authorizeHttpRequests(
 			//Öffentliche Seiten
 			auth -> auth.requestMatchers(
-					LinkAddress.LOGIN_PAGE_ADDRESS,
-					LinkAddress.REGISTER_PAGE_ADDRESS,
+					"/",
+					"/" + PageAddress.REGISTER_PAGE_ADDRESS,
                     "/css/**",
                     "/js/**").permitAll().anyRequest().authenticated()
 		)
 		//Eigenes LogIn
 		.formLogin(form -> form
-			.loginPage(LinkAddress.LOGIN_PAGE_ADDRESS)
+			.loginPage("/login")
 			.loginProcessingUrl("/login")
 			.usernameParameter("user-field")
 		    .passwordParameter("password-field")
-			.defaultSuccessUrl(LinkAddress.HOME_PAGE_ADDRESS, true)
-			.failureUrl(LinkAddress.LOGIN_PAGE_ADDRESS + "?error=true")
+			.defaultSuccessUrl("/" + PageAddress.HOME_PAGE_ADDRESS, true)
+			.failureUrl("/" + "?error=true")
 			.permitAll()
 		)
 		//Remember me für 7 Tage
 		.rememberMe(r -> r
 			.key("my-secret-key")
-			.alwaysRemember(true)
 			.tokenValiditySeconds(604800)
 			.userDetailsService(userDetailsService)
 			.rememberMeParameter("remember-me")
