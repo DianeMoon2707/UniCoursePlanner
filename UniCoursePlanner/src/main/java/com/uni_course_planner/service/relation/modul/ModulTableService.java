@@ -43,8 +43,7 @@ public class ModulTableService
 					modul.getModulname(),
 					modul.getLp(),
 					eventSet,
-					modul.getmId().getModulId(),
-					modul.getmId().getUserId()
+					modul.getmId().getModulId()
 				));
 		}
 		

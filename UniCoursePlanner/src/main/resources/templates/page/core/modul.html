@@ -26,7 +26,6 @@
 				<tbody>
 					<tr th:each="modul : ${module}" th:onclick="rowClicked(this)">
 						<td hidden th:text="${modul.modul_id}"></td>
-						<td hidden th:text="${modul.user_id}"></td>
 						<td th:text="${modul.modulname}"></td>
 						<td th:text="${modul.lp}"></td>
 						<td>
