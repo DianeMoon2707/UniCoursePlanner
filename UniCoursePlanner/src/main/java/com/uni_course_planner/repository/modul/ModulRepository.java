@@ -14,6 +14,9 @@ public interface ModulRepository extends JpaRepository<Modul, ModulId>
 	@Query("SELECT COALESCE(MAX(m.mId.modulId), 0) FROM modul m WHERE m.mId.userId = :userId")
 	Long getMaxModulId(@Param("userId") Long user);
 	
+	@Query("SELECT SUM(m.lp) FROM modul m WHERE m.mId.userId = :userId AND m.grade IS NOT NULL")
+	Integer sumByUserId(@Param("userId") Long user);
+	
 	@Query("SELECT m FROM modul m WHERE m.mId.userId = :userId ORDER BY m.modulname ASC")
 	List<Modul> findAllByUserId(@Param("userId") Long user);
 }

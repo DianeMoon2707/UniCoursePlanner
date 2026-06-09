@@ -2,7 +2,8 @@ package com.uni_course_planner.constants.views;
 
 public enum PopupType 
 {
-	MODUL("fragments/popup/modul-popup");
+	MODUL("fragments/popup/modul-popup"),
+	LEISTUNGSPUNKTE("fragments/popup/leistungspunkte-popup");
 	
 	private String fragmentFile;
 	

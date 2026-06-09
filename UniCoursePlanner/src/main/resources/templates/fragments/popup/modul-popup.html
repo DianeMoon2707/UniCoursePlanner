@@ -7,7 +7,7 @@
 		<h2>Standarddaten</h2>
 		
 		<label>Modulname: </label>
-		<input th:field="*{modulname}"> <br>
+		<input th:field="*{modulname}" type="text"> <br>
 		
 		<label>Leistungspunkte: </label>
 		<input th:field="*{lp}" type="number" min="0"> <br>
@@ -31,10 +31,9 @@
 		
 		<h2>Standarddaten</h2>		
 		<input type="hidden" th:field="*{modul_id}">
-		<input type="hidden" th:field="*{user_id}">
 		
 		<label>Modulname: </label>
-		<input th:field="*{modulname}" readonly> <br>
+		<input th:field="*{modulname}" type="text" readonly> <br>
 		
 		<label>Leistungspunkte: </label>
 		<input th:field="*{lp}" readonly> <br>
@@ -58,12 +57,11 @@
 		
 		<h2>Standarddaten</h2>		
 		<input type="hidden" th:field="*{modul_id}">
-		<input type="hidden" th:field="*{user_id}">
 		
 		<label>Modulname: </label>
-		<input th:field="*{modulname}" readonly> 
+		<input th:field="*{modulname}" type="text" readonly> 
 		<i class="bi bi-arrow-right"></i>
-		<input th:field="*{modulnameNeu}"><br>
+		<input th:field="*{modulnameNeu}" type="text"><br>
 		
 		<label>Leistungspunkte: </label>
 		<input th:field="*{lp}" readonly>

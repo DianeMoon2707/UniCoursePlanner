@@ -9,7 +9,7 @@ import com.uni_course_planner.constants.views.PageAddress;
 @Controller
 public class LogInController
 {	
-	@GetMapping("/")
+	@GetMapping("/login")
 	public String loadLogInPage(Model model, @RequestParam(required = false) String error)
 	{
 		if(error != null)

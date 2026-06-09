@@ -18,8 +18,19 @@ input:read-only {
 	background-color: lightgray;
 }
 
+input[type=text] {
+	width: 295px;
+}
+
 input[type=checkbox] {
 	transform: scale(1.5);
+}
+
+select {
+	font-size: 18px;
+	padding: 5px;
+	width: auto;
+	
 }
 
 button {

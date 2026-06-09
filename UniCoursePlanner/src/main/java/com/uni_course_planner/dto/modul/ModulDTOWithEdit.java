@@ -12,10 +12,9 @@ public class ModulDTOWithEdit extends ModulDTOWithID
 	public ModulDTOWithEdit() {}
 	
 	public ModulDTOWithEdit(String modulname, int lp, Set<EventTypes> eventTypes, 
-			Long modul_id, Long user_id,
-			String modulnameNeu, int lpNeu)
+			Long modul_id, String modulnameNeu, int lpNeu)
 	{
-		super(modulname, lp, eventTypes, modul_id, user_id);
+		super(modulname, lp, eventTypes, modul_id);
 		
 		this.modulnameNeu = modulnameNeu;
 		this.lpNeu = lpNeu;
