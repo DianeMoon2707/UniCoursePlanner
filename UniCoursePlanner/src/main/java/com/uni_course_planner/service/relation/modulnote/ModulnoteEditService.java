@@ -11,7 +11,6 @@ import com.uni_course_planner.constants.views.PopupType;
 import com.uni_course_planner.dto.FieldDTO;
 import com.uni_course_planner.dto.modulnote.ModulnoteDTOWithEdit;
 import com.uni_course_planner.relation.modul.modul.*;
-import com.uni_course_planner.relation.modul.modulnote.Modulnote;
 import com.uni_course_planner.relation.user.LogInData;
 import com.uni_course_planner.repository.modul.*;
 import com.uni_course_planner.service.popup.strategy.EditStrategy;
@@ -19,12 +18,10 @@ import com.uni_course_planner.service.popup.strategy.EditStrategy;
 @Service
 public class ModulnoteEditService implements EditStrategy
 {
-	private ModulnoteRepository modulnoteRep;
 	private ModulRepository modulRep;
 
-	public ModulnoteEditService(ModulnoteRepository modulnoteRep, ModulRepository modulRep)
+	public ModulnoteEditService(ModulRepository modulRep)
 	{
-		this.modulnoteRep = modulnoteRep;
 		this.modulRep = modulRep;
 	}
 
@@ -79,28 +76,9 @@ public class ModulnoteEditService implements EditStrategy
 		ModulnoteDTOWithEdit noteDTO = (ModulnoteDTOWithEdit) dto;
 		
 		ModulId mId = new ModulId(currentUser.getId(), noteDTO.getModul_id());
-		Optional<Modulnote> modulnote = modulnoteRep.findById(mId);
+		Modul modul = modulRep.findById(mId).get();
 		
-		Grades grade = noteDTO.getGradeNeu(); 
-		
-		if(modulnote.isPresent())
-		{
-			if(grade == null)
-			{
-				modulnoteRep.deleteById(mId);
-			}
-			else
-			{
-				modulnote.get().setNote(grade);
-				modulnoteRep.save(modulnote.get());
-			}
-		}
-		else
-		{
-			Modul modul = modulRep.findById(mId).get();
-			Modulnote note = new Modulnote(mId, grade, modul);
-			
-			modulnoteRep.save(note);
-		}
+		modul.setGrade(noteDTO.getGradeNeu());
+		modulRep.save(modul);
 	}
 }

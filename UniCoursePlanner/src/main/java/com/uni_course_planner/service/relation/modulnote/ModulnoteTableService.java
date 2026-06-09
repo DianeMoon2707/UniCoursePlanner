@@ -6,19 +6,16 @@ import org.springframework.stereotype.Service;
 
 import com.uni_course_planner.dto.modulnote.ModulnoteDTO;
 import com.uni_course_planner.relation.modul.modul.Modul;
-import com.uni_course_planner.relation.modul.modulnote.Modulnote;
 import com.uni_course_planner.repository.modul.*;
 
 @Service
 public class ModulnoteTableService 
 {
 	private ModulRepository modulRep;
-	private ModulnoteRepository modulnotenRep;
 	
-	public ModulnoteTableService(ModulRepository modulRep, ModulnoteRepository modulnotenRep)
+	public ModulnoteTableService(ModulRepository modulRep)
 	{
 		this.modulRep = modulRep;
-		this.modulnotenRep = modulnotenRep;
 	}
 	
 	public List<ModulnoteDTO> fillLeistungspunkteTable(Long user)
@@ -37,13 +34,13 @@ public class ModulnoteTableService
 			
 			if(lastModulId != modul.getmId().getModulId())
 			{
-				Optional<Modulnote> modulnote = modulnotenRep.findById(modul.getmId());
+				Optional<Modul> modulnote = modulRep.findById(modul.getmId());
 				
 				ModulnoteDTO dto = new ModulnoteDTO(
 					modul.getmId().getModulId(),
 					modul.getModulname(),
 					modul.getLp(),
-					modulnote.isPresent() ? modulnote.get().getNote() : null
+					modulnote.isPresent() ? modulnote.get().getGrade() : null
 				);
 				
 				tableData.add(dto);
@@ -55,7 +52,7 @@ public class ModulnoteTableService
 	
 	public int sumByUserId(Long user)
 	{
-		Integer sum = modulnotenRep.sumByUserId(user);
+		Integer sum = modulRep.sumByUserId(user);
 		return sum == null ? 0 : sum;
 	}
 }
