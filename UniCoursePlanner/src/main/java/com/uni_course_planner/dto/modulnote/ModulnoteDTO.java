@@ -1,13 +1,16 @@
 package com.uni_course_planner.dto.modulnote;
 
 import com.uni_course_planner.constants.modulnote.Grades;
+import com.uni_course_planner.dto.FieldDTO;
 
-public class ModulnoteDTO 
+public class ModulnoteDTO extends FieldDTO
 {
 	private Long modul_id;
 	private String modulname;
 	private int lp;
 	private Grades grade;
+	
+	public ModulnoteDTO() {}
 	
 	public ModulnoteDTO(Long modul_id, String modulname, int lp, Grades grade)
 	{

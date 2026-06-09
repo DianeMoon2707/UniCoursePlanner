@@ -27,15 +27,18 @@
 						<td hidden th:text="${modulnote.modul_id}"></td>
 						<td th:text="${modulnote.modulname}"></td>
 						<td th:text="${modulnote.lp}"></td>
-						<td th:text="${modulnote.grade ?: '-'}"></td>
+						<td th:text="${modulnote.grade?.numeric ?: '-'}"></td>
 					</tr>
 				</tbody>
 			</table>
 			
-			<p id="${lp_gesamt}">Leistungspunkte:</p>
+			<p>
+			    Leistungspunkte:
+			    <span th:text="${lp_gesamt}"></span>
+			</p>
 			
 			<div class="data-handling-btn">				
-				<button type="button" onclick="openEditPopup()">
+				<button type="button" onclick="openPopup('edit', 'LEISTUNGSPUNKTE')">
 					<i class="bi bi-pencil"></i>
 				</button>
 			</div>

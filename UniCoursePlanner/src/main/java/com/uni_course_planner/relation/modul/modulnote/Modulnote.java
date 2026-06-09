@@ -17,6 +17,10 @@ public class Modulnote
 	
 	@MapsId
 	@OneToOne
+    @JoinColumns({
+    	@JoinColumn(name = "user_id", referencedColumnName = "user_id"),
+    	@JoinColumn(name = "modul_id", referencedColumnName = "modul_id")
+    })
 	private Modul modul;
 	
 	protected Modulnote() {}

@@ -29,10 +29,13 @@ public class ModulnoteTableService
 		
 		for(Modul modul : module)
 		{
-			boolean modulExistsInTable = tableData.stream()
-					.anyMatch(m -> m.getModul_id().equals(modul.getmId().getModulId()));
+			Long lastModulId = -1l;
+			if(!tableData.isEmpty())
+			{
+				lastModulId = tableData.get(tableData.size()-1).getModul_id();
+			}
 			
-			if(modulExistsInTable)
+			if(lastModulId != modul.getmId().getModulId())
 			{
 				Optional<Modulnote> modulnote = modulnotenRep.findById(modul.getmId());
 				
