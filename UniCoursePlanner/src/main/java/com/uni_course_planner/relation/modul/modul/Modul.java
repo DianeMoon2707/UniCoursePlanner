@@ -4,7 +4,6 @@ import java.util.List;
 
 import jakarta.persistence.*;
 
-import com.uni_course_planner.constants.modulnote.Grades;
 import com.uni_course_planner.relation.modul.event_type.*;
 
 @Entity(name = "modul")
@@ -19,9 +18,8 @@ public class Modul
 	@Column(nullable = false)
 	private int lp;
 	
-	@Column(nullable = true)
-	@Enumerated(EnumType.STRING)
-	private Grades grade;
+	@Embedded
+	private Grade grade;
 	
 	@OneToMany(mappedBy = "modul", cascade = CascadeType.REMOVE, orphanRemoval = true)
 	private List<EventType> eventTypes;
@@ -65,12 +63,12 @@ public class Modul
 		this.lp = lp;
 	}
 
-	public Grades getGrade() 
+	public Grade getGrade() 
 	{
 		return grade;
 	}
 
-	public void setGrade(Grades grade) 
+	public void setGrade(Grade grade) 
 	{
 		this.grade = grade;
 	}

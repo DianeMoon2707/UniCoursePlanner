@@ -78,7 +78,8 @@ public class ModulnoteEditService implements EditStrategy
 		ModulId mId = new ModulId(currentUser.getId(), noteDTO.getModul_id());
 		Modul modul = modulRep.findById(mId).get();
 		
-		modul.setGrade(noteDTO.getGradeNeu());
+		Grades grade = noteDTO.getGradeNeu();
+		modul.setGrade(new Grade(grade));
 		modulRep.save(modul);
 	}
 }
