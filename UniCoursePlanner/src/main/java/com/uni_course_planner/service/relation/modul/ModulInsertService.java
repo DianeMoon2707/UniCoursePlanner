@@ -10,6 +10,7 @@ import com.uni_course_planner.relation.modul.event_type.*;
 import com.uni_course_planner.relation.modul.modul.*;
 import com.uni_course_planner.relation.user.LogInData;
 import com.uni_course_planner.repository.modul.*;
+import com.uni_course_planner.repository.user.UserRepository;
 import com.uni_course_planner.service.popup.strategy.InsertStrategy;
 
 @Service
@@ -18,12 +19,16 @@ public class ModulInsertService implements InsertStrategy
 	private ModulRepository modulRep;
 	private EventTypeRepository eventTypeRep;
 	
-	public ModulInsertService(ModulRepository modulRep, EventTypeRepository eventTypeRep)
+	private UserRepository userRep;	
+	
+	public ModulInsertService(ModulRepository modulRep, EventTypeRepository eventTypeRep, 
+		UserRepository userRep) 
 	{
 		this.modulRep = modulRep;
 		this.eventTypeRep = eventTypeRep;
+		this.userRep = userRep;
 	}
-	
+
 	@Override
 	public PopupType getType()
 	{
@@ -45,7 +50,8 @@ public class ModulInsertService implements InsertStrategy
 		Modul modul = new Modul(
 				new ModulId(user.getId(), mId),
 				modulDTO.getModulname(),
-				modulDTO.getLp()
+				modulDTO.getLp(),
+				userRep.findById(user.getId()).get()
 			);
 		
 		modulRep.save(modul);

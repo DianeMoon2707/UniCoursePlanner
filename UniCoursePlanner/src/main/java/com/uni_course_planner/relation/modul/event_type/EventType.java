@@ -12,6 +12,10 @@ public class EventType
 	
 	@MapsId("mId")
 	@ManyToOne(optional = false)
+	@JoinColumns({
+		@JoinColumn(name = "user_id", referencedColumnName = "user_id"),
+		@JoinColumn(name = "modul_id", referencedColumnName = "modul_id")
+	})
 	private Modul modul;
 	
 	protected EventType() {}

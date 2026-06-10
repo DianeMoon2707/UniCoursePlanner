@@ -26,6 +26,8 @@ public class SecurityConfig
 			//Öffentliche Seiten
 			auth -> auth.requestMatchers(
 					"/",
+					"/register",
+					"/login",
 					"/" + PageAddress.REGISTER_PAGE_ADDRESS,
                     "/css/**",
                     "/js/**").permitAll().anyRequest().authenticated()
@@ -37,7 +39,7 @@ public class SecurityConfig
 			.usernameParameter("user-field")
 		    .passwordParameter("password-field")
 			.defaultSuccessUrl("/" + PageAddress.HOME_PAGE_ADDRESS, true)
-			.failureUrl("/" + "?error=true")
+			.failureUrl("/login?error=true")
 			.permitAll()
 		)
 		//Remember me für 7 Tage

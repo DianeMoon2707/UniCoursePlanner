@@ -11,7 +11,6 @@ import jakarta.persistence.*;
 @Embeddable
 public class EventTypeId implements Serializable
 {
-	@Embedded
 	private ModulId mId;
 	
 	@Enumerated(EnumType.STRING)

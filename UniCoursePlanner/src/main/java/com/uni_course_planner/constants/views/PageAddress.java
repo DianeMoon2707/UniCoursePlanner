@@ -7,6 +7,7 @@ public final class PageAddress
 	
 	public static final String HOME_PAGE_ADDRESS = "page/core/home";
 	public static final String MODUL_PAGE_ADDRESS = "page/core/modul";
+	public static final String STUNDENPLAN_PAGE_ADDRESS = "page/core/stundenplan";
 	public static final String LEISTUNGSPUNKTE_PAGE_ADDRESS = "page/core/leistungspunkte";
 	
 	public static final String INSERT_POPUP_ADDRESS = "popup/insert";

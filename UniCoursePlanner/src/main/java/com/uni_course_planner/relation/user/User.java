@@ -11,7 +11,7 @@ public class User
 	
 	private String email;
 	
-	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private LogInData logInData;
 	
 	protected User() {}
@@ -44,5 +44,10 @@ public class User
 	public void setLogInData(LogInData logInData) 
 	{
 		this.logInData = logInData;
+		
+		if(logInData != null)
+		{
+			logInData.setUser(this);
+		}
 	}
 }

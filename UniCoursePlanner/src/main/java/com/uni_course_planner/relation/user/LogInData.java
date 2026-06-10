@@ -15,7 +15,7 @@ public class LogInData
 	private String password;
 	
 	@MapsId
-	@OneToOne
+	@OneToOne(optional = false)
     @JoinColumn(name = "id")
     private User user;
 	
