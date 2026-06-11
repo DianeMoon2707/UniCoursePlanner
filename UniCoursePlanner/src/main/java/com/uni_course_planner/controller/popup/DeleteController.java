@@ -13,7 +13,7 @@ import com.uni_course_planner.constants.views.PageAddress;
 import com.uni_course_planner.constants.views.PopupType;
 import com.uni_course_planner.dto.FieldDTO;
 import com.uni_course_planner.relation.user.LogInData;
-import com.uni_course_planner.service.popup.strategy.PopupServiceFactory;
+import com.uni_course_planner.service.modal.strategy.PopupServiceFactory;
 import com.uni_course_planner.service.relation.user.UserService;
 
 @Controller
@@ -39,13 +39,13 @@ public class DeleteController
 	    return serviceFactory.getDeleteService(deleteType).createDTO(rowData);
 	}
 	
-	@GetMapping(PageAddress.DELETE_POPUP_ADDRESS)
+	@GetMapping(PageAddress.DELETE_MODAL_ADDRESS)
 	public String showDeletePopup(@RequestParam PopupType deleteType, Model model)
 	{		
 		model.addAttribute("fragmentPath", deleteType.getFragmentFile());		
 		model.addAttribute("deleteType", deleteType);
 		
-		return PageAddress.DELETE_POPUP_ADDRESS;
+		return deleteType.getFragmentFile() + " :: delete-mask";
 	}
 	
 	@PostMapping("/delete")

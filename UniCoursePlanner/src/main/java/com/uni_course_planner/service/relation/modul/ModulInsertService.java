@@ -11,7 +11,7 @@ import com.uni_course_planner.relation.modul.modul.*;
 import com.uni_course_planner.relation.user.LogInData;
 import com.uni_course_planner.repository.modul.*;
 import com.uni_course_planner.repository.user.UserRepository;
-import com.uni_course_planner.service.popup.strategy.InsertStrategy;
+import com.uni_course_planner.service.modal.strategy.InsertStrategy;
 
 @Service
 public class ModulInsertService implements InsertStrategy

@@ -14,7 +14,7 @@ import com.uni_course_planner.relation.modul.event_type.EventTypeId;
 import com.uni_course_planner.relation.modul.modul.ModulId;
 import com.uni_course_planner.relation.user.LogInData;
 import com.uni_course_planner.repository.modul.*;
-import com.uni_course_planner.service.popup.strategy.DeleteStrategy;
+import com.uni_course_planner.service.modal.strategy.DeleteStrategy;
 
 @Service
 public class ModulDeleteService implements DeleteStrategy

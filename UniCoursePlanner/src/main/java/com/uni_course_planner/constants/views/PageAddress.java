@@ -10,7 +10,7 @@ public final class PageAddress
 	public static final String STUNDENPLAN_PAGE_ADDRESS = "page/core/stundenplan";
 	public static final String LEISTUNGSPUNKTE_PAGE_ADDRESS = "page/core/leistungspunkte";
 	
-	public static final String INSERT_POPUP_ADDRESS = "popup/insert";
-	public static final String EDIT_POPUP_ADDRESS = "popup/edit";
-	public static final String DELETE_POPUP_ADDRESS = "popup/delete";
+	public static final String INSERT_MODAL_ADDRESS = "modal/insert";
+	public static final String EDIT_MODAL_ADDRESS = "modal/edit";
+	public static final String DELETE_MODAL_ADDRESS = "modal/delete";
 }

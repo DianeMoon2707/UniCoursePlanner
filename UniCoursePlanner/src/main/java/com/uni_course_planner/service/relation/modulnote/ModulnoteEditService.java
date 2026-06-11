@@ -13,7 +13,7 @@ import com.uni_course_planner.dto.modulnote.ModulnoteDTOWithEdit;
 import com.uni_course_planner.relation.modul.modul.*;
 import com.uni_course_planner.relation.user.LogInData;
 import com.uni_course_planner.repository.modul.*;
-import com.uni_course_planner.service.popup.strategy.EditStrategy;
+import com.uni_course_planner.service.modal.strategy.EditStrategy;
 
 @Service
 public class ModulnoteEditService implements EditStrategy

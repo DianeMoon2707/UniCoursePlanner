@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import com.uni_course_planner.constants.views.*;
 import com.uni_course_planner.dto.FieldDTO;
 import com.uni_course_planner.relation.user.LogInData;
-import com.uni_course_planner.service.popup.strategy.PopupServiceFactory;
+import com.uni_course_planner.service.modal.strategy.PopupServiceFactory;
 import com.uni_course_planner.service.relation.user.UserService;
 
 @Controller
@@ -35,13 +35,13 @@ public class EditController
 	    return serviceFactory.getEditService(editType).createDTO(rowData);
 	}
 	
-	@GetMapping(PageAddress.EDIT_POPUP_ADDRESS)
+	@GetMapping(PageAddress.EDIT_MODAL_ADDRESS)
 	public String showEditPopup(@RequestParam PopupType editType, Model model)
 	{		
 		model.addAttribute("fragmentPath", editType.getFragmentFile());		
 		model.addAttribute("editType", editType);
 		
-		return PageAddress.EDIT_POPUP_ADDRESS;
+		return editType.getFragmentFile() + " :: edit-mask";
 	}
 	
 	@PostMapping("/edit")

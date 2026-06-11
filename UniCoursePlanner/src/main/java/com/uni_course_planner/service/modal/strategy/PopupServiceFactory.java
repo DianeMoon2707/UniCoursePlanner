@@ -1,4 +1,4 @@
-package com.uni_course_planner.service.popup.strategy;
+package com.uni_course_planner.service.modal.strategy;
 
 import java.util.*;
 import java.util.function.Function;

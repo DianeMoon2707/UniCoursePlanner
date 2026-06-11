@@ -10,7 +10,7 @@ import com.uni_course_planner.constants.views.PopupType;
 import com.uni_course_planner.constants.views.PageAddress;
 import com.uni_course_planner.dto.FieldDTO;
 import com.uni_course_planner.relation.user.LogInData;
-import com.uni_course_planner.service.popup.strategy.*;
+import com.uni_course_planner.service.modal.strategy.*;
 import com.uni_course_planner.service.relation.user.UserService;
 
 @Controller
@@ -31,13 +31,13 @@ public class InsertController
 	    return serviceFactory.getInsertService(insertType).createDTO();
 	}
 	
-	@GetMapping(PageAddress.INSERT_POPUP_ADDRESS)
+	@GetMapping(PageAddress.INSERT_MODAL_ADDRESS)
 	public String showInsertPopup(@RequestParam PopupType insertType, Model model)
 	{		
 		model.addAttribute("fragmentPath", insertType.getFragmentFile());		
 		model.addAttribute("insertType", insertType);
 		
-		return PageAddress.INSERT_POPUP_ADDRESS;
+		return insertType.getFragmentFile() + " :: insert-mask";
 	}
 	
 	@PostMapping("/insert")
