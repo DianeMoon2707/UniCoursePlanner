@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.uni_course_planner.constants.modul.EventTypes;
-import com.uni_course_planner.constants.views.PopupType;
+import com.uni_course_planner.constants.views.ModalType;
 import com.uni_course_planner.dto.FieldDTO;
 import com.uni_course_planner.dto.modul.ModulDTOWithEdit;
 import com.uni_course_planner.relation.modul.modul.*;
@@ -29,9 +29,9 @@ public class ModulEditService implements EditStrategy
 	}
 
 	@Override
-	public PopupType getType() 
+	public ModalType getType() 
 	{
-		return PopupType.MODUL;
+		return ModalType.MODUL;
 	}
 
 	@Override

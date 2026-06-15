@@ -1,13 +1,13 @@
 package com.uni_course_planner.constants.views;
 
-public enum PopupType 
+public enum ModalType 
 {
-	MODUL("fragments/popup/modul-popup"),
-	LEISTUNGSPUNKTE("fragments/popup/leistungspunkte-popup");
+	MODUL("fragments/modal/modul-modal"),
+	LEISTUNGSPUNKTE("fragments/modal/leistungspunkte-modal");
 	
 	private String fragmentFile;
 	
-	PopupType(String fragmentFile)
+	ModalType(String fragmentFile)
 	{
 		this.fragmentFile = fragmentFile;
 	}

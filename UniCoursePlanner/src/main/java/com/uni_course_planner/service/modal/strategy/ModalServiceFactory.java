@@ -6,16 +6,16 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
-import com.uni_course_planner.constants.views.PopupType;
+import com.uni_course_planner.constants.views.ModalType;
 
 @Service
-public class PopupServiceFactory
+public class ModalServiceFactory
 {
-	private final Map<PopupType, InsertStrategy> insertMap;
-	private final Map<PopupType, EditStrategy> editMap;
-	private final Map<PopupType, DeleteStrategy> deleteMap;
+	private final Map<ModalType, InsertStrategy> insertMap;
+	private final Map<ModalType, EditStrategy> editMap;
+	private final Map<ModalType, DeleteStrategy> deleteMap;
 	
-	public PopupServiceFactory(List<InsertStrategy> insertServiceList, 
+	public ModalServiceFactory(List<InsertStrategy> insertServiceList, 
 			List<EditStrategy> editServiceList, 
 			List<DeleteStrategy> deleteServiceList)
 	{
@@ -36,17 +36,17 @@ public class PopupServiceFactory
 	}
 	
 	
-	public InsertStrategy getInsertService(PopupType type)
+	public InsertStrategy getInsertService(ModalType type)
 	{
 		return insertMap.get(type);
 	}
 	
-	public EditStrategy getEditService(PopupType type)
+	public EditStrategy getEditService(ModalType type)
 	{
 		return editMap.get(type);
 	}
 	
-	public DeleteStrategy getDeleteService(PopupType type)
+	public DeleteStrategy getDeleteService(ModalType type)
 	{
 		return deleteMap.get(type);
 	}

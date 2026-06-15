@@ -1,4 +1,4 @@
-package com.uni_course_planner.controller.popup;
+package com.uni_course_planner.controller.modal;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -9,27 +9,27 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.uni_course_planner.constants.views.ModalType;
 import com.uni_course_planner.constants.views.PageAddress;
-import com.uni_course_planner.constants.views.PopupType;
 import com.uni_course_planner.dto.FieldDTO;
 import com.uni_course_planner.relation.user.LogInData;
-import com.uni_course_planner.service.modal.strategy.PopupServiceFactory;
+import com.uni_course_planner.service.modal.strategy.ModalServiceFactory;
 import com.uni_course_planner.service.relation.user.UserService;
 
 @Controller
 public class DeleteController 
 {
 	private UserService userService;
-	private PopupServiceFactory serviceFactory;
+	private ModalServiceFactory serviceFactory;
 	
-	public DeleteController(UserService userService, PopupServiceFactory serviceFactory) 
+	public DeleteController(UserService userService, ModalServiceFactory serviceFactory) 
 	{
 		this.userService = userService;
 		this.serviceFactory = serviceFactory;
 	}
 	
 	@ModelAttribute("fieldDTO")
-	public FieldDTO fieldDTO(@RequestParam PopupType deleteType, @RequestParam(required = false) String rowData) 
+	public FieldDTO fieldDTO(@RequestParam ModalType deleteType, @RequestParam(required = false) String rowData) 
 	{
 		if(rowData == null)
 		{
@@ -40,7 +40,7 @@ public class DeleteController
 	}
 	
 	@GetMapping(PageAddress.DELETE_MODAL_ADDRESS)
-	public String showDeletePopup(@RequestParam PopupType deleteType, Model model)
+	public String showDeleteModal(@RequestParam ModalType deleteType, Model model)
 	{		
 		model.addAttribute("fragmentPath", deleteType.getFragmentFile());		
 		model.addAttribute("deleteType", deleteType);
@@ -49,7 +49,7 @@ public class DeleteController
 	}
 	
 	@PostMapping("/delete")
-	public String delete(@RequestParam PopupType deleteType, @ModelAttribute FieldDTO fieldDTO)
+	public String delete(@RequestParam ModalType deleteType, @ModelAttribute FieldDTO fieldDTO)
 	{
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		LogInData currentUser = userService.getUserByUsername(auth.getName());

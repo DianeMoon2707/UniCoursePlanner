@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.uni_course_planner.constants.modulnote.Grades;
-import com.uni_course_planner.constants.views.PopupType;
+import com.uni_course_planner.constants.views.ModalType;
 import com.uni_course_planner.dto.FieldDTO;
 import com.uni_course_planner.dto.modulnote.ModulnoteDTOWithEdit;
 import com.uni_course_planner.relation.modul.modul.*;
@@ -26,9 +26,9 @@ public class ModulnoteEditService implements EditStrategy
 	}
 
 	@Override
-	public PopupType getType() 
+	public ModalType getType() 
 	{
-		return PopupType.LEISTUNGSPUNKTE;
+		return ModalType.LEISTUNGSPUNKTE;
 	}
 
 	@Override
