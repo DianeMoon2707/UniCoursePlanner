@@ -1,0 +1,31 @@
+<div th:fragment="standard">
+	<h2>Zeitraum</h2>
+	
+	<p>
+		Für deinen Stundenplan ist derzeit kein gültiger Zeitraum vorhanden.<br>
+		Entweder wurde noch kein Zeitraum festgelegt oder der bisherige Zeitraum ist abgelaufen.<br>
+		Bitte wähle unten ein Start- und Enddatum aus, für das der Stundenplan gelten soll.
+	</p>
+	
+	<form th:action="@{/saveDate}" method="post">
+		<div>
+			<input type="date" name="validFrom" th:value="${today}">
+			<i class="bi bi-arrow-right"></i>
+			<input type="date" name="validTo" th:value="${later}">
+		</div>
+		
+		<button>Stundenplan für diesen Zeitraum erstellen</button>
+	</form>
+</div>
+
+<div th:fragment="timetable">
+	<h2>Semesterübersicht</h2>
+				
+	<div class="raster">
+		<div>Montag</div>
+		<div>Dienstag</div>
+		<div>Mittwoch</div>
+		<div>Donnerstag</div>
+		<div>Freitag</div>
+	</div>
+</div>

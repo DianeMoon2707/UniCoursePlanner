@@ -78,7 +78,6 @@ nav {
 /* Content */
 .content {
 	padding: 0 20px 0 20px;
-	font-weight: 500;
 	
 	display: flex;
 	flex-direction: column;
@@ -92,6 +91,16 @@ nav {
 }
 
 /* Buttons */
+.content button {
+	margin-top: 40px;
+	padding: 5px;
+		
+	font-size: 24px;
+	background: white;
+	
+	cursor: pointer;
+}
+
 .data-handling-btn {
 	display: flex;
 	justify-content: flex-end;
@@ -158,4 +167,12 @@ nav {
 .content tr.selected {
 	background-color: #87cefa;
 	cursor: pointer;
+}
+
+/* Input */
+.content input {
+	margin-top: 20px;
+	padding: 5px;
+	
+	font-size: 18px;
 }
