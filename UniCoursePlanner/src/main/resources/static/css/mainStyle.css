@@ -176,3 +176,20 @@ nav {
 	
 	font-size: 18px;
 }
+
+/* Stundenplan */
+.raster {
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	background-color: black;
+	
+	padding: 5px;
+	gap: 5px;
+}
+
+.raster div {
+	background-color: white;
+	text-align: center;
+	
+	padding: 10px;
+}
