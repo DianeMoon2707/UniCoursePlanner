@@ -1,6 +1,7 @@
 package com.uni_course_planner.controller.core;
 
 import java.time.LocalDate;
+import java.util.*;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -8,7 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import com.uni_course_planner.constants.modul.EventTypes;
+import com.uni_course_planner.constants.timetable.Timeslot;
 import com.uni_course_planner.constants.views.PageAddress;
+import com.uni_course_planner.dto.timetable.*;
 import com.uni_course_planner.relation.user.LogInData;
 import com.uni_course_planner.service.relation.user.UserService;
 import com.uni_course_planner.service.relation.zeitraum.ZeitraumService;
@@ -59,6 +63,7 @@ public class StundenplanController
 		if(zeitraumService.actuellZeitraumExistsByUser(user))
 		{
 			model.addAttribute("fragmentName", TIMETABLE_FRAGMENT);
+			model.addAttribute("timetable", createDummyTimetable());
 		}
 		else
 		{
@@ -68,5 +73,48 @@ public class StundenplanController
 			model.addAttribute("today", today);
 			model.addAttribute("later", today.plusMonths(3));
 		}
+	}
+	
+	private List<List<TimetableCellDTO>> createDummyTimetable()
+	{
+	    List<List<TimetableCellDTO>> timetable = new ArrayList<>();
+
+	    // ===== Slot 08-10 =====
+	    List<TimetableCellDTO> row1 = new ArrayList<>();
+
+	    row1.add(new TimetableCellDTO(Timeslot.SLOT_08_10, List.of(
+	        new LectureDTO("Mathe", EventTypes.UB, "A101")
+	    )));
+
+	    row1.add(new TimetableCellDTO(Timeslot.SLOT_08_10, List.of(
+	        new LectureDTO("Deutsch", EventTypes.VL, "B202")
+	    )));
+
+	    row1.add(new TimetableCellDTO(Timeslot.SLOT_08_10, List.of())); // Mittwoch leer
+	    row1.add(new TimetableCellDTO(Timeslot.SLOT_08_10, List.of(
+	        new LectureDTO("Informatik", EventTypes.SEM, "C303")
+	    )));
+	    row1.add(new TimetableCellDTO(Timeslot.SLOT_08_10, List.of()));
+
+	    timetable.add(row1);
+
+	    // ===== Slot 10-12 =====
+	    List<TimetableCellDTO> row2 = new ArrayList<>();
+
+	    row2.add(new TimetableCellDTO(Timeslot.SLOT_10_12, List.of(
+	        new LectureDTO("Physik", EventTypes.VL, "A101"),
+	        new LectureDTO("Tutorium", EventTypes.UB, "A101")
+	    )));
+
+	    row2.add(new TimetableCellDTO(Timeslot.SLOT_10_12, List.of()));
+	    row2.add(new TimetableCellDTO(Timeslot.SLOT_10_12, List.of(
+	        new LectureDTO("Mathe", EventTypes.VL, "B202")
+	    )));
+	    row2.add(new TimetableCellDTO(Timeslot.SLOT_10_12, List.of()));
+	    row2.add(new TimetableCellDTO(Timeslot.SLOT_10_12, List.of()));
+
+	    timetable.add(row2);
+
+	    return timetable;
 	}
 }

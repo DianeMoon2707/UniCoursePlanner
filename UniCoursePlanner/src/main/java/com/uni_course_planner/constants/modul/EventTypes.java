@@ -2,27 +2,29 @@ package com.uni_course_planner.constants.modul;
 
 public enum EventTypes
 {
-	VL("Vorlesung"),
-	UB("Übung"),
-	SEM("Seminar");
+	VL("Vorlesung", "#e6f0ff"),
+	UB("Übung", "#e6f7ea"),
+	SEM("Seminar", "#fff2e6");
 	
 	private String description;
+	private String hexColor;
 	
-	EventTypes(String description)
+	EventTypes(String description, String hexColor)
 	{
 		this.description = description;
+		this.hexColor = hexColor;
 	}
-
+	
 	public String getDescription() 
 	{
 		return description;
 	}
 	
-	public static String getLowerCase(EventTypes type)
+	public String getHexColor() 
 	{
-		return type.toString().toLowerCase();
+		return hexColor;
 	}
-	
+
 	public static EventTypes fromDescriptionToEnum(String description)
 	{
 		String normalized = description.trim();

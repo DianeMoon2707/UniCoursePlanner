@@ -18,16 +18,28 @@
 
 <div th:fragment="timetable">				
 	<div class="raster">
-		<div>Montag</div>
-		<div>Dienstag</div>
-		<div>Mittwoch</div>
-		<div>Donnerstag</div>
-		<div>Freitag</div>
-		
-		<div>X</div>
-		<div></div>
-		<div>Y</div>
-		<div></div>
-		<div>Z</div>
+		<div class="raster-row">
+			<div class="raster-head">Zeitslot</div>
+			<div class="raster-head">Montag</div>
+			<div class="raster-head">Dienstag</div>
+			<div class="raster-head">Mittwoch</div>
+			<div class="raster-head">Donnerstag</div>
+			<div class="raster-head">Freitag</div>
+		</div>
+			
+		<div th:each="row : ${timetable}" class="raster-row">
+			<div class="raster-cell">
+				<div class="raster-entry" th:text="${row[0].slot.time}"></div>
+			</div>
+			
+			<div class="raster-cell" th:each="cell : ${row}">
+				<div th:each="lecture : ${cell.lectures}" class="raster-entry"
+					 th:style="'background-color:' + ${lecture.event.hexColor}">
+					<span th:text="${lecture.modul}"></span>
+					<span th:text="${lecture.event.description} + ';'"></span>
+					<span th:text="'Raum: ' + ${lecture.room}"></span>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>

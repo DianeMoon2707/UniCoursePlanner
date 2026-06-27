@@ -179,17 +179,50 @@ nav {
 
 /* Stundenplan */
 .raster {
-	display: grid;
-	grid-template-columns: repeat(5, 1fr);
-	background-color: black;
-	
-	padding: 5px;
-	gap: 5px;
+	display: flex;
+	flex-direction: column;
 }
 
-.raster div {
+.raster-row {
+	display: grid;
+	grid-template-columns: 0.5fr repeat(5, 1fr);
+}
+
+.raster-head,
+.raster-cell {
 	background-color: white;
-	text-align: center;
-	
+	border: 3px solid black;
+				
 	padding: 10px;
+}
+
+.raster-head {
+	text-align: center;
+	font-weight: bold;
+}
+
+.raster-cell {
+	display: flex;
+	flex-direction: row;
+	min-height: 80px;
+}
+
+.raster-entry {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	flex: 1;
+	gap: 6px;
+	
+	background-color: #f2f2f2;
+	border: 1px solid black;
+	border-radius: 4px;
+	padding: 5px;
+	margin: 5px;
+	
+	min-width: 0;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    text-align: center;
 }
