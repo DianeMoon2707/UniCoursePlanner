@@ -75,43 +75,47 @@ public class StundenplanController
 		}
 	}
 	
-	private List<List<TimetableCellDTO>> createDummyTimetable()
+	private List<TimetableRowDTO> createDummyTimetable()
 	{
-	    List<List<TimetableCellDTO>> timetable = new ArrayList<>();
+	    List<TimetableRowDTO> timetable = new ArrayList<>();
 
 	    // ===== Slot 08-10 =====
-	    List<TimetableCellDTO> row1 = new ArrayList<>();
-
-	    row1.add(new TimetableCellDTO(Timeslot.SLOT_08_10, List.of(
-	        new LectureDTO("Mathe", EventTypes.UB, "A101")
-	    )));
-
-	    row1.add(new TimetableCellDTO(Timeslot.SLOT_08_10, List.of(
-	        new LectureDTO("Deutsch", EventTypes.VL, "B202")
-	    )));
-
-	    row1.add(new TimetableCellDTO(Timeslot.SLOT_08_10, List.of()));
-	    row1.add(new TimetableCellDTO(Timeslot.SLOT_08_10, List.of(
-	        new LectureDTO("Informatik", EventTypes.SEM, "C303")
-	    )));
-	    row1.add(new TimetableCellDTO(Timeslot.SLOT_08_10, List.of()));
+	    List<LectureDTO> lectureMo1 = List.of(new LectureDTO("Mathe", EventTypes.UB, "A101"));
+	    List<LectureDTO> lectureDi1 = List.of(new LectureDTO("Deutsch", EventTypes.VL, "B202"));
+	    List<LectureDTO> lectureMi1 = List.of();
+	    List<LectureDTO> lectureDo1 = List.of(new LectureDTO("Informatik", EventTypes.SEM, "C303"));
+	    List<LectureDTO> lectureFr1 = List.of();
+	    
+	    List<List<LectureDTO>> lectures = new ArrayList<>();
+	    lectures.add(lectureMo1);
+	    lectures.add(lectureDi1);
+	    lectures.add(lectureMi1);
+	    lectures.add(lectureDo1);
+	    lectures.add(lectureFr1);
+	    
+	    TimetableRowDTO row1 = new TimetableRowDTO(Timeslot.SLOT_08_10, lectures);
 
 	    timetable.add(row1);
 
-	    // ===== Slot 10-12 =====
-	    List<TimetableCellDTO> row2 = new ArrayList<>();
-
-	    row2.add(new TimetableCellDTO(Timeslot.SLOT_10_12, List.of(
-	        new LectureDTO("Physik", EventTypes.VL, "A101"),
-	        new LectureDTO("Tutorium", EventTypes.UB, "A101")
-	    )));
-
-	    row2.add(new TimetableCellDTO(Timeslot.SLOT_10_12, List.of()));
-	    row2.add(new TimetableCellDTO(Timeslot.SLOT_10_12, List.of(
-	        new LectureDTO("Mathe", EventTypes.VL, "B202")
-	    )));
-	    row2.add(new TimetableCellDTO(Timeslot.SLOT_10_12, List.of()));
-	    row2.add(new TimetableCellDTO(Timeslot.SLOT_10_12, List.of()));
+	    // ===== Slot 10-12 =====	    
+	    List<LectureDTO> lectureMo2 = List.of(
+		        new LectureDTO("Physik", EventTypes.VL, "A101"),
+		        new LectureDTO("Tutorium", EventTypes.UB, "A101")
+		    );
+	    
+	    List<LectureDTO> lectureDi2 = List.of();
+	    List<LectureDTO> lectureMi2 = List.of(new LectureDTO("Mathe", EventTypes.VL, "B202"));
+	    List<LectureDTO> lectureDo2 = List.of();
+	    List<LectureDTO> lectureFr2 = List.of();
+	    
+	    List<List<LectureDTO>> lectures2 = new ArrayList<>();
+	    lectures2.add(lectureMo2);
+	    lectures2.add(lectureDi2);
+	    lectures2.add(lectureMi2);
+	    lectures2.add(lectureDo2);
+	    lectures2.add(lectureFr2);
+	    
+	    TimetableRowDTO row2 = new TimetableRowDTO(Timeslot.SLOT_10_12, lectures2);
 
 	    timetable.add(row2);
 

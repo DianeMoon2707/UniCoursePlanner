@@ -1,15 +1,15 @@
 package com.uni_course_planner.dto.timetable;
 
-import java.util.List;
+import java.util.*;
 
 import com.uni_course_planner.constants.timetable.Timeslot;
 
-public class TimetableCellDTO 
+public class TimetableRowDTO 
 {
 	private Timeslot slot;
-	private List<LectureDTO> lectures;
+	private List<List<LectureDTO>> lectures;
 	
-	public TimetableCellDTO(Timeslot slot, List<LectureDTO> lectures)
+	public TimetableRowDTO(Timeslot slot, List<List<LectureDTO>> lectures)
 	{
 		this.slot = slot;
 		this.lectures = lectures;
@@ -20,7 +20,7 @@ public class TimetableCellDTO
 		return slot;
 	}
 
-	public List<LectureDTO> getLectures() 
+	public List<List<LectureDTO>> getLectures() 
 	{
 		return lectures;
 	}
