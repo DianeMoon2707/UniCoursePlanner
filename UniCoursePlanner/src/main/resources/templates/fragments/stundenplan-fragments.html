@@ -42,4 +42,29 @@
 			</div>
 		</div>
 	</div>
+	
+	<div id="modalOverlay" class="modal-overlay hidden">
+		<div class="modal-window">
+			
+			<button type="button" class="modal-close" onclick="closeModal()">
+				×
+			</button>
+			
+			<div id="modalContent"></div>
+		</div>
+	</div>
+	
+	<div class="data-handling-btn">
+		<button type="button" onclick="openModal('insert', 'MODUL')">
+			<i class="bi bi-plus-circle"></i>
+		</button>
+		
+		<button type="button" onclick="openModal('edit', 'MODUL')">
+			<i class="bi bi-pencil"></i>
+		</button>
+		
+		<button type="button" onclick="openModal('delete', 'MODUL')">
+			<i class="bi bi-trash"></i>
+		</button>
+	</div>
 </div>
