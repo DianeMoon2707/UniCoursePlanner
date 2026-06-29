@@ -185,7 +185,7 @@ nav {
 
 .raster-row {
 	display: grid;
-	grid-template-columns: 0.5fr repeat(5, 1fr);
+	grid-template-columns: 0.5fr repeat(var(--cols), 1fr);
 }
 
 .raster-head,

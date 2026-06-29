@@ -90,7 +90,7 @@ public class StundenplanController
 	        new LectureDTO("Deutsch", EventTypes.VL, "B202")
 	    )));
 
-	    row1.add(new TimetableCellDTO(Timeslot.SLOT_08_10, List.of())); // Mittwoch leer
+	    row1.add(new TimetableCellDTO(Timeslot.SLOT_08_10, List.of()));
 	    row1.add(new TimetableCellDTO(Timeslot.SLOT_08_10, List.of(
 	        new LectureDTO("Informatik", EventTypes.SEM, "C303")
 	    )));

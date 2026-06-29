@@ -17,14 +17,13 @@
 </div>
 
 <div th:fragment="timetable">				
-	<div class="raster">
+	<div class="raster"
+		th:with="days=${T(com.uni_course_planner.constants.timetable.Weekday).values()}"
+		th:style="'--cols:' + ${days.length + 1}">
 		<div class="raster-row">
 			<div class="raster-head">Zeitslot</div>
-			<div class="raster-head">Montag</div>
-			<div class="raster-head">Dienstag</div>
-			<div class="raster-head">Mittwoch</div>
-			<div class="raster-head">Donnerstag</div>
-			<div class="raster-head">Freitag</div>
+			
+			<div th:each="day : ${days}" class="raster-head" th:text="${day.description}"></div>
 		</div>
 			
 		<div th:each="row : ${timetable}" class="raster-row">
