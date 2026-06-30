@@ -2,7 +2,7 @@ package com.uni_course_planner.dto.timetable;
 
 import com.uni_course_planner.constants.modul.EventTypes;
 
-public class LectureDTO 
+public class LectureDTO
 {
 	private String modul;
 	private EventTypes event;

@@ -1,0 +1,33 @@
+<div th:fragment="insert-mask">
+	<h1>Neuen Stundenplaneintrag speichern</h1>
+	
+	<form id="insertForm" th:action="@{/insert}" method="post" th:object="${fieldDTO}">
+		<input type="hidden" name="insertType" th:value="${insertType}">
+		
+		<label>Zeitfenster: </label>
+		<select th:field="*{time}"> 
+			<option th:each="slot : ${T(com.uni_course_planner.constants.timetable.Timeslot).values()}"
+				th:value="${slot}" th:text="${slot.time}">
+		</select><br>
+		
+		<label>Wochentag: </label>
+		<select th:field="*{day}"> 
+			<option th:each="weekday : ${T(com.uni_course_planner.constants.timetable.Weekday).values()}"
+				th:value="${weekday}" th:text="${weekday.description}">
+		</select><br>
+		
+		<label>Modulname: </label>
+		<input th:field="*{modul}" type="text"><br>
+		
+		<label>Veranstaltungsart: </label>
+		<select th:field="*{event}">
+			<option th:each="type : ${T(com.uni_course_planner.constants.modul.EventTypes).values()}"
+			th:value="${type}" th:text="${type.description}"></option>	
+		</select><br>
+		
+		<label>Raum: </label>
+		<input th:field="*{room}" type="text"><br>
+		
+		<button>Speichern</button>
+	</form>
+</div>

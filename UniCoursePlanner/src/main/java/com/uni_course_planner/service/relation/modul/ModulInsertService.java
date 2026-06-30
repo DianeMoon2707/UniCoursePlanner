@@ -42,16 +42,16 @@ public class ModulInsertService implements InsertStrategy
 	}
 	
 	@Override
-	public void save(FieldDTO dto, LogInData user) 
+	public void save(FieldDTO dto, LogInData currentUser) 
 	{
 		ModulDTO modulDTO = (ModulDTO) dto;
-		Long mId = modulRep.getMaxModulId(user.getId()) + 1;
+		Long mId = modulRep.getMaxModulId(currentUser.getId()) + 1;
 		
 		Modul modul = new Modul(
-				new ModulId(user.getId(), mId),
+				new ModulId(currentUser.getId(), mId),
 				modulDTO.getModulname(),
 				modulDTO.getLp(),
-				userRep.findById(user.getId()).get()
+				userRep.findById(currentUser.getId()).get()
 			);
 		
 		modulRep.save(modul);

@@ -80,7 +80,10 @@
 
 .modal-window select {
 	font-size: 18px;
+	
 	padding: 5px;
+	margin-bottom: 10px;
+	
 	width: auto;
 }
 

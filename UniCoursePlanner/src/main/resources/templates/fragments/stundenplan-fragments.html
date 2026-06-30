@@ -55,16 +55,20 @@
 	</div>
 	
 	<div class="data-handling-btn">
-		<button type="button" onclick="openModal('insert', 'S')">
+		<button type="button" onclick="openModal('insert', 'STUNDENPLAN')">
 			<i class="bi bi-plus-circle"></i>
 		</button>
 		
-		<button type="button" onclick="openModal('edit', 'MODUL')">
+		<button type="button" onclick="openModal('edit', 'STUNDENPLAN')">
 			<i class="bi bi-pencil"></i>
 		</button>
 		
-		<button type="button" onclick="openModal('delete', 'MODUL')">
+		<button type="button" onclick="openModal('delete', 'STUNDENPLAN')">
 			<i class="bi bi-trash"></i>
 		</button>
 	</div>
+	
+	<script th:src="@{/js/tableScripts/tablerow-action.js}"></script>
+	<script th:src="@{/js/modal/modal-opening.js}"></script>
+	<script th:src="@{/js/modal/modal-actions.js}"></script>
 </div>
