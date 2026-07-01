@@ -1,6 +1,7 @@
 package com.uni_course_planner.dto.timetable.modal;
 
-import com.uni_course_planner.constants.modul.EventTypes;
+import java.util.List;
+
 import com.uni_course_planner.constants.timetable.*;
 import com.uni_course_planner.dto.FieldDTO;
 
@@ -9,18 +10,22 @@ public class LectureInsertDTO extends FieldDTO
 	private Timeslot time;
 	private Weekday day;
 	
-	private String modul;
-	private EventTypes event;
+	private String selectedModul;
+	private List<String> modulOptionen;
+	
 	private String room;
 	
-	public LectureInsertDTO() {}
+	public LectureInsertDTO(List<String> modulOptionen) 
+	{
+		this.modulOptionen = modulOptionen;
+	}
 	
-	public LectureInsertDTO(Timeslot time, Weekday day, String modul, EventTypes event, String room) 
+	public LectureInsertDTO(Timeslot time, Weekday day, String selectedModul, String room) 
 	{
 		this.time = time;
 		this.day = day;
-		this.modul = modul;
-		this.event = event;
+		
+		this.selectedModul = selectedModul;
 		this.room = room;
 	}
 
@@ -44,24 +49,25 @@ public class LectureInsertDTO extends FieldDTO
 		this.day = day;
 	}
 
-	public String getModul()
+	public String getSelectedModul()
 	{
-		return modul;
+		return selectedModul;
 	}
 
-	public void setModul(String modul) 
+	public void setSelectedModul(String modul) 
 	{
-		this.modul = modul;
+		this.selectedModul = modul;
+	}
+	
+
+	public List<String> getModulOptionen() 
+	{
+		return modulOptionen;
 	}
 
-	public EventTypes getEvent() 
+	public void setModulOptionen(List<String> modulOptionen) 
 	{
-		return event;
-	}
-
-	public void setEvent(EventTypes event) 
-	{
-		this.event = event;
+		this.modulOptionen = modulOptionen;
 	}
 
 	public String getRoom()

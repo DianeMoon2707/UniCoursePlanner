@@ -16,13 +16,9 @@
 				th:value="${weekday}" th:text="${weekday.description}">
 		</select><br>
 		
-		<label>Modulname: </label>
-		<input th:field="*{modul}" type="text"><br>
-		
-		<label>Veranstaltungsart: </label>
-		<select th:field="*{event}">
-			<option th:each="type : ${T(com.uni_course_planner.constants.modul.EventTypes).values()}"
-			th:value="${type}" th:text="${type.description}"></option>	
+		<label>Modul: </label>
+		<select th:field="*{selectedModul}">
+			<option th:each="modul : *{modulOptionen}" th:value="${modul}" th:text="${modul}"></option>
 		</select><br>
 		
 		<label>Raum: </label>

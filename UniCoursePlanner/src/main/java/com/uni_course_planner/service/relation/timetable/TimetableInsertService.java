@@ -1,7 +1,10 @@
 package com.uni_course_planner.service.relation.timetable;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
+import com.uni_course_planner.constants.modul.EventTypes;
 import com.uni_course_planner.constants.views.ModalType;
 import com.uni_course_planner.dto.FieldDTO;
 import com.uni_course_planner.dto.timetable.modal.LectureInsertDTO;
@@ -37,9 +40,12 @@ public class TimetableInsertService implements InsertStrategy
 	}
 
 	@Override
-	public FieldDTO createDTO() 
+	public FieldDTO createDTO(LogInData currentUser) 
 	{
-		return new LectureInsertDTO();
+		List<String> modulnamen = eventTypeRep.findAllByUserId(currentUser.getId()).stream()
+			.map(et -> et.getModul().getModulname() + " - " + et.geteId().getType().getDescription())
+			.toList();
+		return new LectureInsertDTO(modulnamen);
 	}
 
 	@Override
@@ -48,14 +54,15 @@ public class TimetableInsertService implements InsertStrategy
 		LectureInsertDTO lectureDTO = (LectureInsertDTO) dto;
 		
 		User user = userRep.findById(currentUser.getId()).get();
+		String[]modulOption = lectureDTO.getSelectedModul().split(" - ");
 		
 		Timetable entry = new Timetable(
 			lectureDTO.getTime(),
 			lectureDTO.getDay(),
 			lectureDTO.getRoom(),
 			eventTypeRep.getByModulnameAndType(
-					lectureDTO.getModul(), 
-					lectureDTO.getEvent(), 
+					modulOption[0], 
+					EventTypes.fromDescriptionToEnum(modulOption[1]), 
 					user.getId()
 			)
 		);

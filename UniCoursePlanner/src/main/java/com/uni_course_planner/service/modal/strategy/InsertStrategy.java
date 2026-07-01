@@ -7,6 +7,6 @@ import com.uni_course_planner.relation.user.LogInData;
 public interface InsertStrategy
 {
 	public ModalType getType();
-	public FieldDTO createDTO();
+	public FieldDTO createDTO(LogInData currentUser);
 	public void save(FieldDTO dto, LogInData currentUser);
 }

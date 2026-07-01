@@ -36,7 +36,7 @@ public class ModulInsertService implements InsertStrategy
 	}
 	
 	@Override
-	public FieldDTO createDTO()
+	public FieldDTO createDTO(LogInData currentUser)
 	{
 		return new ModulDTO();
 	}

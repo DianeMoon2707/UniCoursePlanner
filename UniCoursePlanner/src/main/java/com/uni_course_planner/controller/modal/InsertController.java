@@ -28,7 +28,10 @@ public class InsertController
 	@ModelAttribute("fieldDTO")
 	public FieldDTO fieldDTO(@RequestParam ModalType insertType) 
 	{
-	    return serviceFactory.getInsertService(insertType).createDTO();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		LogInData currentUser = userService.getUserByUsername(auth.getName());
+		
+	    return serviceFactory.getInsertService(insertType).createDTO(currentUser);
 	}
 	
 	@GetMapping(PageAddress.INSERT_MODAL_ADDRESS)

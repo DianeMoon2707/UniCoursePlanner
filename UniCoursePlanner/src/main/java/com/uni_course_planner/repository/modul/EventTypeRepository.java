@@ -26,6 +26,9 @@ public interface EventTypeRepository extends JpaRepository<EventType, EventTypeI
 	@Query("SELECT e FROM event_type e WHERE e.modul = :modul")
 	List<EventType> findAllByModul(@Param("modul") Modul modul);
 	
+	@Query("SELECT e FROM event_type e WHERE e.eId.mId.userId = :userId")
+	List<EventType> findAllByUserId(@Param("userId") Long user);
+	
 	@Query("""
 			SELECT COUNT(e) > 0
 			FROM event_type e
