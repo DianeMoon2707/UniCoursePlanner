@@ -1,7 +1,6 @@
 package com.uni_course_planner.controller.core;
 
 import java.time.LocalDate;
-import java.util.*;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -9,11 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import com.uni_course_planner.constants.modul.EventTypes;
-import com.uni_course_planner.constants.timetable.Timeslot;
 import com.uni_course_planner.constants.views.PageAddress;
-import com.uni_course_planner.dto.timetable.*;
 import com.uni_course_planner.relation.user.LogInData;
+import com.uni_course_planner.service.relation.timetable.TimetableTableService;
 import com.uni_course_planner.service.relation.user.UserService;
 import com.uni_course_planner.service.relation.zeitraum.ZeitraumService;
 
@@ -25,11 +22,14 @@ public class StundenplanController
 	
 	private UserService userService;
 	private ZeitraumService zeitraumService;
+	private TimetableTableService timetableService;
 	
-	public StundenplanController(UserService userService, ZeitraumService zeitraumService) 
+	public StundenplanController(UserService userService, ZeitraumService zeitraumService, TimetableTableService timetableService) 
 	{
 		this.userService = userService;
+		
 		this.zeitraumService = zeitraumService;
+		this.timetableService = timetableService;
 	}
 
 	@GetMapping(PageAddress.STUNDENPLAN_PAGE_ADDRESS)
@@ -63,7 +63,7 @@ public class StundenplanController
 		if(zeitraumService.actuellZeitraumExistsByUser(user))
 		{
 			model.addAttribute("fragmentName", TIMETABLE_FRAGMENT);
-			model.addAttribute("timetable", createDummyTimetable());
+			model.addAttribute("timetable", timetableService.fillTimetable(user));
 		}
 		else
 		{
@@ -73,52 +73,5 @@ public class StundenplanController
 			model.addAttribute("today", today);
 			model.addAttribute("later", today.plusMonths(3));
 		}
-	}
-	
-	private List<TimetableRowDTO> createDummyTimetable()
-	{
-	    List<TimetableRowDTO> timetable = new ArrayList<>();
-
-	    // ===== Slot 08-10 =====
-	    List<LectureDTO> lectureMo1 = List.of(new LectureDTO("Mathe", EventTypes.UB, "A101"));
-	    List<LectureDTO> lectureDi1 = List.of(new LectureDTO("Deutsch", EventTypes.VL, "B202"));
-	    List<LectureDTO> lectureMi1 = List.of();
-	    List<LectureDTO> lectureDo1 = List.of(new LectureDTO("Informatik", EventTypes.SEM, "C303"));
-	    List<LectureDTO> lectureFr1 = List.of();
-	    
-	    List<List<LectureDTO>> lectures = new ArrayList<>();
-	    lectures.add(lectureMo1);
-	    lectures.add(lectureDi1);
-	    lectures.add(lectureMi1);
-	    lectures.add(lectureDo1);
-	    lectures.add(lectureFr1);
-	    
-	    TimetableRowDTO row1 = new TimetableRowDTO(Timeslot.SLOT_08_10, lectures);
-
-	    timetable.add(row1);
-
-	    // ===== Slot 10-12 =====	    
-	    List<LectureDTO> lectureMo2 = List.of(
-		        new LectureDTO("Physik", EventTypes.VL, "A101"),
-		        new LectureDTO("Tutorium", EventTypes.UB, "A101")
-		    );
-	    
-	    List<LectureDTO> lectureDi2 = List.of();
-	    List<LectureDTO> lectureMi2 = List.of(new LectureDTO("Mathe", EventTypes.VL, "B202"));
-	    List<LectureDTO> lectureDo2 = List.of();
-	    List<LectureDTO> lectureFr2 = List.of();
-	    
-	    List<List<LectureDTO>> lectures2 = new ArrayList<>();
-	    lectures2.add(lectureMo2);
-	    lectures2.add(lectureDi2);
-	    lectures2.add(lectureMi2);
-	    lectures2.add(lectureDo2);
-	    lectures2.add(lectureFr2);
-	    
-	    TimetableRowDTO row2 = new TimetableRowDTO(Timeslot.SLOT_10_12, lectures2);
-
-	    timetable.add(row2);
-
-	    return timetable;
 	}
 }
