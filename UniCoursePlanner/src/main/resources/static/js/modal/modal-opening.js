@@ -4,8 +4,8 @@ async function openModal(action, type)
 	
 	if(action !== "insert")
     {
-		const rowData = encodeURIComponent(document.getElementById("rowData").value);
-		url += `&rowData=${rowData}`;
+		const data = encodeURIComponent(document.getElementById("data").value);
+		url += `&data=${data}`;
 	}
 	
 	const response = await fetch(url);

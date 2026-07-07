@@ -201,33 +201,6 @@ nav {
 	font-weight: bold;
 }
 
-/*
-.raster-cell {
-	display: flex;
-	flex-direction: row;
-	min-height: 80px;
-}
-
-.raster-entry {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-wrap: wrap;
-	flex: 1;
-	gap: 6px;
-	
-	background-color: #f2f2f2;
-	border: 1px solid black;
-	border-radius: 4px;
-	padding: 5px;
-	margin: 5px;
-	
-	min-width: 0;
-    overflow-wrap: break-word;
-    word-break: break-word;
-    text-align: center;
-}*/
-
 .raster-cell {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
@@ -257,4 +230,10 @@ nav {
     overflow-wrap: break-word;
     word-break: break-word;
     text-align: center;
+}
+
+.raster-entry.active {
+	background-color: #ff0000 !important;
+	color: white;
+	cursor: pointer;
 }

@@ -16,13 +16,14 @@
 	</form>
 </div>
 
-<div th:fragment="timetable">				
+<div th:fragment="timetable">
+	<input hidden id="data">
+					
 	<div class="raster"
 		th:with="days=${T(com.uni_course_planner.constants.timetable.Weekday).values()}"
 		th:style="'--cols:' + ${days.length}">
 		<div class="raster-row">
 			<div class="raster-head">Zeitslot</div>
-			
 			<div th:each="day : ${days}" class="raster-head" th:text="${day.description}"></div>
 		</div>
 			
@@ -31,9 +32,12 @@
 				<div class="raster-entry" th:text="${row.slot.time}"></div>
 			</div>
 			
-			<div class="raster-cell" th:each="cell : ${row.lectures}">
-				<div th:each="lecture : ${cell}" class="raster-entry"
-					 th:style="'background-color:' + ${lecture.event.hexColor}">
+			<div class="raster-cell" th:each="cell, dayStat : ${row.lectures}">
+				<div th:each="lecture : ${cell}" class="raster-entry" 
+					th:data-weekday="${days[dayStat.index]}"
+					th:data-time="${row.slot}"
+					th:style="'background-color:' + ${lecture.event.hexColor}"
+					th:onclick="entryClicked(this)">
 					
 					<span th:text="${lecture.modul}"></span>
 					<span th:text="${lecture.event.description} + ';'"></span>
@@ -68,7 +72,7 @@
 		</button>
 	</div>
 	
-	<script th:src="@{/js/tableScripts/tablerow-action.js}"></script>
+	<script th:src="@{/js/tableScripts/tablecell-action.js}"></script>
 	<script th:src="@{/js/modal/modal-opening.js}"></script>
 	<script th:src="@{/js/modal/modal-actions.js}"></script>
 </div>

@@ -8,6 +8,6 @@ public interface EditStrategy
 {
 	public ModalType getType();
 	public FieldDTO createDTO();
-	public FieldDTO createDTO(String rowData);
+	public FieldDTO createDTO(String data);
 	public void edit(FieldDTO dto, LogInData currentUser);
 }

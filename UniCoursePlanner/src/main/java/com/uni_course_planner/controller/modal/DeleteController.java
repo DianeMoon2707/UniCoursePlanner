@@ -29,14 +29,14 @@ public class DeleteController
 	}
 	
 	@ModelAttribute("fieldDTO")
-	public FieldDTO fieldDTO(@RequestParam ModalType deleteType, @RequestParam(required = false) String rowData) 
+	public FieldDTO fieldDTO(@RequestParam ModalType deleteType, @RequestParam(required = false) String data) 
 	{
-		if(rowData == null)
+		if(data == null)
 		{
 			return serviceFactory.getDeleteService(deleteType).createDTO();
 		}
 		
-	    return serviceFactory.getDeleteService(deleteType).createDTO(rowData);
+	    return serviceFactory.getDeleteService(deleteType).createDTO(data);
 	}
 	
 	@GetMapping(PageAddress.DELETE_MODAL_ADDRESS)

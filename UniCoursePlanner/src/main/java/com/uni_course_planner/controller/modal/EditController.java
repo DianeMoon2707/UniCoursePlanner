@@ -25,14 +25,14 @@ public class EditController
 	}
 	
 	@ModelAttribute("fieldDTO")
-	public FieldDTO fieldDTO(@RequestParam ModalType editType, @RequestParam(required = false) String rowData) 
+	public FieldDTO fieldDTO(@RequestParam ModalType editType, @RequestParam(required = false) String data) 
 	{
-		if(rowData == null)
+		if(data == null)
 		{
 			return serviceFactory.getEditService(editType).createDTO();
 		}
 		
-	    return serviceFactory.getEditService(editType).createDTO(rowData);
+	    return serviceFactory.getEditService(editType).createDTO(data);
 	}
 	
 	@GetMapping(PageAddress.EDIT_MODAL_ADDRESS)

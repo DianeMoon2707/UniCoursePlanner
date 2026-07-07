@@ -8,6 +8,6 @@ public interface DeleteStrategy
 {
 	public ModalType getType();
 	public FieldDTO createDTO();
-	public FieldDTO createDTO(String rowData);
+	public FieldDTO createDTO(String data);
 	public void delete(FieldDTO dto, LogInData user);
 }

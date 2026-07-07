@@ -57,8 +57,7 @@ public class LectureInsertDTO extends FieldDTO
 	public void setSelectedModul(String modul) 
 	{
 		this.selectedModul = modul;
-	}
-	
+	}	
 
 	public List<String> getModulOptionen() 
 	{

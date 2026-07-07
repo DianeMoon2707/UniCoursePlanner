@@ -41,20 +41,20 @@ public class ModulEditService implements EditStrategy
 	}
 
 	@Override
-	public FieldDTO createDTO(String rowData) 
+	public FieldDTO createDTO(String data) 
 	{
 		ModulDTOWithEdit dto = new ModulDTOWithEdit();
 		
 		try
 		{
 			ObjectMapper mapper = new ObjectMapper();
-			List<String> data = mapper.readValue(rowData, new TypeReference<List<String>>() {});
+			List<String> dataList = mapper.readValue(data, new TypeReference<List<String>>() {});
 			
-			dto.setModul_id(Long.parseLong(data.get(0)));
-			dto.setModulname(data.get(1));
-			dto.setLp(Integer.parseInt(data.get(2)));
+			dto.setModul_id(Long.parseLong(dataList.get(0)));
+			dto.setModulname(dataList.get(1));
+			dto.setLp(Integer.parseInt(dataList.get(2)));
 
-			String[] eventString = data.get(3).split("\n");
+			String[] eventString = dataList.get(3).split("\n");
 			HashSet<EventTypes> events = new HashSet<EventTypes>();
 			
 			for(String str : eventString)
