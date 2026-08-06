@@ -76,10 +76,10 @@ public class ModulEditService implements EditStrategy
 	}
 
 	@Override
-	public void edit(FieldDTO dto, LogInData currentUser) 
+	public void edit(FieldDTO dto, LogInData user) 
 	{
 		ModulDTOWithEdit modulDTO = (ModulDTOWithEdit)dto;
-		ModulId mId = new ModulId(currentUser.getId(), modulDTO.getModul_id());
+		ModulId mId = new ModulId(user.getId(), modulDTO.getModul_id());
 		Modul modul = modulRep.findById(mId).orElseThrow();
 		
 		//Standarddaten

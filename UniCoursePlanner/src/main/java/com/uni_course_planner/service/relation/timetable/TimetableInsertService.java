@@ -10,10 +10,8 @@ import com.uni_course_planner.dto.FieldDTO;
 import com.uni_course_planner.dto.timetable.modal.LectureInsertDTO;
 import com.uni_course_planner.relation.timetable.Timetable;
 import com.uni_course_planner.relation.user.LogInData;
-import com.uni_course_planner.relation.user.User;
 import com.uni_course_planner.repository.modul.EventTypeRepository;
 import com.uni_course_planner.repository.timetable.TimetableRepository;
-import com.uni_course_planner.repository.user.UserRepository;
 import com.uni_course_planner.service.modal.strategy.InsertStrategy;
 
 @Service
@@ -22,15 +20,10 @@ public class TimetableInsertService implements InsertStrategy
 	private TimetableRepository timetableRep;
 	private EventTypeRepository eventTypeRep;
 	
-	private UserRepository userRep;	
-	
-	public TimetableInsertService(TimetableRepository timetableRep, EventTypeRepository eventTypeRep,
-			UserRepository userRep)
+	public TimetableInsertService(TimetableRepository timetableRep, EventTypeRepository eventTypeRep)
 	{
 		this.timetableRep = timetableRep;
 		this.eventTypeRep = eventTypeRep;
-		
-		this.userRep = userRep;
 	}
 
 	@Override
@@ -40,20 +33,18 @@ public class TimetableInsertService implements InsertStrategy
 	}
 
 	@Override
-	public FieldDTO createDTO(LogInData currentUser) 
+	public FieldDTO createDTO(LogInData user) 
 	{
-		List<String> modulnamen = eventTypeRep.findAllByUserId(currentUser.getId()).stream()
+		List<String> modulnamen = eventTypeRep.findAllByUserId(user.getId()).stream()
 			.map(et -> et.getModul().getModulname() + " - " + et.geteId().getType().getDescription())
 			.toList();
 		return new LectureInsertDTO(modulnamen);
 	}
 
 	@Override
-	public void save(FieldDTO dto, LogInData currentUser)
+	public void save(FieldDTO dto, LogInData user)
 	{
 		LectureInsertDTO lectureDTO = (LectureInsertDTO) dto;
-		
-		User user = userRep.findById(currentUser.getId()).get();
 		String[]modulOption = lectureDTO.getSelectedModul().split(" - ");
 		
 		Timetable entry = new Timetable(

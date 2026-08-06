@@ -7,29 +7,32 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.uni_course_planner.constants.modul.EventTypes;
-import com.uni_course_planner.constants.timetable.*;
+import com.uni_course_planner.constants.timetable.Timeslot;
+import com.uni_course_planner.constants.timetable.Weekday;
 import com.uni_course_planner.constants.views.ModalType;
 import com.uni_course_planner.dto.FieldDTO;
 import com.uni_course_planner.dto.timetable.modal.LectureDeleteDTO;
+import com.uni_course_planner.dto.timetable.modal.LectureEditDTO;
 import com.uni_course_planner.relation.modul.event_type.EventType;
 import com.uni_course_planner.relation.timetable.Timetable;
-import com.uni_course_planner.relation.user.*;
+import com.uni_course_planner.relation.user.LogInData;
 import com.uni_course_planner.repository.modul.EventTypeRepository;
 import com.uni_course_planner.repository.timetable.TimetableRepository;
-import com.uni_course_planner.service.modal.strategy.DeleteStrategy;
+import com.uni_course_planner.service.modal.strategy.EditStrategy;
+
 
 @Service
-public class TimetableDeleteService implements DeleteStrategy
+public class TimetableEditService implements EditStrategy
 {
 	private TimetableRepository timetableRep;
 	private EventTypeRepository eventTypeRep;
 	
-	public TimetableDeleteService(TimetableRepository timetableRep, EventTypeRepository eventTypeRep) 
+	public TimetableEditService(TimetableRepository timetableRep, EventTypeRepository eventTypeRep) 
 	{
 		this.timetableRep = timetableRep;
 		this.eventTypeRep = eventTypeRep;
 	}
-
+	
 	@Override
 	public ModalType getType()
 	{
@@ -39,13 +42,13 @@ public class TimetableDeleteService implements DeleteStrategy
 	@Override
 	public FieldDTO createDTO() 
 	{
-		return new LectureDeleteDTO("", Weekday.MO, Timeslot.SLOT_08_10, "");
+		return new LectureEditDTO("", Weekday.MO, Timeslot.SLOT_08_10, "", "");
 	}
 
 	@Override
 	public FieldDTO createDTO(String data)
 	{
-		LectureDeleteDTO dto = new LectureDeleteDTO();
+		LectureEditDTO dto = new LectureEditDTO();
 		
 		try
 		{
@@ -55,10 +58,10 @@ public class TimetableDeleteService implements DeleteStrategy
 			String[] textData = LectureDeleteDTO.convertEntryData(dataList.get(0));
 			dto.setModulname(textData[0]);			
 			dto.setRoom(textData[1]);
+			dto.setRoomNeu(textData[1]);
 			
 			dto.setWeekday(Weekday.valueOf(dataList.get(1))); 
-			dto.setTime(Timeslot.valueOf(dataList.get(2)));
-			
+			dto.setTime(Timeslot.valueOf(dataList.get(2)));			
 		}
 		catch(Exception e) 
 		{
@@ -69,9 +72,9 @@ public class TimetableDeleteService implements DeleteStrategy
 	}
 
 	@Override
-	public void delete(FieldDTO dto, LogInData user)
+	public void edit(FieldDTO dto, LogInData user)
 	{
-		LectureDeleteDTO lectureDTO = (LectureDeleteDTO) dto;
+		LectureEditDTO lectureDTO = (LectureEditDTO) dto;
 		
 		String[]modulParts = lectureDTO.getModulname().split(" - ");
 		EventType modul = eventTypeRep.getByModulnameAndType(
@@ -86,6 +89,8 @@ public class TimetableDeleteService implements DeleteStrategy
 			lectureDTO.getRoom(), 
 			modul);
 		
-		timetableRep.delete(entry);
+		entry.setRoom(lectureDTO.getRoomNeu());
+		
+		timetableRep.save(entry);
 	}
 }

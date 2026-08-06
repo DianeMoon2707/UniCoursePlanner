@@ -40,7 +40,10 @@ public interface TimetableRepository extends JpaRepository<Timetable, Long>
 			FROM timetable t
 			WHERE t.time = :time
 			AND t.day = :day
-			AND t.room = :room
+			AND (
+				(:room IS NULL AND t.room IS NULL)
+				OR t.room = :room
+			)
 			AND t.event = :modul
 			""")
 	Timetable findByAttributs(

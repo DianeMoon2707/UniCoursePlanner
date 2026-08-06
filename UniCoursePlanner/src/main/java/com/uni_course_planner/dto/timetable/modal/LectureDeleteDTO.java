@@ -59,4 +59,24 @@ public class LectureDeleteDTO extends FieldDTO
 	{
 		this.room = room;
 	}
+	
+	public static String[] convertEntryData(String data)
+	{
+		String[]array = new String[4];
+		
+		String[] textParts = data.split("\n");
+		
+		String modulname = textParts[0] + " - " + textParts[1].substring(0, textParts[1].length()-1);
+		
+		String room = "";
+		if(textParts[2].length() > "Raum:".length())
+		{
+			room = textParts[2].substring(textParts[2].indexOf(":") + 2).trim();
+		}
+		
+		array[0] = modulname;
+		array[1] = room;
+		
+		return array;
+	}
 }

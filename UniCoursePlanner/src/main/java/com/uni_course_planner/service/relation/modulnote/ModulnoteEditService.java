@@ -71,11 +71,11 @@ public class ModulnoteEditService implements EditStrategy
 	}
 
 	@Override
-	public void edit(FieldDTO dto, LogInData currentUser) 
+	public void edit(FieldDTO dto, LogInData user) 
 	{
 		ModulnoteDTOWithEdit noteDTO = (ModulnoteDTOWithEdit) dto;
 		
-		ModulId mId = new ModulId(currentUser.getId(), noteDTO.getModul_id());
+		ModulId mId = new ModulId(user.getId(), noteDTO.getModul_id());
 		Modul modul = modulRep.findById(mId).get();
 		
 		Grades grade = noteDTO.getGradeNeu();

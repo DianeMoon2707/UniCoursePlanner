@@ -21,10 +21,10 @@ public class TimetableTableService
 		this.timetableRep = timetableRep;
 	}
 	
-	public List<TimetableRowDTO> fillTimetable(LogInData currentUser)
+	public List<TimetableRowDTO> fillTimetable(LogInData user)
 	{
 		List<TimetableRowDTO> timetable = this.createBlankTimetable();
-		List<Timetable> dataSets = timetableRep.findAllByUserId(currentUser.getId());
+		List<Timetable> dataSets = timetableRep.findAllByUserId(user.getId());
 		
 		int rowNumber, colNumber = 0;		
 		TimetableRowDTO cell;
