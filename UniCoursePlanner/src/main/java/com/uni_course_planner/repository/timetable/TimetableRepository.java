@@ -2,11 +2,12 @@ package com.uni_course_planner.repository.timetable;
 
 import java.util.List;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.uni_course_planner.constants.timetable.*;
+import com.uni_course_planner.relation.modul.event_type.EventType;
 import com.uni_course_planner.relation.timetable.Timetable;
 
 @Repository
@@ -33,4 +34,18 @@ public interface TimetableRepository extends JpaRepository<Timetable, Long>
 				END
 			""")
 	List<Timetable> findAllByUserId(@Param("userId") Long user);
+	
+	@Query("""
+			SELECT t
+			FROM timetable t
+			WHERE t.time = :time
+			AND t.day = :day
+			AND t.room = :room
+			AND t.event = :modul
+			""")
+	Timetable findByAttributs(
+			@Param("time") Timeslot time, 
+			@Param("day") Weekday day,
+			@Param("room") String room,
+			@Param("modul") EventType modul);
 }

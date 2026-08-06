@@ -38,9 +38,11 @@
 		<input th:field="*{modulname}" type="text" readonly> <br>
 		
 		<label>Wochentag: </label>
+		<input th:field="*{weekday}" type="hidden">
 		<input type="text" th:value="*{weekday.description}" readonly> <br>
 		
 		<label>Zeit: </label>
+		<input th:field="*{time}" type="hidden">
 		<input type="text" th:value="*{time.time}" readonly> <br>
 				
 		

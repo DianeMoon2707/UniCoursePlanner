@@ -6,16 +6,33 @@ import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.uni_course_planner.constants.modul.EventTypes;
 import com.uni_course_planner.constants.timetable.*;
 import com.uni_course_planner.constants.views.ModalType;
 import com.uni_course_planner.dto.FieldDTO;
 import com.uni_course_planner.dto.timetable.modal.LectureDeleteDTO;
-import com.uni_course_planner.relation.user.LogInData;
+import com.uni_course_planner.relation.modul.event_type.EventType;
+import com.uni_course_planner.relation.timetable.Timetable;
+import com.uni_course_planner.relation.user.*;
+import com.uni_course_planner.repository.modul.EventTypeRepository;
+import com.uni_course_planner.repository.timetable.TimetableRepository;
+import com.uni_course_planner.repository.user.UserRepository;
 import com.uni_course_planner.service.modal.strategy.DeleteStrategy;
 
 @Service
 public class TimetableDeleteService implements DeleteStrategy
 {
+	private TimetableRepository timetableRep;
+	private EventTypeRepository eventTypeRep;
+	private UserRepository userRep;	
+	
+	public TimetableDeleteService(TimetableRepository timetableRep, EventTypeRepository eventTypeRep, UserRepository userRep) 
+	{
+		this.timetableRep = timetableRep;
+		this.eventTypeRep = eventTypeRep;
+		this.userRep = userRep;
+	}
+
 	@Override
 	public ModalType getType()
 	{
@@ -55,10 +72,26 @@ public class TimetableDeleteService implements DeleteStrategy
 	}
 
 	@Override
-	public void delete(FieldDTO dto, LogInData user)
+	public void delete(FieldDTO dto, LogInData currentUser)
 	{
-		// TODO Auto-generated method stub
+		LectureDeleteDTO lectureDTO = (LectureDeleteDTO) dto;
 		
+		User user = userRep.findById(currentUser.getId()).get();
+		
+		String[]modulParts = lectureDTO.getModulname().split(" - ");
+		EventType modul = eventTypeRep.getByModulnameAndType(
+			modulParts[0],
+			EventTypes.fromDescriptionToEnum(modulParts[1]),
+			user.getId()
+		);
+		
+		Timetable entry = timetableRep.findByAttributs(
+			lectureDTO.getTime(),
+			lectureDTO.getWeekday(),
+			lectureDTO.getRoom(), 
+			modul);
+		
+		timetableRep.delete(entry);
 	}
 	
 	private String[] convertEntryData(String data)
@@ -68,7 +101,7 @@ public class TimetableDeleteService implements DeleteStrategy
 		String[] textParts = data.split("\n");
 		
 		String modulname = textParts[0] + " - " + textParts[1].substring(0, textParts[1].length()-1);
-		String room = textParts[2].substring(textParts[2].indexOf(":") + 2);
+		String room = textParts[2].substring(textParts[2].indexOf(":") + 2).trim();
 		
 		array[0] = modulname;
 		array[1] = room;
