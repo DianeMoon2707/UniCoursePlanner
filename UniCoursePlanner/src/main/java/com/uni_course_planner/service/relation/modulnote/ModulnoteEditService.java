@@ -7,13 +7,13 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.uni_course_planner.constants.modulnote.Grades;
-import com.uni_course_planner.constants.views.PopupType;
+import com.uni_course_planner.constants.views.ModalType;
 import com.uni_course_planner.dto.FieldDTO;
 import com.uni_course_planner.dto.modulnote.ModulnoteDTOWithEdit;
 import com.uni_course_planner.relation.modul.modul.*;
 import com.uni_course_planner.relation.user.LogInData;
 import com.uni_course_planner.repository.modul.*;
-import com.uni_course_planner.service.popup.strategy.EditStrategy;
+import com.uni_course_planner.service.modal.strategy.EditStrategy;
 
 @Service
 public class ModulnoteEditService implements EditStrategy
@@ -26,9 +26,9 @@ public class ModulnoteEditService implements EditStrategy
 	}
 
 	@Override
-	public PopupType getType() 
+	public ModalType getType() 
 	{
-		return PopupType.LEISTUNGSPUNKTE;
+		return ModalType.LEISTUNGSPUNKTE;
 	}
 
 	@Override
@@ -38,24 +38,24 @@ public class ModulnoteEditService implements EditStrategy
 	}
 
 	@Override
-	public FieldDTO createDTO(String rowData) 
+	public FieldDTO createDTO(String data) 
 	{
 		ModulnoteDTOWithEdit dto = new ModulnoteDTOWithEdit();
 		
 		try
 		{
 			ObjectMapper mapper = new ObjectMapper();
-			List<String> data = mapper.readValue(rowData, new TypeReference<List<String>>() {});
+			List<String> dataList = mapper.readValue(data, new TypeReference<List<String>>() {});
 			
-			dto.setModul_id(Long.parseLong(data.get(0)));
-			dto.setModulname(data.get(1));
-			dto.setLp(Integer.parseInt(data.get(2)));
+			dto.setModul_id(Long.parseLong(dataList.get(0)));
+			dto.setModulname(dataList.get(1));
+			dto.setLp(Integer.parseInt(dataList.get(2)));
 
-			if(!data.get(3).isEmpty() && !data.get(3).equals("-"))
+			if(!dataList.get(3).isEmpty() && !dataList.get(3).equals("-"))
 			{
 				dto.setGrade(
 					Grades.fromNumericToEnum(
-						Double.parseDouble(data.get(3))
+						Double.parseDouble(dataList.get(3))
 					)
 				);
 			}
@@ -71,14 +71,15 @@ public class ModulnoteEditService implements EditStrategy
 	}
 
 	@Override
-	public void edit(FieldDTO dto, LogInData currentUser) 
+	public void edit(FieldDTO dto, LogInData user) 
 	{
 		ModulnoteDTOWithEdit noteDTO = (ModulnoteDTOWithEdit) dto;
 		
-		ModulId mId = new ModulId(currentUser.getId(), noteDTO.getModul_id());
+		ModulId mId = new ModulId(user.getId(), noteDTO.getModul_id());
 		Modul modul = modulRep.findById(mId).get();
 		
-		modul.setGrade(noteDTO.getGradeNeu());
+		Grades grade = noteDTO.getGradeNeu();
+		modul.setGrade(new Grade(grade));
 		modulRep.save(modul);
 	}
 }

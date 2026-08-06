@@ -4,8 +4,8 @@ import java.util.List;
 
 import jakarta.persistence.*;
 
-import com.uni_course_planner.constants.modulnote.Grades;
 import com.uni_course_planner.relation.modul.event_type.*;
+import com.uni_course_planner.relation.user.User;
 
 @Entity(name = "modul")
 public class Modul 
@@ -19,20 +19,26 @@ public class Modul
 	@Column(nullable = false)
 	private int lp;
 	
-	@Column(nullable = true)
-	@Enumerated(EnumType.STRING)
-	private Grades grade;
+	@Embedded
+	private Grade grade;
 	
-	@OneToMany(mappedBy = "modul", cascade = CascadeType.REMOVE, orphanRemoval = true)
+	@MapsId("userId")
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "user_id")
+	private User user;
+	
+	@OneToMany(mappedBy = "modul", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<EventType> eventTypes;
 	
 	protected Modul() {}
 
-	public Modul(ModulId mId, String modulname, int lp)
+	public Modul(ModulId mId, String modulname, int lp, User user)
 	{
 		this.mId = mId;
 		this.modulname = modulname;
 		this.lp = lp;
+		
+		this.user = user;
 	}
 
 	public ModulId getmId() 
@@ -65,13 +71,30 @@ public class Modul
 		this.lp = lp;
 	}
 
-	public Grades getGrade() 
+	public Grade getGrade() 
 	{
 		return grade;
 	}
 
-	public void setGrade(Grades grade) 
+	public void setGrade(Grade grade) 
 	{
 		this.grade = grade;
+	}
+
+	public User getUser() 
+	{
+		return user;
+	}
+
+	public void setUser(User user) 
+	{
+		this.user = user;
+		
+		if(this.mId == null)
+		{
+			this.mId = new ModulId();
+		}
+		
+		this.mId.setUserId(user.getId());
 	}
 }

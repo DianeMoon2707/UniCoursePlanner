@@ -1,0 +1,79 @@
+<div th:fragment="insert-mask">
+	<h1>Neuen Stundenplaneintrag speichern</h1>
+	
+	<form id="insertForm" th:action="@{/insert}" method="post" th:object="${fieldDTO}">
+		<input type="hidden" name="insertType" th:value="${insertType}">
+		
+		<label>Zeitfenster: </label>
+		<select th:field="*{time}"> 
+			<option th:each="slot : ${T(com.uni_course_planner.constants.timetable.Timeslot).values()}"
+				th:value="${slot}" th:text="${slot.time}">
+		</select><br>
+		
+		<label>Wochentag: </label>
+		<select th:field="*{day}"> 
+			<option th:each="weekday : ${T(com.uni_course_planner.constants.timetable.Weekday).values()}"
+				th:value="${weekday}" th:text="${weekday.description}">
+		</select><br>
+		
+		<label>Modul: </label>
+		<select th:field="*{selectedModul}">
+			<option th:each="modul : *{modulOptionen}" th:value="${modul}" th:text="${modul}"></option>
+		</select><br>
+		
+		<label>Raum: </label>
+		<input th:field="*{room}" type="text"><br>
+		
+		<button>Speichern</button>
+	</form>
+</div>
+
+<div th:fragment="delete-mask">
+	<h1>Stundenplaneintrag löschen</h1>
+	
+	<form id="deleteForm" th:action="@{/delete}" method="post" th:object="${fieldDTO}">
+		<input type="hidden" name="deleteType" th:value="${deleteType}">
+		
+		<label>Modulname: </label>
+		<input th:field="*{modulname}" type="text" readonly> <br>
+		
+		<label>Wochentag: </label>
+		<input th:field="*{weekday}" type="hidden">
+		<input type="text" th:value="*{weekday.description}" readonly> <br>
+		
+		<label>Zeit: </label>
+		<input th:field="*{time}" type="hidden">
+		<input type="text" th:value="*{time.time}" readonly> <br>			
+		
+		<label>Raum: </label>
+		<input th:field="*{room}" type="text" readonly> <br>
+		
+		<button>Löschen</button>
+	</form>
+</div>
+
+<div th:fragment="edit-mask">
+	<h1>Stundenplaneintrag</h1>
+	
+	<form id="editForm" th:action="@{/edit}" method="post" th:object="${fieldDTO}">
+		<input type="hidden" name="editType" th:value="${editType}">
+		
+		<label>Modulname: </label>
+		<input th:field="*{modulname}" type="text" readonly> <br>
+				
+		<label>Wochentag: </label>
+		<input th:field="*{weekday}" type="hidden">
+		<input type="text" th:value="*{weekday.description}" readonly> <br>
+				
+		<label>Zeit: </label>
+		<input th:field="*{time}" type="hidden">
+		<input type="text" th:value="*{time.time}" readonly> <br>
+							
+		<label>Raum: </label>
+		<input th:field="*{room}" type="text" readonly> 
+		<i class="bi bi-arrow-right"></i>
+		<input th:field="*{roomNeu}" type="text"><br>
+		
+		<button>Ändern</button>
+	</form>
+</div>

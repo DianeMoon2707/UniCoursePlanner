@@ -5,7 +5,7 @@ import java.util.*;
 import org.springframework.stereotype.Service;
 
 import com.uni_course_planner.dto.modulnote.ModulnoteDTO;
-import com.uni_course_planner.relation.modul.modul.Modul;
+import com.uni_course_planner.relation.modul.modul.*;
 import com.uni_course_planner.repository.modul.*;
 
 @Service
@@ -33,14 +33,13 @@ public class ModulnoteTableService
 			}
 			
 			if(lastModulId != modul.getmId().getModulId())
-			{
-				Optional<Modul> modulnote = modulRep.findById(modul.getmId());
-				
+			{	
+				Grade grade = modul.getGrade();
 				ModulnoteDTO dto = new ModulnoteDTO(
 					modul.getmId().getModulId(),
 					modul.getModulname(),
 					modul.getLp(),
-					modulnote.isPresent() ? modulnote.get().getGrade() : null
+					grade != null ? grade.getGrade() : null
 				);
 				
 				tableData.add(dto);

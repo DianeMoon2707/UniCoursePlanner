@@ -4,8 +4,7 @@ function rowClicked(row)
 	document.querySelectorAll(".content tr.selected").forEach(tr => tr.classList.remove("selected"));
 	row.classList.add("selected");	
 		
-	const rowData = Array.from(row.cells).map(cell => cell.innerText.trim());
-	
-	//Row-Data saving	
-	document.getElementById("rowData").value = JSON.stringify(rowData);
+	//Row-Data saving
+	const data = Array.from(row.cells).map(cell => cell.innerText.trim());
+	document.getElementById("data").value = JSON.stringify(data);
 }

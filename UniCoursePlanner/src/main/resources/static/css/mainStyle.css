@@ -78,7 +78,6 @@ nav {
 /* Content */
 .content {
 	padding: 0 20px 0 20px;
-	font-weight: 500;
 	
 	display: flex;
 	flex-direction: column;
@@ -92,6 +91,16 @@ nav {
 }
 
 /* Buttons */
+.content button {
+	margin-top: 40px;
+	padding: 5px;
+		
+	font-size: 24px;
+	background: white;
+	
+	cursor: pointer;
+}
+
 .data-handling-btn {
 	display: flex;
 	justify-content: flex-end;
@@ -157,5 +166,74 @@ nav {
 
 .content tr.selected {
 	background-color: #87cefa;
+	cursor: pointer;
+}
+
+/* Input */
+.content input {
+	margin-top: 20px;
+	padding: 5px;
+	
+	font-size: 18px;
+}
+
+/* Stundenplan */
+.raster {
+	display: flex;
+	flex-direction: column;
+}
+
+.raster-row {
+	display: grid;
+	grid-template-columns: 0.5fr repeat(var(--cols), 1fr);
+}
+
+.raster-head,
+.raster-cell {
+	background-color: white;
+	border: 3px solid black;
+				
+	padding: 10px;
+}
+
+.raster-head {
+	text-align: center;
+	font-weight: bold;
+}
+
+.raster-cell {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 8px;
+	
+	min-height: 80px;
+	padding: 10px;
+}
+
+.raster-entry:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+}
+
+.raster-entry {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 6px;
+	
+	background-color: #f2f2f2;
+	border: 1px solid black;
+	border-radius: 4px;
+	padding: 5px;
+	
+	min-width: 0;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    text-align: center;
+}
+
+.raster-entry.active {
+	background-color: #ff0000 !important;
+	color: white;
 	cursor: pointer;
 }
