@@ -262,8 +262,13 @@ nav {
 	background-color: #b0e2ff;
 }
 
-.calender-headline
-{
+.calender-view {
+	display: grid;
+	grid-template-columns: 2fr 1fr;
+	gap: 20px;
+}
+
+.calender-headline {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -273,13 +278,11 @@ nav {
 	background-color: #54ff9f;
 }
 
-.calender-headline h2 
-{
+.calender-headline h2 {
 	margin: -8px;
 }
 
-.calender-headline button
-{
+.calender-headline button {
 	margin: 0;
 	padding: 0;
 	
@@ -287,4 +290,12 @@ nav {
 	height: 50px;
 	
 	border: 0.5px solid black;
+}
+
+.day-schedule {
+	background: white;
+	border: 0.5px solid black;
+	
+	margin: 10px;
+	padding: 10px;
 }

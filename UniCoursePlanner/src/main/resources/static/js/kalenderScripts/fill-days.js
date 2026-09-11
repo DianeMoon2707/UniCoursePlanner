@@ -92,6 +92,12 @@ function createDay(number, additionalClass = "")
 	}
 	
 	day.textContent = number;
+	
+	day.onclick = function()
+	{
+		openDay(currentYear, currentMonth, number);
+	}
+	
 	kalender.appendChild(day);
 }
 

@@ -10,33 +10,50 @@
 		<div th:replace="~{fragments/core-fragments :: menue}"></div>
 		
 		<div class="content">
-			<h1>Kalender</h1>
-			
-			<div class="calender-headline">
-				<button type="button" onclick="previousMonth()">				
-					<i class="bi bi-chevron-left"></i>
-				</button>
-				
-				<h2 id="month"></h2>
-				
-				<button type="button" onclick="nextMonth()">				
-					<i class="bi bi-chevron-right"></i>
-				</button>
-			</div>
-			
-			<div class="raster calender">
-				<div class="raster-row">
-					<div class="raster-head">Montag</div>
-					<div class="raster-head">Dienstag</div>
-					<div class="raster-head">Mittwoch</div>
-					<div class="raster-head">Donnerstag</div>
-					<div class="raster-head">Freitag</div>
-					<div class="raster-head">Samstag</div>
-					<div class="raster-head">Sonntag</div>
+			<div class="calender-view">
+				<div class="calender">
+					<h1>Kalender</h1>
+					
+					<div class="calender-headline">
+						<button type="button" onclick="previousMonth()">				
+							<i class="bi bi-chevron-left"></i>
+						</button>
+						
+						<h2 id="month"></h2>
+						
+						<button type="button" onclick="nextMonth()">				
+							<i class="bi bi-chevron-right"></i>
+						</button>
+					</div>
+					
+					<div class="raster calender">
+						<div class="raster-row">
+							<div class="raster-head">Montag</div>
+							<div class="raster-head">Dienstag</div>
+							<div class="raster-head">Mittwoch</div>
+							<div class="raster-head">Donnerstag</div>
+							<div class="raster-head">Freitag</div>
+							<div class="raster-head">Samstag</div>
+							<div class="raster-head">Sonntag</div>
+						</div>
+						<div class="raster-row" id="days"></div>
+					</div>
 				</div>
-				<div class="raster-row" id="days"></div>
+				<div class="day-schedule">
+					<h1>Tagesplan</h1>
+					<p id="notice-day-schedule">Wähle einen Tag aus.</p>
+					<div id="day-plan">
+						<h2 id="selectedDate"></h2>
+						<table id="events">
+							<tr>
+								<th>
+							</tr>
+						</table>
+					</div>
+				</div>
 			</div>
 		</div>
 		<script th:src="@{/js/kalenderScripts/fill-days.js}"></script>
+		<script th:src="@{/js/kalenderScripts/day-function.js}"></script>
 	</body>
 </html>
