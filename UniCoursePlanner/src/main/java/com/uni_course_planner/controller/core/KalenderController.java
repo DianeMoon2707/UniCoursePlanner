@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.uni_course_planner.constants.views.PageAddress;
 import com.uni_course_planner.relation.user.LogInData;
-import com.uni_course_planner.service.relation.modul.ModulTableService;
 import com.uni_course_planner.service.relation.user.UserService;
 
 @Controller

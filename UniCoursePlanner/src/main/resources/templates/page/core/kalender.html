@@ -12,6 +12,31 @@
 		<div class="content">
 			<h1>Kalender</h1>
 			
+			<div class="calender-headline">
+				<button type="button" onclick="previousMonth()">				
+					<i class="bi bi-chevron-left"></i>
+				</button>
+				
+				<h2 id="month"></h2>
+				
+				<button type="button" onclick="nextMonth()">				
+					<i class="bi bi-chevron-right"></i>
+				</button>
+			</div>
+			
+			<div class="raster calender">
+				<div class="raster-row">
+					<div class="raster-head">Montag</div>
+					<div class="raster-head">Dienstag</div>
+					<div class="raster-head">Mittwoch</div>
+					<div class="raster-head">Donnerstag</div>
+					<div class="raster-head">Freitag</div>
+					<div class="raster-head">Samstag</div>
+					<div class="raster-head">Sonntag</div>
+				</div>
+				<div class="raster-row" id="days"></div>
+			</div>
 		</div>
+		<script th:src="@{/js/kalenderScripts/fill-days.js}"></script>
 	</body>
 </html>

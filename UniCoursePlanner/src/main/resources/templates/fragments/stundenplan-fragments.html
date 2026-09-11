@@ -19,7 +19,7 @@
 <div th:fragment="timetable">
 	<input hidden id="data">
 					
-	<div class="raster"
+	<div class="raster schedule"
 		th:with="days=${T(com.uni_course_planner.constants.timetable.Weekday).values()}"
 		th:style="'--cols:' + ${days.length}">
 		<div class="raster-row">
