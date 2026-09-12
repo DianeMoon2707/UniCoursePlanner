@@ -29,15 +29,17 @@ async function loadDaysWithEvents(year, month)
 }
 
 //Aktuellen Monat zeigen
-function showMonth()
+function showMonth(year, month)
 {
-	monthElement.innerHTML = months[currentMonth] + " " + currentYear;
+	monthElement.innerHTML = months[month] + " " + year;
 }
 
 //Kalenderblatt erstellen
 function createCalender(year, month)
 {
-	showMonth();	
+	kalender.innerHTML = "";
+	
+	showMonth(year, month);	
 	
 	let amountDays = 0;
 	
@@ -49,11 +51,11 @@ function createCalender(year, month)
 //Erstelle Tage vom vorherigen Monat
 function createPreviousMonthDays(year, month)
 {
-	const firstDayOfMonth = new Date(currentYear, currentMonth, 1);
+	const firstDayOfMonth = new Date(year, month, 1);
 	const weekday = firstDayOfMonth.getDay();
 	const daysBefore = weekday === 0 ? 6 : weekday - 1;
 
-	const lastDayOfLastMonth = new Date(currentYear, currentMonth, 0);
+	const lastDayOfLastMonth = new Date(year, month, 0);
 	
 	const prevMonth = lastDayOfLastMonth.getMonth();
 	const prevYear = lastDayOfLastMonth.getFullYear();
@@ -88,13 +90,13 @@ function createCurrentMonthDays(year, month)
 }
 
 //Wochenreihe beenden
-function createNextMonthDays(amountDays)
+function createNextMonthDays(amountDays, month, year)
 {
 	let day = 1;
 	
 	while(amountDays % 7 !== 0)
 	{
-		createDay(day, currentMonth + 1, currentYear, "other-month");
+		createDay(day, month + 1, year, "other-month");
 		
 		day++;
 		amountDays++;
@@ -137,9 +139,7 @@ function daysInMonth(year, month)
 
 //Monat ändern
 function previousMonth()
-{
-	kalender.innerHTML = "";
-	
+{	
 	currentMonth--;
 	
 	if(currentMonth < 0)
@@ -152,9 +152,7 @@ function previousMonth()
 }
 
 function nextMonth()
-{
-	kalender.innerHTML = "";
-	
+{	
 	currentMonth++;
 	
 	if(currentMonth > 11)
