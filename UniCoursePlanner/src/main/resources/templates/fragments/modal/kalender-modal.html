@@ -1,0 +1,76 @@
+<div th:fragment="insert-mask">
+	<h1>Neuen Kalendereintrag anlegen</h1>
+	
+	<form id="insertForm" th:action="@{/insert}" method="post" th:object="${fieldDTO}">
+		<input type="hidden" name="insertType" th:value="${insertType}">
+		
+		<label>Datum: </label>
+		<input type="text" th:field="*{date}" id="dateDTO" readonly> <br>
+		
+		<label>Zeit: </label>
+		<input th:field="*{time}" type="time"> <br>
+		
+		<label>Event: </label>
+		<input th:field="*{topic}" type="text"> <br>
+		
+		<label>Weitere Beschreibung: </label>
+		<input th:field="*{extension}" type="text"> <br>
+		
+		<button>Speichern</button>
+	</form>
+	<script th:src="@{/js/kalenderScripts/date-transmission.js}"></script>
+</div>
+
+<div th:fragment="delete-mask">
+	<h1>Kalendereintrag löschen</h1>
+	
+	<form id="deleteForm" th:action="@{/delete}" method="post" th:object="${fieldDTO}">
+		<input type="hidden" name="deleteType" th:value="${deleteType}">
+		
+		<input type="hidden" th:field="*{id}" readonly> <br>
+		
+		<label>Datum: </label>
+		<input type="text" th:field="*{date}" id="dateDTO" readonly> <br>
+		
+		<label>Zeit: </label>
+		<input th:field="*{time}" type="time" readonly> <br>
+		
+		<label>Event: </label>
+		<input th:field="*{topic}" type="text" readonly> <br>
+		
+		<label>Weitere Beschreibung: </label>
+		<input th:field="*{extension}" type="text" readonly> <br>
+		
+		<button>Löschen</button>
+	</form>
+</div>
+
+<div th:fragment="edit-mask">
+	<h1>Modul ändern</h1>
+	
+	<form id="editForm" th:action="@{/edit}" method="post" th:object="${fieldDTO}">
+		<input type="hidden" name="editType" th:value="${editType}">
+		
+		<input type="hidden" th:field="*{id}" readonly> <br>
+				
+		<label>Datum: </label>
+		<input type="text" th:field="*{date}" id="dateDTO" readonly> <br>
+		
+		<label>Zeit: </label>
+		<input th:field="*{time}" type="text" readonly> 
+		<i class="bi bi-arrow-right"></i>
+		<input th:field="*{timeNeu}" type="time"><br>
+		
+		<label>Event: </label>
+		<input th:field="*{topic}" readonly>
+		<i class="bi bi-arrow-right"></i>
+		<input th:field="*{topicNeu}"> <br>
+		
+		<label>Weitere Beschreibung: </label>
+		<input th:field="*{extension}" readonly>
+		<i class="bi bi-arrow-right"></i>
+		<input th:field="*{extensionNeu}"> <br>
+		
+		<button>Ändern</button>
+	</form>
+</div>

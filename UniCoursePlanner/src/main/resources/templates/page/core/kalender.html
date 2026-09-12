@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Uni-Course-Planner Kalender</title>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+		<link rel="stylesheet" th:href="@{/css/mainStyle.css}">	
+		<link rel="stylesheet" th:href="@{/css/modalStyle.css}">
+	</head>
+	<body>
+		<div th:replace="~{fragments/core-fragments :: menue}"></div>
+		
+		<div class="content">
+			<div class="calender-view">
+				<div class="calender">
+					<h1>Kalender</h1>
+					
+					<div class="calender-headline">
+						<button type="button" onclick="previousMonth()">				
+							<i class="bi bi-chevron-left"></i>
+						</button>
+						
+						<h2 id="month"></h2>
+						
+						<button type="button" onclick="nextMonth()">				
+							<i class="bi bi-chevron-right"></i>
+						</button>
+					</div>
+					
+					<div class="raster calender">
+						<div class="raster-row">
+							<div class="raster-head">Montag</div>
+							<div class="raster-head">Dienstag</div>
+							<div class="raster-head">Mittwoch</div>
+							<div class="raster-head">Donnerstag</div>
+							<div class="raster-head">Freitag</div>
+							<div class="raster-head">Samstag</div>
+							<div class="raster-head">Sonntag</div>
+						</div>
+						<div class="raster-row" id="days"></div>
+					</div>
+				</div>
+				<div class="day-schedule">
+					<h1>Tagesplan</h1>
+					<h2 id="selectedDate"></h2>
+					
+					<input type="hidden" id="selectedDateValue">
+					<input hidden id="data">
+					
+					<table id="events">
+						<thead>
+							<tr>
+								<th hidden>ID</th>
+								<th>Zeit</th>
+								<th>Event</th>
+								<th>Weitere Beschreibung</th>
+							</tr>
+						</thead>
+						<tbody id="eventList"></tbody>
+					</table>
+					
+					<div id="modalOverlay" class="modal-overlay hidden">
+						<div class="modal-window">
+							
+							<button type="button" class="modal-close" onclick="closeModal()">
+								×
+							</button>
+							
+							<div id="modalContent"></div>
+						</div>
+					</div>
+					
+					<div class="data-handling-btn">
+						<button type="button" onclick="openCalendarModal('insert')">
+							<i class="bi bi-plus-circle"></i>
+						</button>
+						
+						<button type="button" onclick="openCalendarModal('edit')">
+							<i class="bi bi-pencil"></i>
+						</button>
+						
+						<button type="button" onclick="openCalendarModal('delete')">
+							<i class="bi bi-trash"></i>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+				
+		<script th:src="@{/js/tableScripts/tablerow-action.js}"></script>
+		
+		<script th:src="@{/js/kalenderScripts/fill-days.js}"></script>
+		<script th:src="@{/js/kalenderScripts/day-schedule.js}"></script>
+		<script th:src="@{/js/kalenderScripts/date-transmission.js}"></script>
+		
+		<script th:src="@{/js/modal/modal-opening.js}"></script>
+		<script th:src="@{/js/modal/modal-actions.js}"></script>
+	</body>
+</html>
