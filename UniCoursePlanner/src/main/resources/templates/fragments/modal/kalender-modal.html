@@ -22,26 +22,24 @@
 </div>
 
 <div th:fragment="delete-mask">
-	<h1>Modul löschen</h1>
+	<h1>Kalendereintrag löschen</h1>
 	
 	<form id="deleteForm" th:action="@{/delete}" method="post" th:object="${fieldDTO}">
 		<input type="hidden" name="deleteType" th:value="${deleteType}">
 		
-		<h2>Standarddaten</h2>		
-		<input type="hidden" th:field="*{modul_id}">
+		<input type="hidden" th:field="*{id}" readonly> <br>
 		
-		<label>Modulname: </label>
-		<input th:field="*{modulname}" type="text" readonly> <br>
+		<label>Datum: </label>
+		<input type="text" th:field="*{date}" id="dateDTO" readonly> <br>
 		
-		<label>Leistungspunkte: </label>
-		<input th:field="*{lp}" readonly> <br>
+		<label>Zeit: </label>
+		<input th:field="*{time}" type="time" readonly> <br>
 		
-		<h2>Veranstaltungsformen</h2>
+		<label>Event: </label>
+		<input th:field="*{topic}" type="text" readonly> <br>
 		
-		<div th:each="type : *{eventTypes}">
-			<label th:text="${type.description}"></label>
-			<input th:field="*{eventTypes}" type="checkbox" th:value="${type}">
-		</div>
+		<label>Weitere Beschreibung: </label>
+		<input th:field="*{extension}" type="text" readonly> <br>
 		
 		<button>Löschen</button>
 	</form>
@@ -53,26 +51,25 @@
 	<form id="editForm" th:action="@{/edit}" method="post" th:object="${fieldDTO}">
 		<input type="hidden" name="editType" th:value="${editType}">
 		
-		<h2>Standarddaten</h2>		
-		<input type="hidden" th:field="*{modul_id}">
+		<input type="hidden" th:field="*{id}" readonly> <br>
+				
+		<label>Datum: </label>
+		<input type="text" th:field="*{date}" id="dateDTO" readonly> <br>
 		
-		<label>Modulname: </label>
-		<input th:field="*{modulname}" type="text" readonly> 
+		<label>Zeit: </label>
+		<input th:field="*{time}" type="text" readonly> 
 		<i class="bi bi-arrow-right"></i>
-		<input th:field="*{modulnameNeu}" type="text"><br>
+		<input th:field="*{timeNeu}" type="time"><br>
 		
-		<label>Leistungspunkte: </label>
-		<input th:field="*{lp}" readonly>
+		<label>Event: </label>
+		<input th:field="*{topic}" readonly>
 		<i class="bi bi-arrow-right"></i>
-		<input th:field="*{lpNeu}" type="number" min="0"> <br>
+		<input th:field="*{topicNeu}"> <br>
 		
-		<h2>Veranstaltungsformen</h2>
-		
-		<div th:each="type : ${T(com.uni_course_planner.constants.modul.EventTypes).values()}">
-			<label th:text="${type.description}"></label>
-			<input th:field="*{eventTypes}" type="checkbox" th:value="${type}"
-			th:disabled="${fieldDTO.eventTypes != null and fieldDTO.eventTypes.contains(type)}">
-		</div>
+		<label>Weitere Beschreibung: </label>
+		<input th:field="*{extension}" readonly>
+		<i class="bi bi-arrow-right"></i>
+		<input th:field="*{extensionNeu}"> <br>
 		
 		<button>Ändern</button>
 	</form>

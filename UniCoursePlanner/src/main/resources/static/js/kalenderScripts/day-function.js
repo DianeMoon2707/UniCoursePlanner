@@ -69,6 +69,7 @@ function displayEvents(events)
 			extension.textContent = event.extension;
 			
 			row.append(id, time, topic, extension);
+			row.onclick = () => rowClicked(row);
 			eventList.appendChild(row);
 		}
 	);
