@@ -36,4 +36,12 @@ public class CalenderTableService
 		
 		return tableData;
 	}
+
+	public List<LocalDate> getEventDays(Long user, int year, int month) 
+	{
+		LocalDate startDate = LocalDate.of(year, month, 1);
+		LocalDate endDate = startDate.withDayOfMonth(startDate.lengthOfMonth());
+		
+		return calenderRep.getEventDates(user, startDate, endDate);
+	}
 }

@@ -42,4 +42,14 @@ public class KalenderController
 		
 		return tableService.fillCalenderTable(user.getId(), date);
 	}
+	
+	@GetMapping(PageAddress.KALENDER_DATES_ADDRESS)
+	@ResponseBody
+	public List<LocalDate> loadEventDates(@RequestParam int year, @RequestParam int month)
+	{
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		LogInData user = userService.getUserByUsername(auth.getName());
+		
+		return tableService.getEventDays(user.getId(), year, month);
+	}
 }

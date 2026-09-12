@@ -17,7 +17,9 @@ async function openDay(year, month, day)
 		calendarView.classList.remove("day-selected");
 		selectedDate.textContent = "";
 		selectedDate.textContentValue = "";
-		dayPlan.classList.remove("visible");	
+		dayPlan.classList.remove("visible");
+		
+		clearEvents();
 	}
 	else
 	{

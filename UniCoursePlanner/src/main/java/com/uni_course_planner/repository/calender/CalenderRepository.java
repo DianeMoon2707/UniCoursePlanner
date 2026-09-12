@@ -20,4 +20,13 @@ public interface CalenderRepository extends JpaRepository<Calender, Long>
 			ORDER BY c.time ASC
 			""")
 	List<Calender> getEventsOfDay(@Param("user") Long user, @Param("date") LocalDate date);
+
+	@Query("""
+			SELECT c.date 
+			FROM calender c 
+			WHERE c.user.id = :user 
+			AND c.date BETWEEN :startDate AND :endDate
+			ORDER BY c.date
+			""")
+	List<LocalDate> getEventDates(@Param("user") Long user, @Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
 }

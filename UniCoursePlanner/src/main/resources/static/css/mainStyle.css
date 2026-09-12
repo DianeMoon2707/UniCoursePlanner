@@ -309,3 +309,6 @@ nav {
 	padding: 10px;
 }
 
+.has-events {
+	color: red;
+}

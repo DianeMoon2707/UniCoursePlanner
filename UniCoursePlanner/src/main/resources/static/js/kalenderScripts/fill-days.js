@@ -8,7 +8,25 @@ const months = ['Januar','Februar','März','April','Mai','Juni','Juli','August',
 let currentMonth = date.getMonth();
 let currentYear = date.getFullYear();
 
-createCalender(date.getFullYear(), date.getMonth());
+let daysWithEvents = [];
+loadDaysWithEvents(currentYear, currentMonth);
+
+//Event-Tage des Monats vom Backend laden
+async function loadDaysWithEvents(year, month)
+{
+	const response = await fetch(`/kalender/dates?year=${year}&month=${month + 1}`);
+	if(!response.ok)
+	{
+		console.error("Event-Tage konnten nicht geladen werden.");
+		daysWithEvents = [];
+	}
+	else
+	{
+		daysWithEvents = await response.json();
+	}
+	
+	createCalender(year, month);
+}
 
 //Aktuellen Monat zeigen
 function showMonth()
@@ -37,9 +55,12 @@ function createPreviousMonthDays(year, month)
 
 	const lastDayOfLastMonth = new Date(currentYear, currentMonth, 0);
 	
+	const prevMonth = lastDayOfLastMonth.getMonth();
+	const prevYear = lastDayOfLastMonth.getFullYear();
+	
 	for(let i = daysBefore; i > 0; i--)
 	{
-		createDay(lastDayOfLastMonth.getDate() - i + 1, "other-month");
+		createDay(lastDayOfLastMonth.getDate() - i + 1, prevMonth, prevYear, "other-month");
 	}
 	
 	return daysBefore;
@@ -55,11 +76,11 @@ function createCurrentMonthDays(year, month)
 		//Aktuellen Tag und sonstige Tage erstellen
 		if(date.getDate() === i && month === date.getMonth() && year === date.getFullYear())
 		{
-			createDay(i, "today");
+			createDay(i, month, year, "today");
 		}
 		else
 		{
-			createDay(i);
+			createDay(i, month, year);
 		}
 	}
 	
@@ -73,7 +94,7 @@ function createNextMonthDays(amountDays)
 	
 	while(amountDays % 7 !== 0)
 	{
-		createDay(day, "other-month");
+		createDay(day, currentMonth + 1, currentYear, "other-month");
 		
 		day++;
 		amountDays++;
@@ -81,7 +102,7 @@ function createNextMonthDays(amountDays)
 }
 
 //Hilfsmethode zur Erstellung eines Tages
-function createDay(number, additionalClass = "")
+function createDay(number, month, year, additionalClass = "")
 {
 	const day = document.createElement("div");
 	day.classList.add("raster-cell");
@@ -91,11 +112,18 @@ function createDay(number, additionalClass = "")
 		day.classList.add(additionalClass);
 	}
 	
+	//Tag markieren, wenn Events vorhanden
+	const currentDay = `${year}-${String(month + 1).padStart(2, "0")}-${String(number).padStart(2, "0")}`;
+	if(daysWithEvents.includes(currentDay))
+	{
+		day.classList.add("has-events");
+	}
+	
 	day.textContent = number;
 	
 	day.onclick = function()
 	{
-		openDay(currentYear, currentMonth, number);
+		openDay(year, month, number);
 	}
 	
 	kalender.appendChild(day);
@@ -120,7 +148,7 @@ function previousMonth()
 		currentYear--;
 	}
 	
-	createCalender(currentYear, currentMonth);
+	loadDaysWithEvents(currentYear, currentMonth);
 }
 
 function nextMonth()
@@ -135,5 +163,5 @@ function nextMonth()
 		currentYear++;
 	}
 	
-	createCalender(currentYear, currentMonth);
+	loadDaysWithEvents(currentYear, currentMonth);
 }
