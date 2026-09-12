@@ -41,19 +41,57 @@
 				</div>
 				<div class="day-schedule">
 					<h1>Tagesplan</h1>
-					<p id="notice-day-schedule">Wähle einen Tag aus.</p>
-					<div id="day-plan">
-						<h2 id="selectedDate"></h2>
-						<table id="events">
+					<h2 id="selectedDate"></h2>
+					
+					<input type="hidden" id="selectedDateValue">
+					
+					<table id="events">
+						<thead>
 							<tr>
-								<th>
+								<th hidden>ID</th>
+								<th>Zeit</th>
+								<th>Event</th>
+								<th>Weitere Beschreibung</th>
 							</tr>
-						</table>
+						</thead>
+						<tbody id="eventList"></tbody>
+					</table>
+					
+					<div id="modalOverlay" class="modal-overlay hidden">
+						<div class="modal-window">
+							
+							<button type="button" class="modal-close" onclick="closeModal()">
+								×
+							</button>
+							
+							<div id="modalContent"></div>
+						</div>
+					</div>
+					
+					<div class="data-handling-btn">
+						<button type="button" onclick="openCalendarModal('insert')">
+							<i class="bi bi-plus-circle"></i>
+						</button>
+						
+						<button type="button" onclick="openCalendarModal('edit')">
+							<i class="bi bi-pencil"></i>
+						</button>
+						
+						<button type="button" onclick="openCalendarModal('delete')">
+							<i class="bi bi-trash"></i>
+						</button>
 					</div>
 				</div>
 			</div>
 		</div>
+				
+		<script th:src="@{/js/tableScripts/tablerow-action.js}"></script>
+		
 		<script th:src="@{/js/kalenderScripts/fill-days.js}"></script>
 		<script th:src="@{/js/kalenderScripts/day-function.js}"></script>
+		<script th:src="@{/js/kalenderScripts/date-transmission.js}"></script>
+		
+		<script th:src="@{/js/modal/modal-opening.js}"></script>
+		<script th:src="@{/js/modal/modal-actions.js}"></script>
 	</body>
 </html>

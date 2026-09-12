@@ -31,9 +31,8 @@ public class Calender
 	
 	protected Calender() {}
 
-	public Calender(Long id, LocalDate date, LocalTime time, String topic, String extension, User user) 
+	public Calender(LocalDate date, LocalTime time, String topic, String extension, User user) 
 	{
-		this.id = id;
 		this.date = date;
 		this.time = time;
 		this.topic = topic;

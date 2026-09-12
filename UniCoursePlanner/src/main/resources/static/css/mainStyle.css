@@ -238,6 +238,17 @@ nav {
 	cursor: pointer;
 }
 
+/* Split-View Calender */
+.calender-view {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 20px;
+}
+
+.calender-view.day-selected {
+    grid-template-columns: 2fr 1fr;
+}
+
 /* Kalender */
 .raster.calender .raster-row {
 	grid-template-columns: repeat(7, 1fr);
@@ -257,12 +268,6 @@ nav {
 
 .raster.calender .raster-cell.today {
 	background-color: #b0e2ff;
-}
-
-.calender-view {
-	display: grid;
-	grid-template-columns: 2fr 1fr;
-	gap: 20px;
 }
 
 .calender-headline {
@@ -289,10 +294,18 @@ nav {
 	border: 0.5px solid black;
 }
 
+/* Tagesplaner */
 .day-schedule {
+	display: none;
+}
+
+.day-schedule.visible {	
+	display: block;
+	
 	background: white;
 	border: 0.5px solid black;
 	
 	margin: 10px;
 	padding: 10px;
 }
+

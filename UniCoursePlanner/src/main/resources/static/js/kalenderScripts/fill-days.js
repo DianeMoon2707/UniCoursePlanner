@@ -11,7 +11,7 @@ let currentYear = date.getFullYear();
 createCalender(date.getFullYear(), date.getMonth());
 
 //Aktuellen Monat zeigen
-function showMonth(month, year)
+function showMonth()
 {
 	monthElement.innerHTML = months[currentMonth] + " " + currentYear;
 }
@@ -19,7 +19,7 @@ function showMonth(month, year)
 //Kalenderblatt erstellen
 function createCalender(year, month)
 {
-	showMonth(currentMonth, currentYear);	
+	showMonth();	
 	
 	let amountDays = 0;
 	

@@ -4,6 +4,7 @@ public enum ModalType
 {
 	MODUL("fragments/modal/modul-modal"),
 	STUNDENPLAN("fragments/modal/stundenplan-modal"),
+	CALENDER("fragments/modal/kalender-modal"),
 	LEISTUNGSPUNKTE("fragments/modal/leistungspunkte-modal");
 	
 	private String fragmentFile;
