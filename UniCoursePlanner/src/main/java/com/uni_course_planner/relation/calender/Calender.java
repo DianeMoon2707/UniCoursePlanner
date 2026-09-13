@@ -2,6 +2,9 @@ package com.uni_course_planner.relation.calender;
 
 import java.time.*;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import com.uni_course_planner.relation.user.User;
 
 import jakarta.persistence.*;
@@ -27,6 +30,7 @@ public class Calender
 	
 	@ManyToOne
 	@JoinColumn(name = "user_id")
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	private User user;
 	
 	protected Calender() {}
