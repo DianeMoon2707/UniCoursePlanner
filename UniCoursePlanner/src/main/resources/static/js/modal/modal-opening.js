@@ -4,7 +4,16 @@ async function openModal(action, type)
 	
 	if(action !== "insert")
     {
-		const data = encodeURIComponent(document.getElementById("data").value);
+		const dataElement = document.getElementById("data");
+		
+		if(!dataElement.value)
+		{
+			console.log("Ja");
+			showErrorMessage("Bitte wählen Sie zuerst einen Datensatz aus.");
+			return;
+		}
+		
+		const data = encodeURIComponent(dataElement.value);
 		url += `&data=${data}`;
 	}
 	
@@ -12,7 +21,7 @@ async function openModal(action, type)
 	
 	if(!response.ok)
 	{
-		alert("Modal konnte nicht geladen werden.");
+		showErrorMessage("Modal konnte nicht geladen werden.");
 		return;
 	}
 	

@@ -40,12 +40,10 @@
 				<p>Don't hava an account? <a th:href="@{/page/logIn/register}">Register</a></p>
 			</form>
 			
-			<div class="error hidden-feld" th:text="${error}"></div>
+			<div th:replace="~{fragments/core-fragments :: error-message}"></div>
 		</div>
 		
 		<script th:src="@{/js/logInScripts/password-eye-script.js}"></script>
-		
 		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-		<script th:src="@{/js/logInScripts/error-message.js}"></script>
 	</body>
 </html>

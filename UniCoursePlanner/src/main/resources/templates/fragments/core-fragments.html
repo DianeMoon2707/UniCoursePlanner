@@ -14,3 +14,9 @@
 		</a>
 	</nav>
 </div>
+
+<div th:fragment="error-message">
+	<div id="message-box" th:if="${errorMessage}" th:data-message="${errorMessage}"></div>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script th:src="@{/js/messageScripts/error.js}"></script>
+</div>

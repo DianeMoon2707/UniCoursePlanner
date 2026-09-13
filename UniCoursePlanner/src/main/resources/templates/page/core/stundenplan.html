@@ -66,10 +66,12 @@
 					<i class="bi bi-trash"></i>
 				</button>
 			</div>
-				
-			<script th:src="@{/js/tableScripts/tablecell-action.js}"></script>
-			<script th:src="@{/js/modal/modal-opening.js}"></script>
-			<script th:src="@{/js/modal/modal-actions.js}"></script>
+			
+			<div th:replace="~{fragments/core-fragments :: error-message}"></div>
 		</div>
+		
+		<script th:src="@{/js/tableScripts/tablecell-action.js}"></script>
+		<script th:src="@{/js/modal/modal-opening.js}"></script>
+		<script th:src="@{/js/modal/modal-actions.js}"></script>
 	</body>
 </html>
