@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Uni-Course-Planner Passwort</title>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+		<link rel="stylesheet" th:href="@{/css/logInStyle.css}">
+	</head>
+	<body>
+		<div class="logInContainer">
+			<h1>Passwort ändern</h1>
+			
+			<form th:action="@{/changePasswort}" method="post">
+				
+				<div class="field">
+					<input name="email-field" placeholder="Email" type="email" required>
+					
+					<div class="password-wrapper">
+						<input name="password-field" id="password-field" placeholder="Password" type="password" required>
+						<button id="password-eye-button" type="button" onclick="changeInputTypeAndSymbol()">
+							<i class="bi bi-eye"></i>
+						</button>
+					</div>
+				</div>
+				
+				<button class="button" type="submit">Neues Passwort bestätigen</button>
+			</form>
+			
+			<div th:replace="~{fragments/core-fragments :: error-message}"></div>
+		</div>
+		
+		<script th:src="@{/js/logInScripts/password-eye-script.js}"></script>
+	</body>
+</html>

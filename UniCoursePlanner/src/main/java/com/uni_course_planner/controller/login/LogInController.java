@@ -14,7 +14,7 @@ public class LogInController
 	{
 		if(error != null)
 		{
-			model.addAttribute("error", "Benutzername oder Passwort falsch");
+			model.addAttribute("errorMessage", "Benutzername oder Passwort falsch");
 		}
 		
 		return PageAddress.LOGIN_PAGE_ADDRESS;

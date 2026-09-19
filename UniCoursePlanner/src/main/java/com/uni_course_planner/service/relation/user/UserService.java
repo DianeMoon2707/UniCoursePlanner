@@ -32,9 +32,25 @@ public class UserService
 		logInDataRep.save(new LogInData(user, username, hashedPassword));
 	}
 	
+	public void changeUserData(LogInData user, String username, String email)
+	{
+		User userForEmail = userRep.findById(user.getId()).get();
+		
+		user.setUsername(username);
+		userForEmail.setEmail(email);
+		
+		userRep.save(userForEmail);
+		logInDataRep.save(user);
+	}
+	
 	//User laden
 	public LogInData getUserByUsername(String username)
 	{
 		return logInDataRep.findLogInDataByUsername(username).get();
+	}
+	
+	public String getEmailFromUser(Long id)
+	{
+		return userRep.getEmail(id);
 	}
 }

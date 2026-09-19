@@ -49,8 +49,12 @@ public class SecurityConfig
 			.userDetailsService(userDetailsService)
 			.rememberMeParameter("remember-me")
 		)
-		//Später LogOut
-		
+		//LogOut
+		.logout(logout -> logout
+			.logoutUrl("/logout")
+			.logoutSuccessUrl("/" + PageAddress.LOGIN_PAGE_ADDRESS)
+			.permitAll()
+		)
 		//User-Service registrieren
 		.userDetailsService(userDetailsService);
 		
