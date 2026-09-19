@@ -4,7 +4,9 @@ public final class PageAddress
 {
 	public static final String LOGIN_PAGE_ADDRESS = "page/logIn/index";
 	public static final String REGISTER_PAGE_ADDRESS = "page/logIn/register";
+	
 	public static final String PASSWORT_VERGESSEN_PAGE_ADDRESS = "page/logIn/passwortVergessen";
+	public static final String CODE_PAGE_ADDRESS = "page/logIn/codePasswort";
 	
 	public static final String HOME_PAGE_ADDRESS = "page/core/home";
 	public static final String MODUL_PAGE_ADDRESS = "page/core/modul";

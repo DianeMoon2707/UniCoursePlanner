@@ -12,9 +12,15 @@
 			<form th:action="@{/changePasswort}" method="post">
 				
 				<div class="field">
-					<input name="email-field" placeholder="Email" type="email" required>
+					<div th:if="${loggedIn}">
+						<input name="authentication-field" type="text" th:value="${username}" readonly>
+					</div>
 					
-					<div class="password-wrapper">
+					<div th:unless="${loggedIn}">
+						<input name="authentication-field" placeholder="Benutzername oder Email" type="text">
+					</div>
+					
+					<div class="inline-container password-wrapper">
 						<input name="password-field" id="password-field" placeholder="Password" type="password" required>
 						<button id="password-eye-button" type="button" onclick="changeInputTypeAndSymbol()">
 							<i class="bi bi-eye"></i>

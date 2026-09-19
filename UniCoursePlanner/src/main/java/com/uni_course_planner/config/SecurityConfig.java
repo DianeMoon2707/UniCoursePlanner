@@ -28,6 +28,8 @@ public class SecurityConfig
 					"/",
 					"/register",
 					"/login",
+					"/passwortVergessen",
+					"/" + PageAddress.PASSWORT_VERGESSEN_PAGE_ADDRESS,
 					"/" + PageAddress.REGISTER_PAGE_ADDRESS,
                     "/css/**",
                     "/js/**").permitAll().anyRequest().authenticated()
@@ -52,7 +54,7 @@ public class SecurityConfig
 		//LogOut
 		.logout(logout -> logout
 			.logoutUrl("/logout")
-			.logoutSuccessUrl("/" + PageAddress.LOGIN_PAGE_ADDRESS)
+			.logoutSuccessUrl("/login")
 			.permitAll()
 		)
 		//User-Service registrieren
