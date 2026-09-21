@@ -9,18 +9,28 @@ import org.springframework.web.bind.annotation.*;
 
 import com.uni_course_planner.constants.views.PageAddress;
 import com.uni_course_planner.relation.user.LogInData;
+import com.uni_course_planner.service.email.EmailService;
+import com.uni_course_planner.service.email.text.PasswortVergessenText;
 import com.uni_course_planner.service.relation.user.UserService;
+import com.uni_course_planner.service.security.CodeGenerator;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class PasswortVergessenController 
 {
 	private UserService userService;
+	private EmailService emailService;
+	private CodeGenerator codeGenerator;
 	
-	public PasswortVergessenController(UserService userService)
+	public PasswortVergessenController(UserService userService, EmailService emailService,
+			CodeGenerator codeGenerator) 
 	{
 		this.userService = userService;
+		this.emailService = emailService;
+		this.codeGenerator = codeGenerator;
 	}
-	
+
 	@GetMapping(PageAddress.PASSWORT_VERGESSEN_PAGE_ADDRESS)
 	public String loadPasswortVergessenPage(Model model)
 	{
@@ -42,10 +52,25 @@ public class PasswortVergessenController
 	}
 	
 	@PostMapping("/changePasswort")
-	public String editPasswort(@RequestParam(name="authentication-field") String userField, 
-			@RequestParam(name="password-field") String passwordField)
-	{
-
+	public String editPasswort(@RequestParam(name="authentication-field") String authenticationField, 
+			@RequestParam(name="password-field") String passwordField, HttpSession session)
+	{		
+		String username = userService.getUsernameFromAuthenticationField(authenticationField);
+		String email = userService.getEmailFromAuthenticationField(authenticationField);
+		String code = codeGenerator.generateCode();
+		
+		this.setSessionAttributes(session, username, email, passwordField, code);
+		
+		emailService.sendEmail(email, new PasswortVergessenText(username, passwordField, code));
+		
 		return "redirect:/" + PageAddress.CODE_PAGE_ADDRESS;
+	}
+	
+	private void setSessionAttributes(HttpSession session, String username, String email, String password, String code)
+	{
+		session.setAttribute("username", username);
+		session.setAttribute("email", email);
+		session.setAttribute("password", password);
+		session.setAttribute("code", code);
 	}
 }

@@ -17,4 +17,11 @@ public interface LogInDataRepository extends JpaRepository<LogInData, Long>
 		WHERE l.username = :username
 			""")
 	Optional<LogInData> findLogInDataByUsername(@Param("username") String username);
+	
+	@Query("""
+			SELECT l.username
+			FROM log_in_data l 
+			WHERE l.user.email = :email
+			""")
+	String getUsernameByEmail(@Param("email") String email);
 }

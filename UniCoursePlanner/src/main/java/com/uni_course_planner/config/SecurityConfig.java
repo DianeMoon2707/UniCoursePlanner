@@ -28,8 +28,10 @@ public class SecurityConfig
 					"/",
 					"/register",
 					"/login",
-					"/passwortVergessen",
+					"/changePasswort",
+					"/verifyCode",
 					"/" + PageAddress.PASSWORT_VERGESSEN_PAGE_ADDRESS,
+					"/" + PageAddress.CODE_PAGE_ADDRESS,
 					"/" + PageAddress.REGISTER_PAGE_ADDRESS,
                     "/css/**",
                     "/js/**").permitAll().anyRequest().authenticated()

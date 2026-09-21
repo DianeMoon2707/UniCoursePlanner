@@ -43,10 +43,45 @@ public class UserService
 		logInDataRep.save(user);
 	}
 	
+	public void changePassword(String username, String password) 
+	{
+		LogInData user = logInDataRep.findLogInDataByUsername(username).get();
+		
+		String hashedPassword = passwordEncoder.encode(password);
+		user.setPassword(hashedPassword);
+		
+		logInDataRep.save(user);
+	}
+	
 	//User laden
 	public LogInData getUserByUsername(String username)
 	{
 		return logInDataRep.findLogInDataByUsername(username).get();
+	}
+	
+	public String getUsernameFromAuthenticationField(String authentication)
+	{
+		if(authentication.contains("@"))
+		{
+			return logInDataRep.getUsernameByEmail(authentication);
+		}
+		else
+		{
+			return authentication;
+		}
+	}
+	
+	public String getEmailFromAuthenticationField(String authentication)
+	{
+		if(!authentication.contains("@"))
+		{
+			LogInData user = logInDataRep.findLogInDataByUsername(authentication).get();
+			return user.getUser().getEmail();
+		}
+		else
+		{
+			return authentication;
+		}
 	}
 	
 	public String getEmailFromUser(Long id)
