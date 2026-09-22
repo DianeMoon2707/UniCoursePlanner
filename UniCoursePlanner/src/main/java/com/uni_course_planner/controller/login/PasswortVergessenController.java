@@ -52,18 +52,25 @@ public class PasswortVergessenController
 	}
 	
 	@PostMapping("/changePasswort")
-	public String editPasswort(@RequestParam(name="authentication-field") String authenticationField, 
+	public String editPasswort(Model model,
+			@RequestParam(name="authentication-field") String authenticationField, 
 			@RequestParam(name="password-field") String passwordField, HttpSession session)
-	{		
+	{	
 		String username = userService.getUsernameFromAuthenticationField(authenticationField);
 		String email = userService.getEmailFromAuthenticationField(authenticationField);
-		String code = codeGenerator.generateCode();
 		
-		this.setSessionAttributes(session, username, email, passwordField, code);
-		
-		emailService.sendEmail(email, new PasswortVergessenText(username, passwordField, code));
-		
-		return "redirect:/" + PageAddress.CODE_PAGE_ADDRESS;
+		if(!userService.userExistsByUsername(username))
+		{
+			model.addAttribute("errorMessage", "Es existiert kein Nutzer zu dieser Email-Adresse oder diesem Benutzernamen.");
+			return PageAddress.PASSWORT_VERGESSEN_PAGE_ADDRESS;
+		}
+		else
+		{
+			String code = codeGenerator.generateCode();
+			this.setSessionAttributes(session, username, email, passwordField, code);
+			emailService.sendEmail(email, new PasswortVergessenText(username, passwordField, code));
+			return "redirect:/" + PageAddress.CODE_PAGE_ADDRESS;
+		}
 	}
 	
 	private void setSessionAttributes(HttpSession session, String username, String email, String password, String code)

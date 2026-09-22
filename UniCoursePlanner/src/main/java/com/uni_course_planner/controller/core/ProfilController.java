@@ -36,18 +36,27 @@ public class ProfilController
 	}
 	
 	@PostMapping("/changeUserData")
-	public String editUserData(@RequestParam(name="user-field") String userField, 
+	public String editUserData(Model model,
+			@RequestParam(name="user-field") String userField, 
 			@RequestParam(name="email-field") String emailField,
 			HttpServletRequest request, HttpServletResponse response)
 	{
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		LogInData currentUser = userService.getUserByUsername(auth.getName());
+		try
+		{
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			LogInData currentUser = userService.getUserByUsername(auth.getName());
 		
-		userService.changeUserData(currentUser, userField, emailField);
+			userService.changeUserData(currentUser, userField, emailField);
 		
-		//Benutzer ausloggen
-		new SecurityContextLogoutHandler().logout(request, response, auth);
+			//Benutzer ausloggen
+			new SecurityContextLogoutHandler().logout(request, response, auth);
 
-		return "redirect:/" + PageAddress.LOGIN_PAGE_ADDRESS;
+			return "redirect:/" + PageAddress.LOGIN_PAGE_ADDRESS;
+		}
+		catch(Exception e)
+		{
+			model.addAttribute("errorMessage", e.getMessage());
+			return PageAddress.PROFIL_PAGE_ADDRESS;
+		}
 	}
 }

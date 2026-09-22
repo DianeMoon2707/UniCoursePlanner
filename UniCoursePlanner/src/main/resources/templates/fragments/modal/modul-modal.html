@@ -7,10 +7,10 @@
 		<h2>Standarddaten</h2>
 		
 		<label>Modulname: </label>
-		<input th:field="*{modulname}" type="text"> <br>
+		<input th:field="*{modulname}" type="text" required> <br>
 		
 		<label>Leistungspunkte: </label>
-		<input th:field="*{lp}" type="number" min="0"> <br>
+		<input th:field="*{lp}" type="number" min="0" required> <br>
 		
 		<h2>Veranstaltungsformen</h2>
 		
@@ -61,12 +61,12 @@
 		<label>Modulname: </label>
 		<input th:field="*{modulname}" type="text" readonly> 
 		<i class="bi bi-arrow-right"></i>
-		<input th:field="*{modulnameNeu}" type="text"><br>
+		<input th:field="*{modulnameNeu}" type="text" required><br>
 		
 		<label>Leistungspunkte: </label>
 		<input th:field="*{lp}" readonly>
 		<i class="bi bi-arrow-right"></i>
-		<input th:field="*{lpNeu}" type="number" min="0"> <br>
+		<input th:field="*{lpNeu}" type="number" min="0" required> <br>
 		
 		<h2>Veranstaltungsformen</h2>
 		

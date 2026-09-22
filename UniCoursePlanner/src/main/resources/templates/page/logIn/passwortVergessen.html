@@ -13,11 +13,11 @@
 				
 				<div class="field">
 					<div th:if="${loggedIn}">
-						<input name="authentication-field" type="text" th:value="${username}" readonly>
+						<input name="authentication-field" type="text" th:value="${username}" readonly required>
 					</div>
 					
 					<div th:unless="${loggedIn}">
-						<input name="authentication-field" placeholder="Benutzername oder Email" type="text">
+						<input name="authentication-field" placeholder="Benutzername oder Email" type="text" required>
 					</div>
 					
 					<div class="inline-container password-wrapper">

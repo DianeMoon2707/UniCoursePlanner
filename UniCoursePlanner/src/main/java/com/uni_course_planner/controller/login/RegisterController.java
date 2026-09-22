@@ -1,6 +1,7 @@
 package com.uni_course_planner.controller.login;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import com.uni_course_planner.constants.views.PageAddress;
@@ -27,14 +28,21 @@ public class RegisterController
 	}
 	
 	@PostMapping("/register")
-	public String register(
+	public String register(Model model,
 			@RequestParam(name="user-field") String userField,
 			@RequestParam(name="email-field") String emailField,
 			@RequestParam(name="password-field") String passwordField)
 	{		
-		userService.registerUser(emailField, userField, passwordField);	
-		emailService.sendEmail(emailField, new RegisterText(userField));
-		
-		return PageAddress.LOGIN_PAGE_ADDRESS;
+		try
+		{
+			userService.registerUser(emailField, userField, passwordField);	
+			emailService.sendEmail(emailField, new RegisterText(userField));
+			return PageAddress.LOGIN_PAGE_ADDRESS;
+		}
+		catch(Exception e)
+		{
+			model.addAttribute("errorMessage", e.getMessage());
+			return PageAddress.REGISTER_PAGE_ADDRESS;
+		}
 	}
 }

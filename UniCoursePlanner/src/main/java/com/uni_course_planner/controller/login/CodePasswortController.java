@@ -30,7 +30,7 @@ public class CodePasswortController
 	}
 	
 	@PostMapping("/verifyCode")
-	public String confirmEmail(@RequestParam(name = "code-field") String codeField, HttpSession session)
+	public String confirmEmail(Model model, @RequestParam(name = "code-field") String codeField, HttpSession session)
 	{
 		String username = (String)session.getAttribute("username");
 		String email = (String)session.getAttribute("email");
@@ -48,6 +48,7 @@ public class CodePasswortController
 		}
 		else
 		{
+			model.addAttribute("errorMessage", "Falscher Code!");
 			return PageAddress.CODE_PAGE_ADDRESS;
 		}		
 	}
