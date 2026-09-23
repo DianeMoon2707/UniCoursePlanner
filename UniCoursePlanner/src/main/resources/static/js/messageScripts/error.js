@@ -10,7 +10,7 @@ function showErrorMessage(message)
 document.addEventListener("DOMContentLoaded", function () 
 {
 	const message = document.getElementById("message-box");
-		
+	
 	if(!message)
 	{
 		return;

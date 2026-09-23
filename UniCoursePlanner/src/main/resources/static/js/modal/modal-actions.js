@@ -14,33 +14,35 @@ function registerForm(formId, url)
 		return;
 	}
 	
-	form.addEventListener("submit", function(e)
+	form.addEventListener("submit", async function(e)
 	{
 		e.preventDefault();
 		
 		const formData = new FormData(form);
 		
-		fetch(url,
-        {
-			method: "POST",
-			body: new URLSearchParams(formData)
-		})
-		.then(response =>
+		try
 		{
+			const response = await fetch(url,
+			{
+				method: "POST",
+				body: new URLSearchParams(formData)
+			});
+			
 			if(response.ok)
 			{
 				closeModal();
-				location.reload();
+				window.location.reload();
 			}
 			else
 			{
-				alert("Fehler beim Speichern.");
+				const message = await response.text();
+				showErrorMessage(message);
 			}
-		})
-		.catch(error =>
+		}
+		catch(error)
 		{
 			console.error(error);
 			alert("Serverfehler.");
-		});
+		}
 	});
 }

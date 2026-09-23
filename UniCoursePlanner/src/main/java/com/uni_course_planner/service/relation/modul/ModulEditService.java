@@ -15,17 +15,22 @@ import com.uni_course_planner.relation.modul.event_type.*;
 import com.uni_course_planner.relation.user.LogInData;
 import com.uni_course_planner.repository.modul.*;
 import com.uni_course_planner.service.modal.strategy.EditStrategy;
+import com.uni_course_planner.service.validation.ModulValidation;
 
 @Service
 public class ModulEditService implements EditStrategy
 {
 	private ModulRepository modulRep;
 	private EventTypeRepository eventTypeRep;
+	
+	private ModulValidation validation;
 
-	public ModulEditService(ModulRepository modulRep, EventTypeRepository eventTypeRep) 
+	public ModulEditService(ModulRepository modulRep, EventTypeRepository eventTypeRep, ModulValidation validation)
 	{
 		this.modulRep = modulRep;
 		this.eventTypeRep = eventTypeRep;
+		
+		this.validation = validation;
 	}
 
 	@Override
@@ -81,6 +86,12 @@ public class ModulEditService implements EditStrategy
 		ModulDTOWithEdit modulDTO = (ModulDTOWithEdit)dto;
 		ModulId mId = new ModulId(user.getId(), modulDTO.getModul_id());
 		Modul modul = modulRep.findById(mId).orElseThrow();
+		
+		validation.validateUserChangeModulnameToAExistingOne(
+			modulDTO.getModulnameNeu(), 
+			modulDTO.getModul_id(), 
+			user.getId()
+		);
 		
 		//Standarddaten
 		modul.setModulname(modulDTO.getModulnameNeu());

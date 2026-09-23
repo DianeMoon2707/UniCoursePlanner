@@ -1,5 +1,6 @@
 package com.uni_course_planner.controller.modal;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -45,12 +46,20 @@ public class EditController
 	}
 	
 	@PostMapping("/edit")
-	public String edit(@RequestParam ModalType editType, @ModelAttribute FieldDTO fieldDTO)
+	@ResponseBody
+	public ResponseEntity<?> edit(@RequestParam ModalType editType, @ModelAttribute FieldDTO fieldDTO)
 	{
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		LogInData currentUser = userService.getUserByUsername(auth.getName());
-		
-		serviceFactory.getEditService(editType).edit(fieldDTO, currentUser);
-		return PageAddress.MODUL_PAGE_ADDRESS;
+		try
+		{
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			LogInData currentUser = userService.getUserByUsername(auth.getName());
+			
+			serviceFactory.getEditService(editType).edit(fieldDTO, currentUser);
+			return ResponseEntity.ok().build();
+		}
+		catch(Exception e)
+		{
+			return ResponseEntity.badRequest().body(e.getMessage());
+		}
 	}
 }
