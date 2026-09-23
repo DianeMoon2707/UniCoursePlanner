@@ -1,7 +1,7 @@
 <div th:fragment="insert-mask">
 	<h1>Neues Modul speichern</h1>
 	
-	<form id="insertForm" th:action="@{/insert}" method="post" th:object="${fieldDTO}">
+	<form id="insertForm" th:action="@{/insert}" method="post" th:object="${fieldDTO}" onsubmit="return validateAtLeastOneCheckboxChecked()">
 		<input type="hidden" name="insertType" th:value="${insertType}">
 		
 		<h2>Standarddaten</h2>

@@ -1,4 +1,4 @@
-async function openModal(action, type)
+async function openModal(action, type, validationFunction = null)
 {
 	let url = `/modal/${action}?${action}Type=${type}`;
 	
@@ -8,7 +8,6 @@ async function openModal(action, type)
 		
 		if(!dataElement.value)
 		{
-			console.log("Ja");
 			showErrorMessage("Bitte wählen Sie zuerst einen Datensatz aus.");
 			return;
 		}
@@ -30,7 +29,7 @@ async function openModal(action, type)
 	document.getElementById("modalContent").innerHTML = html;
 	document.getElementById("modalOverlay").classList.remove("hidden");
 	
-	initializeModalForms();
+	initializeModalForms(validationFunction);
 }
 
 function closeModal()

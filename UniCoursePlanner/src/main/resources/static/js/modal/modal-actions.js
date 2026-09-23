@@ -1,11 +1,11 @@
-function initializeModalForms()
+function initializeModalForms(validationFunction)
 {
-	registerForm("insertForm", "/insert");
-	registerForm("editForm", "/edit");
-	registerForm("deleteForm", "/delete");
+	registerForm("insertForm", "/insert", validationFunction);
+	registerForm("editForm", "/edit", validationFunction);
+	registerForm("deleteForm", "/delete", validationFunction);
 }
 
-function registerForm(formId, url)
+function registerForm(formId, url, validationFunction = null)
 {
 	const form = document.getElementById(formId);
 	
@@ -17,6 +17,11 @@ function registerForm(formId, url)
 	form.addEventListener("submit", async function(e)
 	{
 		e.preventDefault();
+		
+		if(validationFunction && !validationFunction())
+		{
+			return;
+		}
 		
 		const formData = new FormData(form);
 		

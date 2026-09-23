@@ -87,7 +87,7 @@ public class ModulEditService implements EditStrategy
 		ModulId mId = new ModulId(user.getId(), modulDTO.getModul_id());
 		Modul modul = modulRep.findById(mId).orElseThrow();
 		
-		validation.validateUserChangeModulnameToAExistingOne(
+		validation.validateUserChangesModulnameToAExistingOne(
 			modulDTO.getModulnameNeu(), 
 			modulDTO.getModul_id(), 
 			user.getId()

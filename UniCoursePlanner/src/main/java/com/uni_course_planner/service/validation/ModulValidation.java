@@ -27,7 +27,7 @@ public class ModulValidation
 		}
 	}
 	
-	public void validateUserChangeModulnameToAExistingOne(String modulname, Long modulId, Long userId)
+	public void validateUserChangesModulnameToAExistingOne(String modulname, Long modulId, Long userId)
 	{
 		Optional<Modul> modul = modulRep.findModulByModulnameAndUserId(modulname, userId);
 		

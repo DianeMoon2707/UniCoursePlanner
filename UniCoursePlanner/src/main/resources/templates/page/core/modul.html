@@ -50,7 +50,7 @@
 			</div>
 			
 			<div class="data-handling-btn">
-				<button type="button" onclick="openModal('insert', 'MODUL')">
+				<button type="button" onclick="openModal('insert', 'MODUL', validateAtLeastOneCheckboxChecked)">
 					<i class="bi bi-plus-circle"></i>
 				</button>
 				
@@ -67,6 +67,7 @@
 		</div>
 		
 		<script th:src="@{/js/tableScripts/tablerow-action.js}"></script>
+		<script th:src="@{/js/modulScripts/checkbox-required.js}"></script>
 		<script th:src="@{/js/modal/modal-opening.js}"></script>
 		<script th:src="@{/js/modal/modal-actions.js}"></script>
 	</body>
