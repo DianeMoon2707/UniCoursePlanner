@@ -1,11 +1,10 @@
 package com.uni_course_planner.service.relation.modul;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.uni_course_planner.constants.modul.EventTypes;
 import com.uni_course_planner.constants.views.ModalType;
 import com.uni_course_planner.dto.FieldDTO;
@@ -15,17 +14,22 @@ import com.uni_course_planner.relation.modul.event_type.*;
 import com.uni_course_planner.relation.user.LogInData;
 import com.uni_course_planner.repository.modul.*;
 import com.uni_course_planner.service.modal.strategy.EditStrategy;
+import com.uni_course_planner.service.validation.ModulValidation;
 
 @Service
 public class ModulEditService implements EditStrategy
 {
 	private ModulRepository modulRep;
 	private EventTypeRepository eventTypeRep;
+	
+	private ModulValidation validation;
 
-	public ModulEditService(ModulRepository modulRep, EventTypeRepository eventTypeRep) 
+	public ModulEditService(ModulRepository modulRep, EventTypeRepository eventTypeRep, ModulValidation validation)
 	{
 		this.modulRep = modulRep;
 		this.eventTypeRep = eventTypeRep;
+		
+		this.validation = validation;
 	}
 
 	@Override
@@ -33,45 +37,36 @@ public class ModulEditService implements EditStrategy
 	{
 		return ModalType.MODUL;
 	}
-
+	
 	@Override
-	public FieldDTO createDTO() 
+	public FieldDTO createDTO()
 	{
-		return new ModulDTOWithEdit("", 0, new HashSet<EventTypes>(),1L, "", 0);
+		return new ModulDTOWithEdit();
 	}
 
 	@Override
-	public FieldDTO createDTO(String data) 
+	public FieldDTO createDTO(String data, LogInData user) 
 	{
 		ModulDTOWithEdit dto = new ModulDTOWithEdit();
 		
-		try
-		{
-			ObjectMapper mapper = new ObjectMapper();
-			List<String> dataList = mapper.readValue(data, new TypeReference<List<String>>() {});
-			
-			dto.setModul_id(Long.parseLong(dataList.get(0)));
-			dto.setModulname(dataList.get(1));
-			dto.setLp(Integer.parseInt(dataList.get(2)));
-
-			String[] eventString = dataList.get(3).split("\n");
-			HashSet<EventTypes> events = new HashSet<EventTypes>();
-			
-			for(String str : eventString)
-			{
-				events.add(EventTypes.fromDescriptionToEnum(str));
-			}
-			
-			dto.setEventTypes(events);
-			
-			dto.setModulnameNeu(dto.getModulname());
-			dto.setLpNeu(dto.getLp());
-		}
-		catch(Exception e) 
-		{
-			System.out.println(e);
-		}
+		ModulId mId = new ModulId(user.getId(), Long.parseLong(data));
+		Modul modul = modulRep.findById(mId).get();
 		
+		dto.setModul_id(mId.getModulId());
+		
+		dto.setModulname(modul.getModulname());
+		dto.setModulnameNeu(dto.getModulname());
+		
+		dto.setLp(modul.getLp());
+		dto.setLpNeu(dto.getLp());
+		
+		Set<EventTypes> events = eventTypeRep.findAllByModul(modul)
+				.stream()
+				.map(eventType -> eventType.geteId().getType())
+				.collect(Collectors.toSet());
+		
+		dto.setEventTypes(events);
+	
 		return dto;
 	}
 
@@ -81,6 +76,12 @@ public class ModulEditService implements EditStrategy
 		ModulDTOWithEdit modulDTO = (ModulDTOWithEdit)dto;
 		ModulId mId = new ModulId(user.getId(), modulDTO.getModul_id());
 		Modul modul = modulRep.findById(mId).orElseThrow();
+		
+		validation.validateUserChangesModulnameToAExistingOne(
+			modulDTO.getModulnameNeu(), 
+			modulDTO.getModul_id(), 
+			user.getId()
+		);
 		
 		//Standarddaten
 		modul.setModulname(modulDTO.getModulnameNeu());
@@ -94,6 +95,5 @@ public class ModulEditService implements EditStrategy
 			EventTypeId eId = new EventTypeId(mId, type);
 			eventTypeRep.save(new EventType(eId, modul));
 		}
-	}
-	
+	}	
 }

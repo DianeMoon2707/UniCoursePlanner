@@ -1,5 +1,8 @@
 package com.uni_course_planner.relation.user;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import jakarta.persistence.*;
 
 @Entity(name="log_in_data")
@@ -16,6 +19,7 @@ public class LogInData
 	
 	@MapsId
 	@OneToOne(optional = false)
+	@OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "id")
     private User user;
 	

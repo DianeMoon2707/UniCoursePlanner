@@ -1,13 +1,11 @@
 package com.uni_course_planner.controller.modal;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import com.uni_course_planner.constants.views.ModalType;
 import com.uni_course_planner.constants.views.PageAddress;
@@ -36,7 +34,10 @@ public class DeleteController
 			return serviceFactory.getDeleteService(deleteType).createDTO();
 		}
 		
-	    return serviceFactory.getDeleteService(deleteType).createDTO(data);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		LogInData currentUser = userService.getUserByUsername(auth.getName());
+		
+	    return serviceFactory.getDeleteService(deleteType).createDTO(data, currentUser);
 	}
 	
 	@GetMapping(PageAddress.DELETE_MODAL_ADDRESS)
@@ -49,12 +50,20 @@ public class DeleteController
 	}
 	
 	@PostMapping("/delete")
-	public String delete(@RequestParam ModalType deleteType, @ModelAttribute FieldDTO fieldDTO)
+	@ResponseBody
+	public ResponseEntity<?> delete(@RequestParam ModalType deleteType, @ModelAttribute FieldDTO fieldDTO)
 	{
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		LogInData currentUser = userService.getUserByUsername(auth.getName());
-		
-		serviceFactory.getDeleteService(deleteType).delete(fieldDTO, currentUser);
-		return PageAddress.MODUL_PAGE_ADDRESS;
+		try
+		{
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			LogInData currentUser = userService.getUserByUsername(auth.getName());
+			
+			serviceFactory.getDeleteService(deleteType).delete(fieldDTO, currentUser);
+			return ResponseEntity.ok().build();
+		}
+		catch(Exception e)
+		{
+			return ResponseEntity.badRequest().body(e.getMessage());
+		}
 	}
 }

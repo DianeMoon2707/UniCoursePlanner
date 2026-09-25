@@ -8,10 +8,10 @@
 		<input type="text" th:field="*{date}" id="dateDTO" readonly> <br>
 		
 		<label>Zeit: </label>
-		<input th:field="*{time}" type="time"> <br>
+		<input th:field="*{time}" type="time" required> <br>
 		
 		<label>Event: </label>
-		<input th:field="*{topic}" type="text"> <br>
+		<input th:field="*{topic}" type="text" required> <br>
 		
 		<label>Weitere Beschreibung: </label>
 		<input th:field="*{extension}" type="text"> <br>
@@ -46,7 +46,7 @@
 </div>
 
 <div th:fragment="edit-mask">
-	<h1>Modul ändern</h1>
+	<h1>Kalendereintrag ändern</h1>
 	
 	<form id="editForm" th:action="@{/edit}" method="post" th:object="${fieldDTO}">
 		<input type="hidden" name="editType" th:value="${editType}">
@@ -59,12 +59,12 @@
 		<label>Zeit: </label>
 		<input th:field="*{time}" type="text" readonly> 
 		<i class="bi bi-arrow-right"></i>
-		<input th:field="*{timeNeu}" type="time"><br>
+		<input th:field="*{timeNeu}" type="time" required><br>
 		
 		<label>Event: </label>
 		<input th:field="*{topic}" readonly>
 		<i class="bi bi-arrow-right"></i>
-		<input th:field="*{topicNeu}"> <br>
+		<input th:field="*{topicNeu}" required> <br>
 		
 		<label>Weitere Beschreibung: </label>
 		<input th:field="*{extension}" readonly>

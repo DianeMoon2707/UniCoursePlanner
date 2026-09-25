@@ -1,11 +1,7 @@
 package com.uni_course_planner.service.relation.calender;
 
-import java.util.List;
-
 import org.springframework.stereotype.Service;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.uni_course_planner.constants.views.ModalType;
 import com.uni_course_planner.dto.FieldDTO;
 import com.uni_course_planner.dto.calender.CalenderDTOWithID;
@@ -37,28 +33,18 @@ public class CalenderDeleteService implements DeleteStrategy
 	}
 
 	@Override
-	public FieldDTO createDTO(String data) 
+	public FieldDTO createDTO(String data, LogInData user) 
 	{
 		CalenderDTOWithID dto = new CalenderDTOWithID();
 		
-		try
-		{
-			ObjectMapper mapper = new ObjectMapper();
-			List<String> dataList = mapper.readValue(data, new TypeReference<List<String>>() {});
-			
-			dto.setId(Long.parseLong(dataList.get(0)));
-			
-			Calender calender = calenderRep.findById(dto.getId()).get();
-			
-			dto.setDate(calender.getDate());
-			dto.setTime(calender.getTime());
-			dto.setTopic(calender.getTopic());
-			dto.setExtension(calender.getExtension());
-		}
-		catch(Exception e) 
-		{
-			System.out.println(e);
-		}
+		Long id = Long.parseLong(data);
+		Calender calender = calenderRep.findById(id).get();
+		
+		dto.setId(id);
+		dto.setDate(calender.getDate());
+		dto.setTime(calender.getTime());
+		dto.setTopic(calender.getTopic());
+		dto.setExtension(calender.getExtension());
 		
 		return dto;
 	}

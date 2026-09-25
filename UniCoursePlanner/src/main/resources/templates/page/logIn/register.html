@@ -26,6 +26,8 @@
 				
 				<button class="button" type="submit">Register</button>
 			</form>
+			
+			<div th:replace="~{fragments/core-fragments :: error-message}"></div>
 		</div>
 		
 		<script th:src="@{/js/logInScripts/password-eye-script.js}"></script>

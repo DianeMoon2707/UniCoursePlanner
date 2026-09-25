@@ -1,5 +1,8 @@
 package com.uni_course_planner.relation.modul.event_type;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import com.uni_course_planner.relation.modul.modul.Modul;
 
 import jakarta.persistence.*;
@@ -16,6 +19,7 @@ public class EventType
 		@JoinColumn(name = "user_id", referencedColumnName = "user_id"),
 		@JoinColumn(name = "modul_id", referencedColumnName = "modul_id")
 	})
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Modul modul;
 	
 	protected EventType() {}

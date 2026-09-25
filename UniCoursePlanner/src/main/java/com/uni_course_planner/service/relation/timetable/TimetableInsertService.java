@@ -5,14 +5,17 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.uni_course_planner.constants.modul.EventTypes;
+import com.uni_course_planner.constants.timetable.*;
 import com.uni_course_planner.constants.views.ModalType;
 import com.uni_course_planner.dto.FieldDTO;
 import com.uni_course_planner.dto.timetable.modal.LectureInsertDTO;
+import com.uni_course_planner.relation.modul.event_type.EventType;
 import com.uni_course_planner.relation.timetable.Timetable;
 import com.uni_course_planner.relation.user.LogInData;
 import com.uni_course_planner.repository.modul.EventTypeRepository;
 import com.uni_course_planner.repository.timetable.TimetableRepository;
 import com.uni_course_planner.service.modal.strategy.InsertStrategy;
+import com.uni_course_planner.service.validation.TimetableValidation;
 
 @Service
 public class TimetableInsertService implements InsertStrategy
@@ -20,10 +23,15 @@ public class TimetableInsertService implements InsertStrategy
 	private TimetableRepository timetableRep;
 	private EventTypeRepository eventTypeRep;
 	
-	public TimetableInsertService(TimetableRepository timetableRep, EventTypeRepository eventTypeRep)
+	private TimetableValidation validation;
+
+	public TimetableInsertService(TimetableRepository timetableRep, EventTypeRepository eventTypeRep,
+			TimetableValidation validation) 
 	{
 		this.timetableRep = timetableRep;
 		this.eventTypeRep = eventTypeRep;
+		
+		this.validation = validation;
 	}
 
 	@Override
@@ -45,17 +53,24 @@ public class TimetableInsertService implements InsertStrategy
 	public void save(FieldDTO dto, LogInData user)
 	{
 		LectureInsertDTO lectureDTO = (LectureInsertDTO) dto;
+		
 		String[]modulOption = lectureDTO.getSelectedModul().split(" - ");
+		EventType event = eventTypeRep.getByModulnameAndType(
+				modulOption[0], 
+				EventTypes.fromDescriptionToEnum(modulOption[1]), 
+				user.getId()
+		);
+		
+		Weekday day = lectureDTO.getDay();
+		Timeslot time = lectureDTO.getTime();
+		
+		validation.validateUserAlreadyGeneratedEntryForCell(event, day, time);
 		
 		Timetable entry = new Timetable(
-			lectureDTO.getTime(),
-			lectureDTO.getDay(),
+			time,
+			day,
 			lectureDTO.getRoom(),
-			eventTypeRep.getByModulnameAndType(
-					modulOption[0], 
-					EventTypes.fromDescriptionToEnum(modulOption[1]), 
-					user.getId()
-			)
+			event
 		);
 		
 		timetableRep.save(entry);

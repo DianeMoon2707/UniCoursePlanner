@@ -1,17 +1,16 @@
 package com.uni_course_planner.service.relation.modul;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.uni_course_planner.constants.modul.EventTypes;
 import com.uni_course_planner.constants.views.ModalType;
 import com.uni_course_planner.dto.FieldDTO;
 import com.uni_course_planner.dto.modul.ModulDTOWithID;
-import com.uni_course_planner.relation.modul.event_type.EventTypeId;
-import com.uni_course_planner.relation.modul.modul.ModulId;
+import com.uni_course_planner.relation.modul.event_type.*;
+import com.uni_course_planner.relation.modul.modul.*;
 import com.uni_course_planner.relation.user.LogInData;
 import com.uni_course_planner.repository.modul.*;
 import com.uni_course_planner.service.modal.strategy.DeleteStrategy;
@@ -37,37 +36,27 @@ public class ModulDeleteService implements DeleteStrategy
 	@Override
 	public FieldDTO createDTO() 
 	{
-		return new ModulDTOWithID("", 0, new HashSet<EventTypes>(),1L);
+		return new ModulDTOWithID();
 	}
 	
 	@Override
-	public FieldDTO createDTO(String data) 
+	public FieldDTO createDTO(String data, LogInData user) 
 	{
 		ModulDTOWithID dto = new ModulDTOWithID();
-		
-		try
-		{
-			ObjectMapper mapper = new ObjectMapper();
-			List<String> dataList = mapper.readValue(data, new TypeReference<List<String>>() {});
-			
-			dto.setModul_id(Long.parseLong(dataList.get(0)));
-			dto.setModulname(dataList.get(1));
-			dto.setLp(Integer.parseInt(dataList.get(2)));
 
-			String[] eventString = dataList.get(3).split("\n");
-			HashSet<EventTypes> events = new HashSet<EventTypes>();
-			
-			for(String str : eventString)
-			{
-				events.add(EventTypes.fromDescriptionToEnum(str));
-			}
-			
-			dto.setEventTypes(events);
-		}
-		catch(Exception e) 
-		{
-			System.out.println(e);
-		}
+		ModulId mId = new ModulId(user.getId(), Long.parseLong(data));
+		Modul modul = modulRep.findById(mId).get();
+		
+		dto.setModul_id(mId.getModulId());
+		dto.setModulname(modul.getModulname());
+		dto.setLp(modul.getLp());
+		
+		Set<EventTypes> events = eventTypeRep.findAllByModul(modul)
+				.stream()
+				.map(eventType -> eventType.geteId().getType())
+				.collect(Collectors.toSet());
+		
+		dto.setEventTypes(events);
 		
 		return dto;
 	}

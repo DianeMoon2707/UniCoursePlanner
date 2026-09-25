@@ -12,6 +12,7 @@ import com.uni_course_planner.relation.user.LogInData;
 import com.uni_course_planner.repository.modul.*;
 import com.uni_course_planner.repository.user.UserRepository;
 import com.uni_course_planner.service.modal.strategy.InsertStrategy;
+import com.uni_course_planner.service.validation.ModulValidation;
 
 @Service
 public class ModulInsertService implements InsertStrategy
@@ -21,12 +22,17 @@ public class ModulInsertService implements InsertStrategy
 	
 	private UserRepository userRep;	
 	
-	public ModulInsertService(ModulRepository modulRep, EventTypeRepository eventTypeRep, 
-		UserRepository userRep) 
+	private ModulValidation validation;
+
+	public ModulInsertService(ModulRepository modulRep, EventTypeRepository eventTypeRep, UserRepository userRep,
+			ModulValidation validation) 
 	{
 		this.modulRep = modulRep;
 		this.eventTypeRep = eventTypeRep;
+		
 		this.userRep = userRep;
+		
+		this.validation = validation;
 	}
 
 	@Override
@@ -53,6 +59,8 @@ public class ModulInsertService implements InsertStrategy
 				modulDTO.getLp(),
 				userRep.findById(currentUser.getId()).get()
 			);
+		
+		validation.validateUserAlreadyGeneratedModul(modul.getModulname(), currentUser.getId());
 		
 		modulRep.save(modul);
 		this.saveEvents(modulDTO, modul);

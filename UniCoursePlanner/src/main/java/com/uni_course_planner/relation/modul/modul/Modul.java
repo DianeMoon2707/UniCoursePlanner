@@ -1,10 +1,10 @@
 package com.uni_course_planner.relation.modul.modul;
 
-import java.util.List;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import jakarta.persistence.*;
 
-import com.uni_course_planner.relation.modul.event_type.*;
 import com.uni_course_planner.relation.user.User;
 
 @Entity(name = "modul")
@@ -25,10 +25,8 @@ public class Modul
 	@MapsId("userId")
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "user_id")
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	private User user;
-	
-	@OneToMany(mappedBy = "modul", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<EventType> eventTypes;
 	
 	protected Modul() {}
 

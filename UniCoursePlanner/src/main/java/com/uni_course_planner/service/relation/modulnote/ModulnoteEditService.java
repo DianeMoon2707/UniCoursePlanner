@@ -1,11 +1,6 @@
 package com.uni_course_planner.service.relation.modulnote;
 
-import java.util.*;
-
 import org.springframework.stereotype.Service;
-
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.uni_course_planner.constants.modulnote.Grades;
 import com.uni_course_planner.constants.views.ModalType;
 import com.uni_course_planner.dto.FieldDTO;
@@ -38,34 +33,24 @@ public class ModulnoteEditService implements EditStrategy
 	}
 
 	@Override
-	public FieldDTO createDTO(String data) 
+	public FieldDTO createDTO(String data, LogInData user) 
 	{
 		ModulnoteDTOWithEdit dto = new ModulnoteDTOWithEdit();
 		
-		try
-		{
-			ObjectMapper mapper = new ObjectMapper();
-			List<String> dataList = mapper.readValue(data, new TypeReference<List<String>>() {});
-			
-			dto.setModul_id(Long.parseLong(dataList.get(0)));
-			dto.setModulname(dataList.get(1));
-			dto.setLp(Integer.parseInt(dataList.get(2)));
-
-			if(!dataList.get(3).isEmpty() && !dataList.get(3).equals("-"))
-			{
-				dto.setGrade(
-					Grades.fromNumericToEnum(
-						Double.parseDouble(dataList.get(3))
-					)
-				);
-			}
-			
-			dto.setGradeNeu(dto.getGrade());
-		}
-		catch(Exception e) 
-		{
-			System.out.println(e);
-		}
+		ModulId mId = new ModulId(user.getId(), Long.parseLong(data));
+		Modul modul = modulRep.findById(mId).get();
+		
+		dto.setModul_id(mId.getModulId());
+		dto.setModulname(modul.getModulname());
+		dto.setLp(modul.getLp());
+		
+		dto.setGrade(
+			    modul.getGrade() == null
+			        ? null
+			        : modul.getGrade().getGrade()
+			);
+		
+		dto.setGradeNeu(dto.getGrade());
 		
 		return dto;
 	}

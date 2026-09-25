@@ -43,7 +43,7 @@ public class TimetableDeleteService implements DeleteStrategy
 	}
 
 	@Override
-	public FieldDTO createDTO(String data)
+	public FieldDTO createDTO(String data, LogInData user)
 	{
 		LectureDeleteDTO dto = new LectureDeleteDTO();
 		

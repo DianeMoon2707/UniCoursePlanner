@@ -1,4 +1,4 @@
-.modal-overlay{
+.modal-overlay {
 	position: fixed;
 	
 	top: 0;
@@ -35,8 +35,7 @@
 	position: relative;
 }
 
-.modal-close
-{
+.modal-close {
     position: absolute;
 	
     right: 10px;
@@ -49,11 +48,15 @@
 	cursor: pointer;
 }
 
-.modal-window h1{
+.swal2-container {
+	z-index: 99999 !important;
+}
+
+.modal-window h1 {
 	text-decoration: underline;
 }
 
-.modal-window h2{
+.modal-window h2 {
 	margin-bottom: 25px;
 }
 

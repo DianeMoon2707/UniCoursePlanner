@@ -28,6 +28,10 @@ public class SecurityConfig
 					"/",
 					"/register",
 					"/login",
+					"/changePasswort",
+					"/verifyCode",
+					"/" + PageAddress.PASSWORT_VERGESSEN_PAGE_ADDRESS,
+					"/" + PageAddress.CODE_PAGE_ADDRESS,
 					"/" + PageAddress.REGISTER_PAGE_ADDRESS,
                     "/css/**",
                     "/js/**").permitAll().anyRequest().authenticated()
@@ -49,8 +53,12 @@ public class SecurityConfig
 			.userDetailsService(userDetailsService)
 			.rememberMeParameter("remember-me")
 		)
-		//Später LogOut
-		
+		//LogOut
+		.logout(logout -> logout
+			.logoutUrl("/logout")
+			.logoutSuccessUrl("/login")
+			.permitAll()
+		)
 		//User-Service registrieren
 		.userDetailsService(userDetailsService);
 		

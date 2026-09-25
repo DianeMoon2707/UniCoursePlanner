@@ -1,5 +1,8 @@
 package com.uni_course_planner.relation.timetable;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import com.uni_course_planner.constants.timetable.*;
 import com.uni_course_planner.relation.modul.event_type.EventType;
 
@@ -23,7 +26,8 @@ public class Timetable
 	@Column
 	private String room;
 	
-	@ManyToOne
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	@ManyToOne(optional = false)
 	@JoinColumns({
 		@JoinColumn(name = "user_id", referencedColumnName = "user_id"),
 		@JoinColumn(name = "modul_id", referencedColumnName = "modul_id"),
