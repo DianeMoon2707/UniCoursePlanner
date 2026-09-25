@@ -33,7 +33,10 @@ public class EditController
 			return serviceFactory.getEditService(editType).createDTO();
 		}
 		
-	    return serviceFactory.getEditService(editType).createDTO(data);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		LogInData currentUser = userService.getUserByUsername(auth.getName());
+		
+	    return serviceFactory.getEditService(editType).createDTO(data, currentUser);
 	}
 	
 	@GetMapping(PageAddress.EDIT_MODAL_ADDRESS)

@@ -46,7 +46,7 @@ public class TimetableEditService implements EditStrategy
 	}
 
 	@Override
-	public FieldDTO createDTO(String data)
+	public FieldDTO createDTO(String data, LogInData user)
 	{
 		LectureEditDTO dto = new LectureEditDTO();
 		

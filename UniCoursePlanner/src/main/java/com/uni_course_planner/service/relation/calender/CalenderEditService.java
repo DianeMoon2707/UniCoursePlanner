@@ -1,12 +1,8 @@
 package com.uni_course_planner.service.relation.calender;
 
 import java.time.LocalDate;
-import java.util.List;
 
 import org.springframework.stereotype.Service;
-
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.uni_course_planner.constants.views.ModalType;
 import com.uni_course_planner.dto.FieldDTO;
 import com.uni_course_planner.dto.calender.CalenderDTOWithEdit;
@@ -42,33 +38,24 @@ public class CalenderEditService implements EditStrategy
 	}
 
 	@Override
-	public FieldDTO createDTO(String data) 
+	public FieldDTO createDTO(String data, LogInData user) 
 	{
 		CalenderDTOWithEdit dto = new CalenderDTOWithEdit();
 		
-		try
-		{
-			ObjectMapper mapper = new ObjectMapper();
-			List<String> dataList = mapper.readValue(data, new TypeReference<List<String>>() {});
-			
-			dto.setId(Long.parseLong(dataList.get(0)));
-			
-			Calender calender = calenderRep.findById(dto.getId()).get();
-			
-			dto.setDate(calender.getDate());
-			dto.setTime(calender.getTime());
-			dto.setTimeNeu(calender.getTime());
-			
-			dto.setTopic(calender.getTopic());
-			dto.setTopicNeu(calender.getTopic());
-			
-			dto.setExtension(calender.getExtension());
-			dto.setExtensionNeu(calender.getExtension());
-		}
-		catch(Exception e) 
-		{
-			System.out.println(e);
-		}
+		Long id = Long.parseLong(data);
+		Calender calender = calenderRep.findById(id).get();
+		
+		dto.setId(id);
+		dto.setDate(calender.getDate());
+		
+		dto.setTime(calender.getTime());
+		dto.setTimeNeu(calender.getTime());
+		
+		dto.setTopic(calender.getTopic());
+		dto.setTopicNeu(calender.getTopic());
+		
+		dto.setExtension(calender.getExtension());
+		dto.setExtensionNeu(calender.getExtension());
 		
 		return dto;
 	}

@@ -34,7 +34,10 @@ public class DeleteController
 			return serviceFactory.getDeleteService(deleteType).createDTO();
 		}
 		
-	    return serviceFactory.getDeleteService(deleteType).createDTO(data);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		LogInData currentUser = userService.getUserByUsername(auth.getName());
+		
+	    return serviceFactory.getDeleteService(deleteType).createDTO(data, currentUser);
 	}
 	
 	@GetMapping(PageAddress.DELETE_MODAL_ADDRESS)

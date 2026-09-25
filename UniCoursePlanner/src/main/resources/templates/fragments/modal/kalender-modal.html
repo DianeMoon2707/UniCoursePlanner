@@ -46,7 +46,7 @@
 </div>
 
 <div th:fragment="edit-mask">
-	<h1>Modul ändern</h1>
+	<h1>Kalendereintrag ändern</h1>
 	
 	<form id="editForm" th:action="@{/edit}" method="post" th:object="${fieldDTO}">
 		<input type="hidden" name="editType" th:value="${editType}">

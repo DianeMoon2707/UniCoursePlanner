@@ -1,11 +1,10 @@
 package com.uni_course_planner.service.relation.modul;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.uni_course_planner.constants.modul.EventTypes;
 import com.uni_course_planner.constants.views.ModalType;
 import com.uni_course_planner.dto.FieldDTO;
@@ -38,45 +37,36 @@ public class ModulEditService implements EditStrategy
 	{
 		return ModalType.MODUL;
 	}
-
+	
 	@Override
-	public FieldDTO createDTO() 
+	public FieldDTO createDTO()
 	{
-		return new ModulDTOWithEdit("", 0, new HashSet<EventTypes>(),1L, "", 0);
+		return new ModulDTOWithEdit();
 	}
 
 	@Override
-	public FieldDTO createDTO(String data) 
+	public FieldDTO createDTO(String data, LogInData user) 
 	{
 		ModulDTOWithEdit dto = new ModulDTOWithEdit();
 		
-		try
-		{
-			ObjectMapper mapper = new ObjectMapper();
-			List<String> dataList = mapper.readValue(data, new TypeReference<List<String>>() {});
-			
-			dto.setModul_id(Long.parseLong(dataList.get(0)));
-			dto.setModulname(dataList.get(1));
-			dto.setLp(Integer.parseInt(dataList.get(2)));
-
-			String[] eventString = dataList.get(3).split("\n");
-			HashSet<EventTypes> events = new HashSet<EventTypes>();
-			
-			for(String str : eventString)
-			{
-				events.add(EventTypes.fromDescriptionToEnum(str));
-			}
-			
-			dto.setEventTypes(events);
-			
-			dto.setModulnameNeu(dto.getModulname());
-			dto.setLpNeu(dto.getLp());
-		}
-		catch(Exception e) 
-		{
-			System.out.println(e);
-		}
+		ModulId mId = new ModulId(user.getId(), Long.parseLong(data));
+		Modul modul = modulRep.findById(mId).get();
 		
+		dto.setModul_id(mId.getModulId());
+		
+		dto.setModulname(modul.getModulname());
+		dto.setModulnameNeu(dto.getModulname());
+		
+		dto.setLp(modul.getLp());
+		dto.setLpNeu(dto.getLp());
+		
+		Set<EventTypes> events = eventTypeRep.findAllByModul(modul)
+				.stream()
+				.map(eventType -> eventType.geteId().getType())
+				.collect(Collectors.toSet());
+		
+		dto.setEventTypes(events);
+	
 		return dto;
 	}
 
@@ -105,6 +95,5 @@ public class ModulEditService implements EditStrategy
 			EventTypeId eId = new EventTypeId(mId, type);
 			eventTypeRep.save(new EventType(eId, modul));
 		}
-	}
-	
+	}	
 }
