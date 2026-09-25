@@ -1,5 +1,6 @@
 package com.uni_course_planner.service.relation.calender;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -13,15 +14,19 @@ import com.uni_course_planner.relation.calender.Calender;
 import com.uni_course_planner.relation.user.LogInData;
 import com.uni_course_planner.repository.calender.CalenderRepository;
 import com.uni_course_planner.service.modal.strategy.EditStrategy;
+import com.uni_course_planner.service.validation.KalenderValidation;
 
 @Service
 public class CalenderEditService implements EditStrategy
 {
 	private CalenderRepository calenderRep;
-	
-	public CalenderEditService(CalenderRepository calenderRep)
+	private KalenderValidation validation;
+
+	public CalenderEditService(CalenderRepository calenderRep, KalenderValidation validation) 
 	{
+		super();
 		this.calenderRep = calenderRep;
+		this.validation = validation;
 	}
 
 	@Override
@@ -73,6 +78,9 @@ public class CalenderEditService implements EditStrategy
 	{
 		CalenderDTOWithEdit calenderDTO = (CalenderDTOWithEdit)dto;
 		Calender calender = calenderRep.findById(calenderDTO.getId()).orElseThrow();
+		
+		LocalDate date = calenderDTO.getDate();
+		validation.validateEntryIsNotBeforeToday(date);
 		
 		calender.setTime(calenderDTO.getTimeNeu());
 		calender.setTopic(calenderDTO.getTopicNeu());
