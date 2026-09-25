@@ -41,7 +41,7 @@ public class ModulEditService implements EditStrategy
 	@Override
 	public FieldDTO createDTO()
 	{
-		return new ModulDTOWithEdit();
+		return new ModulDTOWithEdit("", 0, new HashSet<EventTypes>(), 1L, "", 0);
 	}
 
 	@Override

@@ -36,7 +36,7 @@ public class ModulDeleteService implements DeleteStrategy
 	@Override
 	public FieldDTO createDTO() 
 	{
-		return new ModulDTOWithID();
+		return new ModulDTOWithID("", 0, new HashSet<EventTypes>(), 1L);
 	}
 	
 	@Override
