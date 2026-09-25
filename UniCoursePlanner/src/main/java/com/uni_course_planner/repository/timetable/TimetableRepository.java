@@ -1,6 +1,7 @@
 package com.uni_course_planner.repository.timetable;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.Param;
@@ -50,5 +51,17 @@ public interface TimetableRepository extends JpaRepository<Timetable, Long>
 			@Param("time") Timeslot time, 
 			@Param("day") Weekday day,
 			@Param("room") String room,
+			@Param("modul") EventType modul);
+	
+	@Query("""
+			SELECT t
+			FROM timetable t
+			WHERE t.time = :time
+			AND t.day = :day
+			AND t.event = :modul
+			""")
+	Optional<Timetable> findEntryOfACell(
+			@Param("time") Timeslot time, 
+			@Param("day") Weekday day,
 			@Param("modul") EventType modul);
 }
