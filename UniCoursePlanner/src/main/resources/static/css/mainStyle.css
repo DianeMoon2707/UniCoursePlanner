@@ -175,22 +175,22 @@ body {
 	cursor: pointer;
 }
 
-/* Split-View Calender */
-.calender-view {
+/* Split-View Calendar */
+.calendar-view {
 	display: grid;
 	grid-template-columns: 1fr;
 	gap: 20px;
 }
 
-.calender-view.day-selected {
+.calendar-view.day-selected {
     grid-template-columns: 2fr 1fr;
 }
 
-/* Kalender */
-.raster.calender .raster-row {
+/* Calendar */
+.raster.calendar .raster-row {
 	grid-template-columns: repeat(7, 1fr);
 }
-.raster.calender .raster-cell {
+.raster.calendar .raster-cell {
 	background-color: #ffffff;
 	border: 1px solid black;
 	text-align: center;
@@ -198,16 +198,16 @@ body {
 	padding: 25px 0 5px 0;
 }
 
-.raster.calender .raster-cell.other-month {
+.raster.calendar .raster-cell.other-month {
 	color: #bfbfbf;
 	background-color: #ebebeb;
 }
 
-.raster.calender .raster-cell.today {
+.raster.calendar .raster-cell.today {
 	background-color: #b0e2ff;
 }
 
-.calender-headline {
+.calendar-headline {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -217,11 +217,11 @@ body {
 	background-color: #54ff9f;
 }
 
-.calender-headline h2 {
+.calendar-headline h2 {
 	margin: -8px;
 }
 
-.calender-headline button {
+.calendar-headline button {
 	margin: 0;
 	padding: 0;
 	

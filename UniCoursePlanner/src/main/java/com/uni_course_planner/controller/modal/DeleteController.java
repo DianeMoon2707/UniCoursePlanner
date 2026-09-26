@@ -8,9 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import com.uni_course_planner.constants.views.ModalType;
-import com.uni_course_planner.constants.views.PageAddress;
+import com.uni_course_planner.constants.views.PageRoutes;
 import com.uni_course_planner.dto.FieldDTO;
-import com.uni_course_planner.relation.user.LogInData;
+import com.uni_course_planner.entity.user.LogInData;
 import com.uni_course_planner.service.modal.strategy.ModalServiceFactory;
 import com.uni_course_planner.service.relation.user.UserService;
 
@@ -40,7 +40,7 @@ public class DeleteController
 	    return serviceFactory.getDeleteService(deleteType).createDTO(data, currentUser);
 	}
 	
-	@GetMapping(PageAddress.DELETE_MODAL_ADDRESS)
+	@GetMapping(PageRoutes.DELETE_MODAL_ADDRESS)
 	public String showDeleteModal(@RequestParam ModalType deleteType, Model model)
 	{		
 		model.addAttribute("fragmentPath", deleteType.getFragmentFile());		

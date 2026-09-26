@@ -8,8 +8,8 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.uni_course_planner.constants.timetable.*;
-import com.uni_course_planner.relation.modul.event_type.EventType;
-import com.uni_course_planner.relation.timetable.Timetable;
+import com.uni_course_planner.entity.module.event_type.EventType;
+import com.uni_course_planner.entity.timetable.Timetable;
 
 @Repository
 public interface TimetableRepository extends JpaRepository<Timetable, Long>

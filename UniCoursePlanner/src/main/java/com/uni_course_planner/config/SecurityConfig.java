@@ -6,7 +6,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-import com.uni_course_planner.constants.views.PageAddress;
+import com.uni_course_planner.constants.views.PageRoutes;
 import com.uni_course_planner.service.relation.user.CustomUserDetailsService;
 
 @Configuration
@@ -23,49 +23,56 @@ public class SecurityConfig
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception 
 	{
 		http.authorizeHttpRequests(
-			//Öffentliche Seiten
+			//Public pages and resources that do not require authentication
 			auth -> auth.requestMatchers(
 					"/",
 					"/register",
 					"/login",
 					"/changePasswort",
 					"/verifyCode",
-					"/" + PageAddress.PASSWORT_VERGESSEN_PAGE_ADDRESS,
-					"/" + PageAddress.CODE_PAGE_ADDRESS,
-					"/" + PageAddress.REGISTER_PAGE_ADDRESS,
+					"/" + PageRoutes.PASSWORT_VERGESSEN_PAGE_ADDRESS,
+					"/" + PageRoutes.CODE_PAGE_ADDRESS,
+					"/" + PageRoutes.REGISTER_PAGE_ADDRESS,
                     "/css/**",
-                    "/js/**").permitAll().anyRequest().authenticated()
+                    "/js/**").permitAll()
+			//Alle anderen Seiten erfordern eine erfolgreiche Authentifizierung
+			.anyRequest().authenticated()
 		)
-		//Eigenes LogIn
+		//Konfiguration des benutzerdefinierten LogIn-Formulars
 		.formLogin(form -> form
 			.loginPage("/login")
 			.loginProcessingUrl("/login")
 			.usernameParameter("user-field")
 		    .passwordParameter("password-field")
-			.defaultSuccessUrl("/" + PageAddress.HOME_PAGE_ADDRESS, true)
+		    
+		    //Nach erfolgreicher Anmeldung zur Startseite weiterleiten
+			.defaultSuccessUrl("/" + PageRoutes.HOME_PAGE_ADDRESS, true)
+			
+			//Bei fehlgeschlagener Anmeldung zur LogIn-Seite zurückkehren
 			.failureUrl("/login?error=true")
 			.permitAll()
 		)
-		//Remember me für 7 Tage
+		//Angemeldeten Benutzern ermöglichen, für sieben Tage angemeldet zu bleiben
 		.rememberMe(r -> r
 			.key("my-secret-key")
 			.tokenValiditySeconds(604800)
 			.userDetailsService(userDetailsService)
 			.rememberMeParameter("remember-me")
 		)
-		//LogOut
+		//Konfiguration des Logout-Vorgangs
 		.logout(logout -> logout
 			.logoutUrl("/logout")
 			.logoutSuccessUrl("/login")
 			.permitAll()
 		)
-		//User-Service registrieren
-		.userDetailsService(userDetailsService);
 		
+		//User-Service für die Authentifizierung registrieren
+		.userDetailsService(userDetailsService);
 		
 		return http.build();
     }
 	
+	//Passwörter für die Datenbank mit BCrypt hashen
 	@Bean
 	public PasswordEncoder passwordEncoder()
 	{

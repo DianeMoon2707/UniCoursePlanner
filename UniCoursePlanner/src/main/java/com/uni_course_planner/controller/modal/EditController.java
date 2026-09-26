@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.uni_course_planner.constants.views.*;
 import com.uni_course_planner.dto.FieldDTO;
-import com.uni_course_planner.relation.user.LogInData;
+import com.uni_course_planner.entity.user.LogInData;
 import com.uni_course_planner.service.modal.strategy.ModalServiceFactory;
 import com.uni_course_planner.service.relation.user.UserService;
 
@@ -39,7 +39,7 @@ public class EditController
 	    return serviceFactory.getEditService(editType).createDTO(data, currentUser);
 	}
 	
-	@GetMapping(PageAddress.EDIT_MODAL_ADDRESS)
+	@GetMapping(PageRoutes.EDIT_MODAL_ADDRESS)
 	public String showEditModal(@RequestParam ModalType editType, Model model)
 	{		
 		model.addAttribute("fragmentPath", editType.getFragmentFile());		

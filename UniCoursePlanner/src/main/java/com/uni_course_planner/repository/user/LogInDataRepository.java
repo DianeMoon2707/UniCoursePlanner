@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.uni_course_planner.relation.user.LogInData;
+import com.uni_course_planner.entity.user.LogInData;
 
 @Repository
 public interface LogInDataRepository extends JpaRepository<LogInData, Long>

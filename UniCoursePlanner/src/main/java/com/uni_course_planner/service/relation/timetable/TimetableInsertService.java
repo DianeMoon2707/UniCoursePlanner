@@ -4,15 +4,15 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.uni_course_planner.constants.modul.EventTypes;
+import com.uni_course_planner.constants.module.EventTypes;
 import com.uni_course_planner.constants.timetable.*;
 import com.uni_course_planner.constants.views.ModalType;
 import com.uni_course_planner.dto.FieldDTO;
 import com.uni_course_planner.dto.timetable.modal.LectureInsertDTO;
-import com.uni_course_planner.relation.modul.event_type.EventType;
-import com.uni_course_planner.relation.timetable.Timetable;
-import com.uni_course_planner.relation.user.LogInData;
-import com.uni_course_planner.repository.modul.EventTypeRepository;
+import com.uni_course_planner.entity.module.event_type.EventType;
+import com.uni_course_planner.entity.timetable.Timetable;
+import com.uni_course_planner.entity.user.LogInData;
+import com.uni_course_planner.repository.module.EventTypeRepository;
 import com.uni_course_planner.repository.timetable.TimetableRepository;
 import com.uni_course_planner.service.modal.strategy.InsertStrategy;
 import com.uni_course_planner.service.validation.TimetableValidation;
@@ -37,7 +37,7 @@ public class TimetableInsertService implements InsertStrategy
 	@Override
 	public ModalType getType() 
 	{
-		return ModalType.STUNDENPLAN;
+		return ModalType.TIMETABLE;
 	}
 
 	@Override

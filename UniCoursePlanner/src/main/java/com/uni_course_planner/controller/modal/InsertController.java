@@ -8,9 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import com.uni_course_planner.constants.views.ModalType;
-import com.uni_course_planner.constants.views.PageAddress;
+import com.uni_course_planner.constants.views.PageRoutes;
 import com.uni_course_planner.dto.FieldDTO;
-import com.uni_course_planner.relation.user.LogInData;
+import com.uni_course_planner.entity.user.LogInData;
 import com.uni_course_planner.service.modal.strategy.*;
 import com.uni_course_planner.service.relation.user.UserService;
 
@@ -35,7 +35,7 @@ public class InsertController
 	    return serviceFactory.getInsertService(insertType).createDTO(currentUser);
 	}
 	
-	@GetMapping(PageAddress.INSERT_MODAL_ADDRESS)
+	@GetMapping(PageRoutes.INSERT_MODAL_ADDRESS)
 	public String showInsertModal(@RequestParam ModalType insertType, Model model)
 	{		
 		model.addAttribute("fragmentPath", insertType.getFragmentFile());		

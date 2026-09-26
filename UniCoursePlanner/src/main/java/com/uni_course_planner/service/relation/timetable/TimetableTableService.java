@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 import com.uni_course_planner.constants.timetable.Timeslot;
 import com.uni_course_planner.constants.timetable.Weekday;
 import com.uni_course_planner.dto.timetable.*;
-import com.uni_course_planner.relation.timetable.Timetable;
-import com.uni_course_planner.relation.user.LogInData;
+import com.uni_course_planner.entity.timetable.Timetable;
+import com.uni_course_planner.entity.user.LogInData;
 import com.uni_course_planner.repository.timetable.TimetableRepository;
 
 @Service

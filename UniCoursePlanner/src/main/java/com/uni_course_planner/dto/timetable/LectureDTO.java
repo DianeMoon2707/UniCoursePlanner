@@ -1,6 +1,6 @@
 package com.uni_course_planner.dto.timetable;
 
-import com.uni_course_planner.constants.modul.EventTypes;
+import com.uni_course_planner.constants.module.EventTypes;
 
 public class LectureDTO
 {

@@ -3,7 +3,7 @@ package com.uni_course_planner.service.relation.user;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.uni_course_planner.relation.user.*;
+import com.uni_course_planner.entity.user.*;
 import com.uni_course_planner.repository.user.*;
 import com.uni_course_planner.service.validation.UserValidation;
 

@@ -6,17 +6,17 @@ import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.uni_course_planner.constants.modul.EventTypes;
+import com.uni_course_planner.constants.module.EventTypes;
 import com.uni_course_planner.constants.timetable.Timeslot;
 import com.uni_course_planner.constants.timetable.Weekday;
 import com.uni_course_planner.constants.views.ModalType;
 import com.uni_course_planner.dto.FieldDTO;
 import com.uni_course_planner.dto.timetable.modal.LectureDeleteDTO;
 import com.uni_course_planner.dto.timetable.modal.LectureEditDTO;
-import com.uni_course_planner.relation.modul.event_type.EventType;
-import com.uni_course_planner.relation.timetable.Timetable;
-import com.uni_course_planner.relation.user.LogInData;
-import com.uni_course_planner.repository.modul.EventTypeRepository;
+import com.uni_course_planner.entity.module.event_type.EventType;
+import com.uni_course_planner.entity.timetable.Timetable;
+import com.uni_course_planner.entity.user.LogInData;
+import com.uni_course_planner.repository.module.EventTypeRepository;
 import com.uni_course_planner.repository.timetable.TimetableRepository;
 import com.uni_course_planner.service.modal.strategy.EditStrategy;
 
@@ -36,7 +36,7 @@ public class TimetableEditService implements EditStrategy
 	@Override
 	public ModalType getType()
 	{
-		return ModalType.STUNDENPLAN;
+		return ModalType.TIMETABLE;
 	}
 
 	@Override

@@ -10,8 +10,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.uni_course_planner.relation.user.LogInData;
-import com.uni_course_planner.relation.user.User;
+import com.uni_course_planner.entity.user.LogInData;
+import com.uni_course_planner.entity.user.User;
 import com.uni_course_planner.repository.user.*;
 import com.uni_course_planner.service.validation.UserValidation;
 

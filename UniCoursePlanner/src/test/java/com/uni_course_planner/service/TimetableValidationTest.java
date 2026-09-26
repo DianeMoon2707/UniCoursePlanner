@@ -11,8 +11,8 @@ import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.uni_course_planner.constants.timetable.*;
-import com.uni_course_planner.relation.modul.event_type.*;
-import com.uni_course_planner.relation.timetable.Timetable;
+import com.uni_course_planner.entity.module.event_type.*;
+import com.uni_course_planner.entity.timetable.Timetable;
 import com.uni_course_planner.repository.timetable.TimetableRepository;
 import com.uni_course_planner.service.validation.TimetableValidation;
 

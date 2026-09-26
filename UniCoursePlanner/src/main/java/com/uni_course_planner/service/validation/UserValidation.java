@@ -4,7 +4,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import com.uni_course_planner.relation.user.*;
+import com.uni_course_planner.entity.user.*;
 import com.uni_course_planner.repository.user.*;
 
 @Service

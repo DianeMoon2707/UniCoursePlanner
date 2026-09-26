@@ -1,0 +1,27 @@
+<div th:fragment="edit-mask">
+	<h1>Note ändern</h1>
+	
+	<form id="editForm" th:action="@{/edit}" method="post" th:object="${fieldDTO}">
+		<input type="hidden" name="editType" th:value="${editType}">
+		
+		<h2>Standarddaten</h2>		
+		<input type="hidden" th:field="*{modul_id}">
+		
+		<label>Modulname: </label>
+		<input th:field="*{modulname}" type="text" readonly> <br>
+		
+		<label>Note: </label>
+		<input th:value="${fieldDTO.grade?.numeric ?: '-'}" readonly>
+		
+		<i class="bi bi-arrow-right"></i>
+		
+		<select th:field="*{gradeNeu}"> 
+			<option value="">-</option>
+			<option th:each="gradeN : ${T(com.uni_course_planner.constants.grade.Grades).values()}"
+			th:value="${gradeN}" th:text="${gradeN.numeric}">
+		</select>	
+		<br>
+		
+		<button>Ändern</button>
+	</form>
+</div>

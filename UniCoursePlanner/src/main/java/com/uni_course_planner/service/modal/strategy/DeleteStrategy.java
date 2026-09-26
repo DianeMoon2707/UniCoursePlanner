@@ -2,7 +2,7 @@ package com.uni_course_planner.service.modal.strategy;
 
 import com.uni_course_planner.constants.views.ModalType;
 import com.uni_course_planner.dto.FieldDTO;
-import com.uni_course_planner.relation.user.LogInData;
+import com.uni_course_planner.entity.user.LogInData;
 
 public interface DeleteStrategy 
 {

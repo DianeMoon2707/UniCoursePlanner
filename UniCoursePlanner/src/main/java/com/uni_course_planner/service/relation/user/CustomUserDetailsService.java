@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.*;
 import org.springframework.stereotype.Service;
 
-import com.uni_course_planner.relation.user.LogInData;
+import com.uni_course_planner.entity.user.LogInData;
 import com.uni_course_planner.repository.user.LogInDataRepository;
 
 @Service
@@ -15,7 +15,7 @@ public class CustomUserDetailsService implements UserDetailsService
 	@Autowired
 	private LogInDataRepository logInDataRep;
 
-	// Eingeloggter Nutzer rufen
+	//Für die Authentifizierung durch Spring Security: Lade einen Benutzer anhand seines Benutzernamens
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException
 	{
@@ -26,6 +26,7 @@ public class CustomUserDetailsService implements UserDetailsService
 			throw new UsernameNotFoundException("Benutzer nicht gefunden");
 		}
 		
+		//Datenbankeintrag in ein für Spring Security verwendbares UserDetails-Objekt umwandeln
 		return User.builder()
                 .username(user.get().getUsername())
                 .password(user.get().getPassword())

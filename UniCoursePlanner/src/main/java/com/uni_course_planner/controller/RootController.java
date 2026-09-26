@@ -3,7 +3,7 @@ package com.uni_course_planner.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.uni_course_planner.constants.views.PageAddress;
+import com.uni_course_planner.constants.views.PageRoutes;
 
 @Controller
 public class RootController 
@@ -11,6 +11,6 @@ public class RootController
 	@GetMapping("/")
 	public String root() 
 	{
-	    return "redirect:" + PageAddress.HOME_PAGE_ADDRESS;
+	    return "redirect:" + PageRoutes.HOME_PAGE_ADDRESS;
 	}
 }

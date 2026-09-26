@@ -5,8 +5,8 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.uni_course_planner.constants.timetable.*;
-import com.uni_course_planner.relation.modul.event_type.EventType;
-import com.uni_course_planner.relation.timetable.Timetable;
+import com.uni_course_planner.entity.module.event_type.EventType;
+import com.uni_course_planner.entity.timetable.Timetable;
 import com.uni_course_planner.repository.timetable.TimetableRepository;
 
 @Service
