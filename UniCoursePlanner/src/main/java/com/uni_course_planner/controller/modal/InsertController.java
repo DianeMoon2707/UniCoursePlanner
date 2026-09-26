@@ -35,7 +35,7 @@ public class InsertController
 	    return serviceFactory.getInsertService(insertType).createDTO(currentUser);
 	}
 	
-	@GetMapping(PageRoutes.INSERT_MODAL_ADDRESS)
+	@GetMapping(PageRoutes.INSERT_MODAL)
 	public String showInsertModal(@RequestParam ModalType insertType, Model model)
 	{		
 		model.addAttribute("fragmentPath", insertType.getFragmentFile());		

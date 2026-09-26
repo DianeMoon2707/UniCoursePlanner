@@ -25,13 +25,13 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="modul : ${module}" th:onclick="rowClicked(this)">
-						<td hidden th:text="${modul.modul_id}"></td>
-						<td th:text="${modul.modulname}"></td>
-						<td th:text="${modul.lp}"></td>
+					<tr th:each="module : ${modules}" th:onclick="rowClicked(this)">
+						<td hidden th:text="${module.modul_id}"></td>
+						<td th:text="${module.modulname}"></td>
+						<td th:text="${module.lp}"></td>
 						<td>
 							<ul>
-								<li th:each="event : ${modul.eventTypes}" th:text="${event.description}">
+								<li th:each="event : ${module.eventTypes}" th:text="${event.description}">
 							</ul>
 						</td>
 					</tr>
@@ -50,15 +50,15 @@
 			</div>
 			
 			<div class="data-handling-btn">
-				<button type="button" onclick="openModal('insert', 'MODUL', validateAtLeastOneCheckboxChecked)">
+				<button type="button" onclick="openModal('insert', 'MODULE', validateAtLeastOneCheckboxChecked)">
 					<i class="bi bi-plus-circle"></i>
 				</button>
 				
-				<button type="button" onclick="openModal('edit', 'MODUL')">
+				<button type="button" onclick="openModal('edit', 'MODULE')">
 					<i class="bi bi-pencil"></i>
 				</button>
 				
-				<button type="button" onclick="openModal('delete', 'MODUL')">
+				<button type="button" onclick="openModal('delete', 'MODULE')">
 					<i class="bi bi-trash"></i>
 				</button>
 			</div>

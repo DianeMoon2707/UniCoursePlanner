@@ -8,9 +8,9 @@ import com.uni_course_planner.constants.views.PageRoutes;
 @Controller
 public class HomeController
 {
-	@GetMapping(PageRoutes.HOME_PAGE_ADDRESS)
+	@GetMapping(PageRoutes.HOME)
 	public String loadHomePage()
 	{		
-		return PageRoutes.HOME_PAGE_ADDRESS;
+		return PageRoutes.HOME;
 	}
 }

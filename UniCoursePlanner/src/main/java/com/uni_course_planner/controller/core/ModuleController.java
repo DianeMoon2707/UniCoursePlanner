@@ -15,22 +15,22 @@ import com.uni_course_planner.service.relation.user.UserService;
 public class ModuleController 
 {
 	private UserService userService;
-	private ModuleTableService modulTableService;
+	private ModuleTableService moduleTableService;
 	
-	public ModuleController(UserService userService, ModuleTableService modulTableService)
+	public ModuleController(UserService userService, ModuleTableService moduleTableService)
 	{
 		this.userService = userService;
-		this.modulTableService = modulTableService;
+		this.moduleTableService = moduleTableService;
 	}
 	
-	@GetMapping(PageRoutes.MODUL_PAGE_ADDRESS)
+	@GetMapping(PageRoutes.MODULE)
 	public String loadModulPage(Model model)
 	{
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		LogInData user = userService.getUserByUsername(auth.getName());
 		
-		model.addAttribute("module", modulTableService.fillModulTable(user.getId()));
+		model.addAttribute("modules", moduleTableService.fillModuleTable(user.getId()));
 		
-		return PageRoutes.MODUL_PAGE_ADDRESS;
+		return PageRoutes.MODULE;
 	}
 }

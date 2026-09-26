@@ -31,8 +31,8 @@ public class ForgotPasswordController
 		this.codeGenerator = codeGenerator;
 	}
 
-	@GetMapping(PageRoutes.PASSWORT_VERGESSEN_PAGE_ADDRESS)
-	public String loadPasswortVergessenPage(Model model)
+	@GetMapping(PageRoutes.FORGOT_PASSWORD)
+	public String loadForgotPasswordPage(Model model)
 	{
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		
@@ -48,11 +48,11 @@ public class ForgotPasswordController
 			model.addAttribute("loggedIn", false);
 		}
 		
-		return PageRoutes.PASSWORT_VERGESSEN_PAGE_ADDRESS;
+		return PageRoutes.FORGOT_PASSWORD;
 	}
 	
-	@PostMapping("/changePasswort")
-	public String editPasswort(Model model,
+	@PostMapping("/changePassword")
+	public String editPassword(Model model,
 			@RequestParam(name="authentication-field") String authenticationField, 
 			@RequestParam(name="password-field") String passwordField, HttpSession session)
 	{	
@@ -62,14 +62,14 @@ public class ForgotPasswordController
 		if(!userService.userExistsByUsername(username))
 		{
 			model.addAttribute("errorMessage", "Es existiert kein Nutzer zu dieser Email-Adresse oder diesem Benutzernamen.");
-			return PageRoutes.PASSWORT_VERGESSEN_PAGE_ADDRESS;
+			return PageRoutes.FORGOT_PASSWORD;
 		}
 		else
 		{
 			String code = codeGenerator.generateCode();
 			this.setSessionAttributes(session, username, email, passwordField, code);
 			emailService.sendEmail(email, new ForgotPasswordText(username, passwordField, code));
-			return "redirect:/" + PageRoutes.CODE_PAGE_ADDRESS;
+			return "redirect:/" + PageRoutes.VERIFICATION_CODE;
 		}
 	}
 	

@@ -21,10 +21,10 @@ public class RegisterController
 		this.emailService = emailService;
 	}
 
-	@GetMapping(PageRoutes.REGISTER_PAGE_ADDRESS)
+	@GetMapping(PageRoutes.REGISTER)
 	public String loadRegisterPage()
 	{
-		return PageRoutes.REGISTER_PAGE_ADDRESS;
+		return PageRoutes.REGISTER;
 	}
 	
 	@PostMapping("/register")
@@ -37,12 +37,12 @@ public class RegisterController
 		{
 			userService.registerUser(emailField, userField, passwordField);	
 			emailService.sendEmail(emailField, new RegisterText(userField));
-			return PageRoutes.LOGIN_PAGE_ADDRESS;
+			return PageRoutes.LOGIN;
 		}
 		catch(Exception e)
 		{
 			model.addAttribute("errorMessage", e.getMessage());
-			return PageRoutes.REGISTER_PAGE_ADDRESS;
+			return PageRoutes.REGISTER;
 		}
 	}
 }

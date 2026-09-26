@@ -28,11 +28,11 @@ public class SecurityConfig
 					"/",
 					"/register",
 					"/login",
-					"/changePasswort",
+					"/changePassword",
 					"/verifyCode",
-					"/" + PageRoutes.PASSWORT_VERGESSEN_PAGE_ADDRESS,
-					"/" + PageRoutes.CODE_PAGE_ADDRESS,
-					"/" + PageRoutes.REGISTER_PAGE_ADDRESS,
+					"/" + PageRoutes.FORGOT_PASSWORD,
+					"/" + PageRoutes.VERIFICATION_CODE,
+					"/" + PageRoutes.REGISTER,
                     "/css/**",
                     "/js/**").permitAll()
 			//Alle anderen Seiten erfordern eine erfolgreiche Authentifizierung
@@ -46,7 +46,7 @@ public class SecurityConfig
 		    .passwordParameter("password-field")
 		    
 		    //Nach erfolgreicher Anmeldung zur Startseite weiterleiten
-			.defaultSuccessUrl("/" + PageRoutes.HOME_PAGE_ADDRESS, true)
+			.defaultSuccessUrl("/" + PageRoutes.HOME, true)
 			
 			//Bei fehlgeschlagener Anmeldung zur LogIn-Seite zurückkehren
 			.failureUrl("/login?error=true")

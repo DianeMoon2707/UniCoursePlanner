@@ -39,7 +39,7 @@ public class EditController
 	    return serviceFactory.getEditService(editType).createDTO(data, currentUser);
 	}
 	
-	@GetMapping(PageRoutes.EDIT_MODAL_ADDRESS)
+	@GetMapping(PageRoutes.EDIT_MODAL)
 	public String showEditModal(@RequestParam ModalType editType, Model model)
 	{		
 		model.addAttribute("fragmentPath", editType.getFragmentFile());		

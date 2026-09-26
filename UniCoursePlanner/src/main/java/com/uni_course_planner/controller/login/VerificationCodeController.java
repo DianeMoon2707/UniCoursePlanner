@@ -23,14 +23,14 @@ public class VerificationCodeController
 		this.emailService = emailService;
 	}
 	
-	@GetMapping(PageRoutes.CODE_PAGE_ADDRESS)
+	@GetMapping(PageRoutes.VERIFICATION_CODE)
 	public String loadCodePage(Model model)
 	{
-		return PageRoutes.CODE_PAGE_ADDRESS;
+		return PageRoutes.VERIFICATION_CODE;
 	}
 	
 	@PostMapping("/verifyCode")
-	public String confirmEmail(Model model, @RequestParam(name = "code-field") String codeField, HttpSession session)
+	public String verifyCode(Model model, @RequestParam(name = "code-field") String codeField, HttpSession session)
 	{
 		String username = (String)session.getAttribute("username");
 		String email = (String)session.getAttribute("email");
@@ -44,12 +44,12 @@ public class VerificationCodeController
 			
 			this.removeSessionAttribute(session);
 			
-			return PageRoutes.LOGIN_PAGE_ADDRESS;
+			return PageRoutes.LOGIN;
 		}
 		else
 		{
 			model.addAttribute("errorMessage", "Falscher Code!");
-			return PageRoutes.CODE_PAGE_ADDRESS;
+			return PageRoutes.VERIFICATION_CODE;
 		}		
 	}
 	

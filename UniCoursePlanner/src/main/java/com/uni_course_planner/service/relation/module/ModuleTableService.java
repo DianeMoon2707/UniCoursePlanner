@@ -13,20 +13,20 @@ import com.uni_course_planner.repository.module.*;
 @Service
 public class ModuleTableService 
 {
-	private ModuleRepository modulRep;
+	private ModuleRepository moduleRep;
 	private EventTypeRepository eventTypeRep;
 	
-	public ModuleTableService(ModuleRepository modulRep, EventTypeRepository eventTypeRep) 
+	public ModuleTableService(ModuleRepository moduleRep, EventTypeRepository eventTypeRep) 
 	{
-		this.modulRep = modulRep;
+		this.moduleRep = moduleRep;
 		this.eventTypeRep = eventTypeRep;
 	}
 	
-	public List<ModuleDTOWithID> fillModulTable(Long user)
+	public List<ModuleDTOWithID> fillModuleTable(Long user)
 	{
 		List<ModuleDTOWithID> tableData = new ArrayList<ModuleDTOWithID>();
 		
-		List<Module> module = modulRep.findAllByUserId(user);
+		List<Module> module = moduleRep.findAllByUserId(user);
 		
 		for(Module modul : module)
 		{

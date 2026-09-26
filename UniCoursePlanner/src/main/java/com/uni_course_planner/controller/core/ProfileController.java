@@ -23,8 +23,8 @@ public class ProfileController
 		this.userService = userService;
 	}
 	
-	@GetMapping(PageRoutes.PROFIL_PAGE_ADDRESS)
-	public String loadProfilPage(Model model)
+	@GetMapping(PageRoutes.PROFILE)
+	public String loadProfilePage(Model model)
 	{
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		LogInData user = userService.getUserByUsername(auth.getName());
@@ -32,7 +32,7 @@ public class ProfileController
 		model.addAttribute("username", user.getUsername());
 		model.addAttribute("email", userService.getEmailFromUser(user.getId()));
 		
-		return PageRoutes.PROFIL_PAGE_ADDRESS;
+		return PageRoutes.PROFILE;
 	}
 	
 	@PostMapping("/changeUserData")
@@ -51,12 +51,12 @@ public class ProfileController
 			//Benutzer ausloggen
 			new SecurityContextLogoutHandler().logout(request, response, auth);
 
-			return "redirect:/" + PageRoutes.LOGIN_PAGE_ADDRESS;
+			return "redirect:/" + PageRoutes.LOGIN;
 		}
 		catch(Exception e)
 		{
 			model.addAttribute("errorMessage", e.getMessage());
-			return PageRoutes.PROFIL_PAGE_ADDRESS;
+			return PageRoutes.PROFILE;
 		}
 	}
 }

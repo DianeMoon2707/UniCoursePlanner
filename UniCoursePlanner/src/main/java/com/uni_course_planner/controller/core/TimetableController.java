@@ -23,14 +23,14 @@ public class TimetableController
 		this.timetableService = timetableService;
 	}
 
-	@GetMapping(PageRoutes.STUNDENPLAN_PAGE_ADDRESS)
-	public String showStundenplanPage(Model model)
+	@GetMapping(PageRoutes.TIMETABLE)
+	public String showTimetablePage(Model model)
 	{
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		LogInData user = userService.getUserByUsername(auth.getName());
 		
 		model.addAttribute("timetable", timetableService.fillTimetable(user));
 		
-		return PageRoutes.STUNDENPLAN_PAGE_ADDRESS;
+		return PageRoutes.TIMETABLE;
 	}
 }

@@ -133,7 +133,7 @@ body {
 	font-weight: bold;
 }
 
-/* Stundenplan */
+/* Timetable */
 .raster.schedule .raster-row {
 	grid-template-columns: 0.5fr repeat(var(--cols), 1fr);
 }

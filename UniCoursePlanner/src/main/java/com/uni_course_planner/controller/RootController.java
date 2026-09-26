@@ -11,6 +11,6 @@ public class RootController
 	@GetMapping("/")
 	public String root() 
 	{
-	    return "redirect:" + PageRoutes.HOME_PAGE_ADDRESS;
+	    return "redirect:" + PageRoutes.HOME;
 	}
 }

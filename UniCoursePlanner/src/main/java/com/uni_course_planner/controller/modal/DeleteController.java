@@ -40,7 +40,7 @@ public class DeleteController
 	    return serviceFactory.getDeleteService(deleteType).createDTO(data, currentUser);
 	}
 	
-	@GetMapping(PageRoutes.DELETE_MODAL_ADDRESS)
+	@GetMapping(PageRoutes.DELETE_MODAL)
 	public String showDeleteModal(@RequestParam ModalType deleteType, Model model)
 	{		
 		model.addAttribute("fragmentPath", deleteType.getFragmentFile());		

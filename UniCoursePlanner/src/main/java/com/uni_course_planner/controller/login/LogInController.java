@@ -17,6 +17,6 @@ public class LogInController
 			model.addAttribute("errorMessage", "Benutzername oder Passwort falsch");
 		}
 		
-		return PageRoutes.LOGIN_PAGE_ADDRESS;
+		return PageRoutes.LOGIN;
 	}
 }
