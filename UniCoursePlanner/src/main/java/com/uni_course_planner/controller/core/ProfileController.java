@@ -35,6 +35,7 @@ public class ProfileController
 		return PageRoutes.PROFILE;
 	}
 	
+	//Edit Username and/or Email
 	@PostMapping("/changeUserData")
 	public String editUserData(Model model,
 			@RequestParam(name="user-field") String userField, 
@@ -48,7 +49,7 @@ public class ProfileController
 		
 			userService.changeUserData(currentUser, userField, emailField);
 		
-			//Benutzer ausloggen
+			//Log out the user after changing their account data
 			new SecurityContextLogoutHandler().logout(request, response, auth);
 
 			return "redirect:/" + PageRoutes.LOGIN;

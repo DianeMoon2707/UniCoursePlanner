@@ -42,9 +42,9 @@ public class GradeEditService implements EditStrategy
 		ModuleId mId = new ModuleId(user.getId(), Long.parseLong(data));
 		Module modul = modulRep.findById(mId).get();
 		
-		dto.setModul_id(mId.getModulId());
-		dto.setModulname(modul.getModulname());
-		dto.setLp(modul.getLp());
+		dto.setModuleId(mId.getModulId());
+		dto.setModulename(modul.getModulname());
+		dto.setCredits(modul.getLp());
 		
 		dto.setGrade(
 			    modul.getGrade() == null
@@ -52,7 +52,7 @@ public class GradeEditService implements EditStrategy
 			        : modul.getGrade().getGrade()
 			);
 		
-		dto.setGradeNeu(dto.getGrade());
+		dto.setGradeNew(dto.getGrade());
 		
 		return dto;
 	}
@@ -62,10 +62,10 @@ public class GradeEditService implements EditStrategy
 	{
 		GradeDTOWithEdit noteDTO = (GradeDTOWithEdit) dto;
 		
-		ModuleId mId = new ModuleId(user.getId(), noteDTO.getModul_id());
+		ModuleId mId = new ModuleId(user.getId(), noteDTO.getModuleId());
 		Module modul = modulRep.findById(mId).get();
 		
-		Grades grade = noteDTO.getGradeNeu();
+		Grades grade = noteDTO.getGradeNew();
 		modul.setGrade(new Grade(grade));
 		modulRep.save(modul);
 	}

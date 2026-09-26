@@ -26,6 +26,7 @@ public enum Grades
 		return numeric;
 	}
 	
+	//Converts a numeric grade into the corresponding enum value
 	public static Grades fromNumericToEnum(double num)
 	{		
 		for(Grades grade : Grades.values())

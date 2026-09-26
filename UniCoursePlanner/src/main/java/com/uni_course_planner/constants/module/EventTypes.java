@@ -1,5 +1,6 @@
 package com.uni_course_planner.constants.module;
 
+//Enum for storing event descriptions and colors for the timetable
 public enum EventTypes
 {
 	VL("Vorlesung", "#e6f0ff"),
@@ -25,6 +26,7 @@ public enum EventTypes
 		return hexColor;
 	}
 
+	//Converts a description into the corresponding enum value
 	public static EventTypes fromDescriptionToEnum(String description)
 	{
 		String normalized = description.trim();

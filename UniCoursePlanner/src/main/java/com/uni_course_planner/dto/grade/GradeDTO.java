@@ -5,49 +5,49 @@ import com.uni_course_planner.dto.FieldDTO;
 
 public class GradeDTO extends FieldDTO
 {
-	private Long modul_id;
-	private String modulname;
-	private int lp;
+	private Long moduleId;
+	private String modulename;
+	private int credits;
 	private Grades grade;
 	
 	public GradeDTO() {}
 	
-	public GradeDTO(Long modul_id, String modulname, int lp, Grades grade)
+	public GradeDTO(Long moduleId, String modulename, int credits, Grades grade)
 	{
-		this.modul_id = modul_id;
-		this.modulname = modulname;
-		this.lp = lp;
+		this.moduleId = moduleId;
+		this.modulename = modulename;
+		this.credits = credits;
 		this.grade = grade;
 	}
 
-	public Long getModul_id() 
+	public Long getModuleId() 
 	{
-		return modul_id;
+		return moduleId;
 	}
 
-	public void setModul_id(Long modul_id)
+	public void setModuleId(Long moduleId)
 	{
-		this.modul_id = modul_id;
+		this.moduleId = moduleId;
 	}
 
-	public String getModulname()
+	public String getModulename()
 	{
-		return modulname;
+		return modulename;
 	}
 
-	public void setModulname(String modulname) 
+	public void setModulename(String modulename) 
 	{
-		this.modulname = modulname;
+		this.modulename = modulename;
 	}
 
-	public int getLp() 
+	public int getCredits() 
 	{
-		return lp;
+		return credits;
 	}
 
-	public void setLp(int lp)
+	public void setCredits(int credits)
 	{
-		this.lp = lp;
+		this.credits = credits;
 	}
 
 	public Grades getGrade() 

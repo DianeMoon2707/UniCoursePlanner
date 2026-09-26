@@ -15,12 +15,12 @@ import com.uni_course_planner.service.relation.user.UserService;
 public class TimetableController 
 {	
 	private UserService userService;
-	private TimetableTableService timetableService;
+	private TimetableTableService timetableTableService;
 	
-	public TimetableController(UserService userService, TimetableTableService timetableService) 
+	public TimetableController(UserService userService, TimetableTableService timetableTableService) 
 	{
 		this.userService = userService;
-		this.timetableService = timetableService;
+		this.timetableTableService = timetableTableService;
 	}
 
 	@GetMapping(PageRoutes.TIMETABLE)
@@ -29,7 +29,7 @@ public class TimetableController
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		LogInData user = userService.getUserByUsername(auth.getName());
 		
-		model.addAttribute("timetable", timetableService.fillTimetable(user));
+		model.addAttribute("timetable", timetableTableService.fillTimetable(user));
 		
 		return PageRoutes.TIMETABLE;
 	}

@@ -6,37 +6,37 @@ import com.uni_course_planner.constants.module.EventTypes;
 
 public class ModuleDTOWithEdit extends ModuleDTOWithID
 {
-	private String modulnameNeu;
-	private int lpNeu;
+	private String modulenameNew;
+	private int creditsNew;
 	
 	public ModuleDTOWithEdit() {}
 	
-	public ModuleDTOWithEdit(String modulname, int lp, Set<EventTypes> eventTypes, 
-			Long modul_id, String modulnameNeu, int lpNeu)
+	public ModuleDTOWithEdit(String modulename, int credits, Set<EventTypes> eventTypes, 
+			Long moduleId, String modulenameNew, int creditsNew)
 	{
-		super(modulname, lp, eventTypes, modul_id);
+		super(modulename, credits, eventTypes, moduleId);
 		
-		this.modulnameNeu = modulnameNeu;
-		this.lpNeu = lpNeu;
+		this.modulenameNew = modulenameNew;
+		this.creditsNew = creditsNew;
 	}
 
-	public String getModulnameNeu()
+	public String getModulenameNew()
 	{
-		return modulnameNeu;
+		return modulenameNew;
 	}
 
-	public void setModulnameNeu(String modulnameNeu)
+	public void setModulenameNew(String modulenameNew)
 	{
-		this.modulnameNeu = modulnameNeu;
+		this.modulenameNew = modulenameNew;
 	}
 
-	public int getLpNeu()
+	public int getCreditsNew()
 	{
-		return lpNeu;
+		return creditsNew;
 	}
 
-	public void setLpNeu(int lpNeu) 
+	public void setCreditsNew(int creditsNew) 
 	{
-		this.lpNeu = lpNeu;
+		this.creditsNew = creditsNew;
 	}
 }

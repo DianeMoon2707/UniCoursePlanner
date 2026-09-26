@@ -48,9 +48,9 @@ public class ModuleDeleteService implements DeleteStrategy
 		ModuleId mId = new ModuleId(user.getId(), Long.parseLong(data));
 		Module modul = modulRep.findById(mId).get();
 		
-		dto.setModul_id(mId.getModulId());
-		dto.setModulname(modul.getModulname());
-		dto.setLp(modul.getLp());
+		dto.setModuleId(mId.getModulId());
+		dto.setModulename(modul.getModulname());
+		dto.setCredits(modul.getLp());
 		
 		Set<EventTypes> events = eventTypeRep.findAllByModul(modul)
 				.stream()
@@ -67,7 +67,7 @@ public class ModuleDeleteService implements DeleteStrategy
 	{
 		ModuleDTOWithID modulDTO = (ModuleDTOWithID)dto;
 		
-		ModuleId mId = new ModuleId(user.getId(), modulDTO.getModul_id());
+		ModuleId mId = new ModuleId(user.getId(), modulDTO.getModuleId());
 		Set<EventTypes> selectedEvents = modulDTO.getEventTypes();
 
 		for(EventTypes type : selectedEvents)

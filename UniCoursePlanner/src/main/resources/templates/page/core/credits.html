@@ -26,9 +26,9 @@
 				</thead>
 				<tbody>
 					<tr th:each="grade : ${grades}" th:onclick="rowClicked(this)">
-						<td hidden th:text="${grade.modul_id}"></td>
-						<td th:text="${grade.modulname}"></td>
-						<td th:text="${grade.lp}"></td>
+						<td hidden th:text="${grade.moduleId}"></td>
+						<td th:text="${grade.modulename}"></td>
+						<td th:text="${grade.credits}"></td>
 						<td th:text="${grade.grade?.numeric ?: '-'}"></td>
 					</tr>
 				</tbody>

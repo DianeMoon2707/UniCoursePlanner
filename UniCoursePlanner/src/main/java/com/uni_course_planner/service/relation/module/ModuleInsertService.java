@@ -56,8 +56,8 @@ public class ModuleInsertService implements InsertStrategy
 		
 		Module modul = new Module(
 				new ModuleId(currentUser.getId(), mId),
-				modulDTO.getModulname(),
-				modulDTO.getLp(),
+				modulDTO.getModulename(),
+				modulDTO.getCredits(),
 				userRep.findById(currentUser.getId()).get()
 			);
 		

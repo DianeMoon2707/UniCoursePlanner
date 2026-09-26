@@ -7,10 +7,10 @@
 		<h2>Standarddaten</h2>
 		
 		<label>Modulname: </label>
-		<input th:field="*{modulname}" type="text" required> <br>
+		<input th:field="*{modulename}" type="text" required> <br>
 		
 		<label>Leistungspunkte: </label>
-		<input th:field="*{lp}" type="number" min="0" required> <br>
+		<input th:field="*{credits}" type="number" min="0" required> <br>
 		
 		<h2>Veranstaltungsformen</h2>
 		
@@ -30,13 +30,13 @@
 		<input type="hidden" name="deleteType" th:value="${deleteType}">
 		
 		<h2>Standarddaten</h2>		
-		<input type="hidden" th:field="*{modul_id}">
+		<input type="hidden" th:field="*{moduleId}">
 		
 		<label>Modulname: </label>
-		<input th:field="*{modulname}" type="text" readonly> <br>
+		<input th:field="*{modulename}" type="text" readonly> <br>
 		
 		<label>Leistungspunkte: </label>
-		<input th:field="*{lp}" readonly> <br>
+		<input th:field="*{credits}" readonly> <br>
 		
 		<h2>Veranstaltungsformen</h2>
 		
@@ -56,17 +56,17 @@
 		<input type="hidden" name="editType" th:value="${editType}">
 		
 		<h2>Standarddaten</h2>		
-		<input type="hidden" th:field="*{modul_id}">
+		<input type="hidden" th:field="*{moduleId}">
 		
 		<label>Modulname: </label>
-		<input th:field="*{modulname}" type="text" readonly> 
+		<input th:field="*{modulename}" type="text" readonly> 
 		<i class="bi bi-arrow-right"></i>
-		<input th:field="*{modulnameNeu}" type="text" required><br>
+		<input th:field="*{modulenameNew}" type="text" required><br>
 		
 		<label>Leistungspunkte: </label>
-		<input th:field="*{lp}" readonly>
+		<input th:field="*{credits}" readonly>
 		<i class="bi bi-arrow-right"></i>
-		<input th:field="*{lpNeu}" type="number" min="0" required> <br>
+		<input th:field="*{creditsNew}" type="number" min="0" required> <br>
 		
 		<h2>Veranstaltungsformen</h2>
 		

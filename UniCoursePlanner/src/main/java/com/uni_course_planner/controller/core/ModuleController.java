@@ -24,7 +24,7 @@ public class ModuleController
 	}
 	
 	@GetMapping(PageRoutes.MODULE)
-	public String loadModulPage(Model model)
+	public String loadModulePage(Model model)
 	{
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		LogInData user = userService.getUserByUsername(auth.getName());

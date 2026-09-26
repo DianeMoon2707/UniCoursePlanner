@@ -5,17 +5,17 @@
 		<input type="hidden" name="editType" th:value="${editType}">
 		
 		<h2>Standarddaten</h2>		
-		<input type="hidden" th:field="*{modul_id}">
+		<input type="hidden" th:field="*{moduleId}">
 		
 		<label>Modulname: </label>
-		<input th:field="*{modulname}" type="text" readonly> <br>
+		<input th:field="*{modulename}" type="text" readonly> <br>
 		
 		<label>Note: </label>
 		<input th:value="${fieldDTO.grade?.numeric ?: '-'}" readonly>
 		
 		<i class="bi bi-arrow-right"></i>
 		
-		<select th:field="*{gradeNeu}"> 
+		<select th:field="*{gradeNew}"> 
 			<option value="">-</option>
 			<option th:each="gradeN : ${T(com.uni_course_planner.constants.grade.Grades).values()}"
 			th:value="${gradeN}" th:text="${gradeN.numeric}">

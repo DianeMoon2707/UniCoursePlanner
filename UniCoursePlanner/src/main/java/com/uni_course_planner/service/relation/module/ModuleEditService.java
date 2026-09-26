@@ -53,13 +53,13 @@ public class ModuleEditService implements EditStrategy
 		ModuleId mId = new ModuleId(user.getId(), Long.parseLong(data));
 		Module modul = modulRep.findById(mId).get();
 		
-		dto.setModul_id(mId.getModulId());
+		dto.setModuleId(mId.getModulId());
 		
-		dto.setModulname(modul.getModulname());
-		dto.setModulnameNeu(dto.getModulname());
+		dto.setModulename(modul.getModulname());
+		dto.setModulenameNew(dto.getModulename());
 		
-		dto.setLp(modul.getLp());
-		dto.setLpNeu(dto.getLp());
+		dto.setCredits(modul.getLp());
+		dto.setCreditsNew(dto.getCredits());
 		
 		Set<EventTypes> events = eventTypeRep.findAllByModul(modul)
 				.stream()
@@ -75,18 +75,18 @@ public class ModuleEditService implements EditStrategy
 	public void edit(FieldDTO dto, LogInData user) 
 	{
 		ModuleDTOWithEdit modulDTO = (ModuleDTOWithEdit)dto;
-		ModuleId mId = new ModuleId(user.getId(), modulDTO.getModul_id());
+		ModuleId mId = new ModuleId(user.getId(), modulDTO.getModuleId());
 		Module modul = modulRep.findById(mId).orElseThrow();
 		
 		validation.validateUserChangesModulnameToAExistingOne(
-			modulDTO.getModulnameNeu(), 
-			modulDTO.getModul_id(), 
+			modulDTO.getModulenameNew(), 
+			modulDTO.getModuleId(), 
 			user.getId()
 		);
 		
 		//Standarddaten
-		modul.setModulname(modulDTO.getModulnameNeu());
-		modul.setLp(modulDTO.getLpNeu());
+		modul.setModulname(modulDTO.getModulenameNew());
+		modul.setLp(modulDTO.getCreditsNew());
 		
 		modulRep.save(modul);
 		

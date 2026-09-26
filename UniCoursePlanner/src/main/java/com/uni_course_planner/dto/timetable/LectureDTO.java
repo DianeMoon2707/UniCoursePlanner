@@ -4,25 +4,25 @@ import com.uni_course_planner.constants.module.EventTypes;
 
 public class LectureDTO
 {
-	private String modul;
+	private String module;
 	private EventTypes event;
 	private String room;
 
-	public LectureDTO(String modul, EventTypes event, String room)
+	public LectureDTO(String module, EventTypes event, String room)
 	{
-		this.modul = modul;
+		this.module = module;
 		this.event = event;		
 		this.room = room;
 	}
 
-	public String getModul() 
+	public String getModule() 
 	{
-		return modul;
+		return module;
 	}
 
-	public void setModul(String modul) 
+	public void setModule(String module) 
 	{
-		this.modul = modul;
+		this.module = module;
 	}
 
 	public EventTypes getEvent() 

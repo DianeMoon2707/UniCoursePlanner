@@ -4,50 +4,50 @@ import java.time.*;
 
 public class CalendarDTOWithEdit extends CalendarDTOWithID
 {
-	private LocalTime timeNeu;
-	private String topicNeu;
-	private String extensionNeu;
+	private LocalTime timeNew;
+	private String topicNew;
+	private String extensionNew;
 	
 	public CalendarDTOWithEdit() {}
 	
 	public CalendarDTOWithEdit(LocalDate date, LocalTime time, 
 			String topic, String extension, Long id,
-			LocalTime timeNeu, String topicNeu, String extensionNeu)
+			LocalTime timeNew, String topicNew, String extensionNew)
 	{
 		super(date, time, topic, extension, id);
 		
-		this.timeNeu = timeNeu;
-		this.topicNeu = topicNeu;
-		this.extensionNeu = extensionNeu;
+		this.timeNew = timeNew;
+		this.topicNew = topicNew;
+		this.extensionNew = extensionNew;
 	}
 
-	public LocalTime getTimeNeu() 
+	public LocalTime getTimeNew() 
 	{
-		return timeNeu;
+		return timeNew;
 	}
 
-	public void setTimeNeu(LocalTime timeNeu) 
+	public void setTimeNew(LocalTime timeNew) 
 	{
-		this.timeNeu = timeNeu;
+		this.timeNew = timeNew;
 	}
 
-	public String getTopicNeu() 
+	public String getTopicNew() 
 	{
-		return topicNeu;
+		return topicNew;
 	}
 
-	public void setTopicNeu(String topicNeu)
+	public void setTopicNew(String topicNew)
 	{
-		this.topicNeu = topicNeu;
+		this.topicNew = topicNew;
 	}
 
-	public String getExtensionNeu() 
+	public String getExtensionNew() 
 	{
-		return extensionNeu;
+		return extensionNew;
 	}
 
-	public void setExtensionNeu(String extensionNeu)
+	public void setExtensionNew(String extensionNew)
 	{
-		this.extensionNeu = extensionNeu;
+		this.extensionNew = extensionNew;
 	}	
 }

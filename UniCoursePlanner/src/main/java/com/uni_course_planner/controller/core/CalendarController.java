@@ -19,12 +19,12 @@ import com.uni_course_planner.service.relation.user.UserService;
 public class CalendarController 
 {
 	private UserService userService;
-	private CalendarTableService tableService;
+	private CalendarTableService calendarTableService;
 	
-	public CalendarController(UserService userService, CalendarTableService tableService)
+	public CalendarController(UserService userService, CalendarTableService calendarTableService)
 	{
 		this.userService = userService;
-		this.tableService = tableService;
+		this.calendarTableService = calendarTableService;
 	}
 
 	@GetMapping(PageRoutes.CALENDAR)
@@ -33,6 +33,7 @@ public class CalendarController
 		return PageRoutes.CALENDAR;
 	}
 	
+	//Load calendar-events for the currently authenticated user
 	@GetMapping(PageRoutes.CALENDAR_EVENTS)
 	@ResponseBody
 	public List<CalendarDTOWithID> loadEvents(@RequestParam LocalDate date)
@@ -40,9 +41,10 @@ public class CalendarController
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		LogInData user = userService.getUserByUsername(auth.getName());
 		
-		return tableService.fillCalendarTable(user.getId(), date);
+		return calendarTableService.fillCalendarTable(user.getId(), date);
 	}
 	
+	//Load all dates with events for the currently authenticated user
 	@GetMapping(PageRoutes.CALENDAR_DATES)
 	@ResponseBody
 	public List<LocalDate> loadEventDates(@RequestParam int year, @RequestParam int month)
@@ -50,6 +52,6 @@ public class CalendarController
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		LogInData user = userService.getUserByUsername(auth.getName());
 		
-		return tableService.getEventDays(user.getId(), year, month);
+		return calendarTableService.getEventDays(user.getId(), year, month);
 	}
 }

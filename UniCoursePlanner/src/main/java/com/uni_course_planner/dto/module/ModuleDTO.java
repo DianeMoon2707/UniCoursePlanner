@@ -7,38 +7,38 @@ import com.uni_course_planner.dto.FieldDTO;
 
 public class ModuleDTO extends FieldDTO
 {	
-	private String modulname;
-	private int lp;
+	private String modulename;
+	private int credits;
 	
 	private Set<EventTypes> eventTypes;
 
 	public ModuleDTO() {}
 	
-	public ModuleDTO(String modulname, int lp, Set<EventTypes> eventTypes) 
+	public ModuleDTO(String modulename, int credits, Set<EventTypes> eventTypes) 
 	{		
-		this.modulname = modulname;
-		this.lp = lp;
+		this.modulename = modulename;
+		this.credits = credits;
 		this.eventTypes = eventTypes;
 	}
 
-	public String getModulname() 
+	public String getModulename() 
 	{
-		return modulname;
+		return modulename;
 	}
 
-	public void setModulname(String modulname) 
+	public void setModulename(String modulename) 
 	{
-		this.modulname = modulname;
+		this.modulename = modulename;
 	}
 
-	public int getLp() 
+	public int getCredits() 
 	{
-		return lp;
+		return credits;
 	}
 
-	public void setLp(int lp)
+	public void setCredits(int credits)
 	{
-		this.lp = lp;
+		this.credits = credits;
 	}
 
 	public Set<EventTypes> getEventTypes()

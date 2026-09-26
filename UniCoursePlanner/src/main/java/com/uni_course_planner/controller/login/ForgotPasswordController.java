@@ -34,6 +34,10 @@ public class ForgotPasswordController
 	@GetMapping(PageRoutes.FORGOT_PASSWORD)
 	public String loadForgotPasswordPage(Model model)
 	{
+		/**
+		 * Users can access this page from their profile while being authenticated.
+		 * In that case, display their username on the page.
+		 */
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		
 		if(auth != null && auth.isAuthenticated() && !(auth instanceof AnonymousAuthenticationToken))

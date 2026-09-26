@@ -1,10 +1,10 @@
 package com.uni_course_planner.constants.views;
 
+//Central collection of application-routes
 public final class PageRoutes 
 {
 	public static final String LOGIN = "page/logIn/index";
-	public static final String REGISTER = "page/logIn/register";
-	
+	public static final String REGISTER = "page/logIn/register";	
 	public static final String FORGOT_PASSWORD = "page/logIn/forgotPassword";
 	public static final String VERIFICATION_CODE = "page/logIn/verificationCode";
 	

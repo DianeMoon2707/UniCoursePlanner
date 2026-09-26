@@ -6,24 +6,24 @@ import com.uni_course_planner.constants.module.EventTypes;
 
 public class ModuleDTOWithID extends ModuleDTO
 {
-	private Long modul_id;
+	private Long moduleId;
 	
-	public ModuleDTOWithID()	{}
+	public ModuleDTOWithID() {}
 	
-	public ModuleDTOWithID(String modulname, int lp, Set<EventTypes> eventTypes, Long modul_id)
+	public ModuleDTOWithID(String modulename, int credits, Set<EventTypes> eventTypes, Long moduleId)
 	{
-		super(modulname, lp, eventTypes);
+		super(modulename, credits, eventTypes);
 		
-		this.modul_id = modul_id;
+		this.moduleId = moduleId;
 	}
 
-	public Long getModul_id()
+	public Long getModuleId()
 	{
-		return modul_id;
+		return moduleId;
 	}
 
-	public void setModul_id(Long modul_id) 
+	public void setModuleId(Long moduleId) 
 	{
-		this.modul_id = modul_id;
+		this.moduleId = moduleId;
 	}
 }

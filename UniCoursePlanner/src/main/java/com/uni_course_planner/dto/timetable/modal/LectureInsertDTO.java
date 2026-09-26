@@ -10,22 +10,24 @@ public class LectureInsertDTO extends FieldDTO
 	private Timeslot time;
 	private Weekday day;
 	
-	private String selectedModul;
-	private List<String> modulOptionen;
+	private String selectedModule;
+	private List<String> moduleOptions;
 	
 	private String room;
 	
-	public LectureInsertDTO(List<String> modulOptionen) 
+	//Creates the DTO with the available modules for the insert form
+	public LectureInsertDTO(List<String> moduleOptions) 
 	{
-		this.modulOptionen = modulOptionen;
+		this.moduleOptions = moduleOptions;
 	}
 	
-	public LectureInsertDTO(Timeslot time, Weekday day, String selectedModul, String room) 
+	//Creates the DTO with the selected lecture data
+	public LectureInsertDTO(Timeslot time, Weekday day, String selectedModule, String room) 
 	{
 		this.time = time;
 		this.day = day;
 		
-		this.selectedModul = selectedModul;
+		this.selectedModule = selectedModule;
 		this.room = room;
 	}
 
@@ -49,24 +51,24 @@ public class LectureInsertDTO extends FieldDTO
 		this.day = day;
 	}
 
-	public String getSelectedModul()
+	public String getSelectedModule()
 	{
-		return selectedModul;
+		return selectedModule;
 	}
 
-	public void setSelectedModul(String modul) 
+	public void setSelectedModule(String module) 
 	{
-		this.selectedModul = modul;
+		this.selectedModule = module;
 	}	
 
-	public List<String> getModulOptionen() 
+	public List<String> getModuleOptions() 
 	{
-		return modulOptionen;
+		return moduleOptions;
 	}
 
-	public void setModulOptionen(List<String> modulOptionen) 
+	public void setModulOptions(List<String> moduleOptions) 
 	{
-		this.modulOptionen = modulOptionen;
+		this.moduleOptions = moduleOptions;
 	}
 
 	public String getRoom()

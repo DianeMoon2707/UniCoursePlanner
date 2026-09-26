@@ -1,5 +1,6 @@
 package com.uni_course_planner.constants.views;
 
+//Enum for identifying the type of modal and selecting the corresponding fragment and service
 public enum ModalType 
 {
 	MODULE("fragments/modal/module-modal"),

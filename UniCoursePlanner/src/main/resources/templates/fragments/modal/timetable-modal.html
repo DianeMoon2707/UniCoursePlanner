@@ -17,8 +17,8 @@
 		</select><br>
 		
 		<label>Modul: </label>
-		<select th:field="*{selectedModul}">
-			<option th:each="modul : *{modulOptionen}" th:value="${modul}" th:text="${modul}"></option>
+		<select th:field="*{selectedModule}">
+			<option th:each="module : *{moduleOptions}" th:value="${module}" th:text="${module}"></option>
 		</select><br>
 		
 		<label>Raum: </label>
@@ -35,7 +35,7 @@
 		<input type="hidden" name="deleteType" th:value="${deleteType}">
 		
 		<label>Modulname: </label>
-		<input th:field="*{modulname}" type="text" readonly> <br>
+		<input th:field="*{modulename}" type="text" readonly> <br>
 		
 		<label>Wochentag: </label>
 		<input th:field="*{weekday}" type="hidden">
@@ -59,7 +59,7 @@
 		<input type="hidden" name="editType" th:value="${editType}">
 		
 		<label>Modulname: </label>
-		<input th:field="*{modulname}" type="text" readonly> <br>
+		<input th:field="*{modulename}" type="text" readonly> <br>
 				
 		<label>Wochentag: </label>
 		<input th:field="*{weekday}" type="hidden">
@@ -72,7 +72,7 @@
 		<label>Raum: </label>
 		<input th:field="*{room}" type="text" readonly> 
 		<i class="bi bi-arrow-right"></i>
-		<input th:field="*{roomNeu}" type="text"><br>
+		<input th:field="*{roomNew}" type="text"><br>
 		
 		<button>Ändern</button>
 	</form>

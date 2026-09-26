@@ -26,9 +26,11 @@ public class DeleteController
 		this.serviceFactory = serviceFactory;
 	}
 	
+	// Create the DTO based on the selected delete-type and the chosen dataset
 	@ModelAttribute("fieldDTO")
 	public FieldDTO fieldDTO(@RequestParam ModalType deleteType, @RequestParam(required = false) String data) 
 	{
+		//If no data is available: Create DTO with dummy-datas
 		if(data == null)
 		{
 			return serviceFactory.getDeleteService(deleteType).createDTO();

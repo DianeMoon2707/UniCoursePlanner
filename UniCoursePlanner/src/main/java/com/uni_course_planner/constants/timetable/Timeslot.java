@@ -22,6 +22,7 @@ public enum Timeslot
 		return order;
 	}
 	
+	//Returns the enum value with the specified order
 	public static Timeslot getIndex(int index)
 	{
 		for(Timeslot slot : values())

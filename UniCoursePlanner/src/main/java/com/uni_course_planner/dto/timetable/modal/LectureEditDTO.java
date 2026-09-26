@@ -5,23 +5,23 @@ import com.uni_course_planner.constants.timetable.Weekday;
 
 public class LectureEditDTO extends LectureDeleteDTO
 {
-	private String roomNeu;
+	private String roomNew;
 
 	public LectureEditDTO() {}
 	
-	public LectureEditDTO(String modulname, Weekday weekday, Timeslot time, String room, String roomNeu) 
+	public LectureEditDTO(String modulename, Weekday weekday, Timeslot time, String room, String roomNew) 
 	{
-		super(modulname, weekday, time, room);
-		this.roomNeu = roomNeu;
+		super(modulename, weekday, time, room);
+		this.roomNew = roomNew;
 	}
 
-	public String getRoomNeu() 
+	public String getRoomNew() 
 	{
-		return roomNeu;
+		return roomNew;
 	}
 
-	public void setRoomNeu(String roomNeu) 
+	public void setRoomNew(String roomNew) 
 	{
-		this.roomNeu = roomNeu;
+		this.roomNew = roomNew;
 	}
 }

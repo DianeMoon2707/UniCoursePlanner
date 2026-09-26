@@ -5,29 +5,29 @@ import com.uni_course_planner.dto.FieldDTO;
 
 public class LectureDeleteDTO extends FieldDTO
 {
-	private String modulname;
+	private String modulename;
 	private Weekday weekday;
 	private Timeslot time;
 	private String room;
 	
 	public LectureDeleteDTO() {}
 	
-	public LectureDeleteDTO(String modulname, Weekday weekday, Timeslot time, String room) 
+	public LectureDeleteDTO(String modulename, Weekday weekday, Timeslot time, String room) 
 	{
-		this.modulname = modulname;
+		this.modulename = modulename;
 		this.weekday = weekday;
 		this.time = time;
 		this.room = room;
 	}
 
-	public String getModulname() 
+	public String getModulename() 
 	{
-		return modulname;
+		return modulename;
 	}
 
-	public void setModulname(String modulname) 
+	public void setModulename(String modulename) 
 	{
-		this.modulname = modulname;
+		this.modulename = modulename;
 	}
 
 	public Weekday getWeekday() 
@@ -60,13 +60,21 @@ public class LectureDeleteDTO extends FieldDTO
 		this.room = room;
 	}
 	
+	/**
+	 * Extracts the module and room from the HTML grid entry.
+	 * The expected format is:
+	 * <Module> - <Event>;
+	 * Room: <Room>
+	 * 
+	 * Returns the module and event at index 0 and the room at index 1.
+	 */
 	public static String[] convertEntryData(String data)
 	{
 		String[]array = new String[4];
 		
 		String[] textParts = data.split("\n");
 		
-		String modulname = textParts[0] + " - " + textParts[1].substring(0, textParts[1].length()-1);
+		String modulename = textParts[0] + " - " + textParts[1].substring(0, textParts[1].length()-1);
 		
 		String room = "";
 		if(textParts[2].length() > "Raum:".length())
@@ -74,7 +82,7 @@ public class LectureDeleteDTO extends FieldDTO
 			room = textParts[2].substring(textParts[2].indexOf(":") + 2).trim();
 		}
 		
-		array[0] = modulname;
+		array[0] = modulename;
 		array[1] = room;
 		
 		return array;

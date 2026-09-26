@@ -56,9 +56,9 @@ public class TimetableEditService implements EditStrategy
 			List<String> dataList = mapper.readValue(data, new TypeReference<List<String>>() {});
 			
 			String[] textData = LectureDeleteDTO.convertEntryData(dataList.get(0));
-			dto.setModulname(textData[0]);			
+			dto.setModulename(textData[0]);			
 			dto.setRoom(textData[1]);
-			dto.setRoomNeu(textData[1]);
+			dto.setRoomNew(textData[1]);
 			
 			dto.setWeekday(Weekday.valueOf(dataList.get(1))); 
 			dto.setTime(Timeslot.valueOf(dataList.get(2)));			
@@ -76,7 +76,7 @@ public class TimetableEditService implements EditStrategy
 	{
 		LectureEditDTO lectureDTO = (LectureEditDTO) dto;
 		
-		String[]modulParts = lectureDTO.getModulname().split(" - ");
+		String[]modulParts = lectureDTO.getModulename().split(" - ");
 		EventType modul = eventTypeRep.getByModulnameAndType(
 			modulParts[0],
 			EventTypes.fromDescriptionToEnum(modulParts[1]),
@@ -89,7 +89,7 @@ public class TimetableEditService implements EditStrategy
 			lectureDTO.getRoom(), 
 			modul);
 		
-		entry.setRoom(lectureDTO.getRoomNeu());
+		entry.setRoom(lectureDTO.getRoomNew());
 		
 		timetableRep.save(entry);
 	}

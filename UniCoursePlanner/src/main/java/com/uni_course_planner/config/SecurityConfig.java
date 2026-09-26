@@ -35,44 +35,44 @@ public class SecurityConfig
 					"/" + PageRoutes.REGISTER,
                     "/css/**",
                     "/js/**").permitAll()
-			//Alle anderen Seiten erfordern eine erfolgreiche Authentifizierung
+			//All other requests require an authenticated user
 			.anyRequest().authenticated()
 		)
-		//Konfiguration des benutzerdefinierten LogIn-Formulars
+		//Configure the custom logIn-form
 		.formLogin(form -> form
 			.loginPage("/login")
 			.loginProcessingUrl("/login")
 			.usernameParameter("user-field")
 		    .passwordParameter("password-field")
 		    
-		    //Nach erfolgreicher Anmeldung zur Startseite weiterleiten
+		    //Redirect to the home-page after a successful logIn
 			.defaultSuccessUrl("/" + PageRoutes.HOME, true)
 			
-			//Bei fehlgeschlagener Anmeldung zur LogIn-Seite zurückkehren
+			//Redirect back to the login page after a failed login attempt
 			.failureUrl("/login?error=true")
 			.permitAll()
 		)
-		//Angemeldeten Benutzern ermöglichen, für sieben Tage angemeldet zu bleiben
+		//Keep users signed in for up to seven days
 		.rememberMe(r -> r
 			.key("my-secret-key")
 			.tokenValiditySeconds(604800)
 			.userDetailsService(userDetailsService)
 			.rememberMeParameter("remember-me")
 		)
-		//Konfiguration des Logout-Vorgangs
+		//Configure the logout process
 		.logout(logout -> logout
 			.logoutUrl("/logout")
 			.logoutSuccessUrl("/login")
 			.permitAll()
 		)
 		
-		//User-Service für die Authentifizierung registrieren
+		//Register the user service used for authentication
 		.userDetailsService(userDetailsService);
 		
 		return http.build();
     }
 	
-	//Passwörter für die Datenbank mit BCrypt hashen
+	//Configure BCrypt for password hashing
 	@Bean
 	public PasswordEncoder passwordEncoder()
 	{

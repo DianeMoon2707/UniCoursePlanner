@@ -30,7 +30,7 @@ public class GradeTableService
 			Long lastModulId = -1l;
 			if(!tableData.isEmpty())
 			{
-				lastModulId = tableData.get(tableData.size()-1).getModul_id();
+				lastModulId = tableData.get(tableData.size()-1).getModuleId();
 			}
 			
 			if(lastModulId != modul.getmId().getModulId())

@@ -49,13 +49,13 @@ public class CalendarEditService implements EditStrategy
 		dto.setDate(calendar.getDate());
 		
 		dto.setTime(calendar.getTime());
-		dto.setTimeNeu(calendar.getTime());
+		dto.setTimeNew(calendar.getTime());
 		
 		dto.setTopic(calendar.getTopic());
-		dto.setTopicNeu(calendar.getTopic());
+		dto.setTopicNew(calendar.getTopic());
 		
 		dto.setExtension(calendar.getExtension());
-		dto.setExtensionNeu(calendar.getExtension());
+		dto.setExtensionNew(calendar.getExtension());
 		
 		return dto;
 	}
@@ -69,9 +69,9 @@ public class CalendarEditService implements EditStrategy
 		LocalDate date = calendarDTO.getDate();
 		validation.validateEntryIsNotBeforeToday(date);
 		
-		calendar.setTime(calendarDTO.getTimeNeu());
-		calendar.setTopic(calendarDTO.getTopicNeu());
-		calendar.setExtension(calendarDTO.getExtensionNeu());
+		calendar.setTime(calendarDTO.getTimeNew());
+		calendar.setTopic(calendarDTO.getTopicNew());
+		calendar.setExtension(calendarDTO.getExtensionNew());
 		
 		calendarRep.save(calendar);
 	}

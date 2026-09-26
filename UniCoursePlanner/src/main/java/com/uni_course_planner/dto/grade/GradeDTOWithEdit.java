@@ -4,24 +4,24 @@ import com.uni_course_planner.constants.grade.Grades;
 
 public class GradeDTOWithEdit extends GradeDTO 
 {
-	private Grades gradeNeu;
+	private Grades gradeNew;
 	
 	public GradeDTOWithEdit() {}
 	
-	public GradeDTOWithEdit(Long modul_id, String modulname, int lp, Grades grade, Grades gradeNeu) 
+	public GradeDTOWithEdit(Long moduleId, String modulename, int credits, Grades grade, Grades gradeNew) 
 	{
-		super(modul_id, modulname, lp, grade);
-		this.gradeNeu = gradeNeu;
+		super(moduleId, modulename, credits, grade);
+		this.gradeNew = gradeNew;
 	}
 
-	public Grades getGradeNeu() 
+	public Grades getGradeNew() 
 	{
-		return gradeNeu;
+		return gradeNew;
 	}
 
-	public void setGradeNeu(Grades gradeNeu)
+	public void setGradeNew(Grades gradeNew)
 	{
-		this.gradeNeu = gradeNeu;
+		this.gradeNew = gradeNew;
 	}
 	
 }

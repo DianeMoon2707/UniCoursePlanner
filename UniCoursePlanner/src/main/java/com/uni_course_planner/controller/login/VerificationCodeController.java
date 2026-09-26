@@ -24,7 +24,7 @@ public class VerificationCodeController
 	}
 	
 	@GetMapping(PageRoutes.VERIFICATION_CODE)
-	public String loadCodePage(Model model)
+	public String loadVerificationCodePage(Model model)
 	{
 		return PageRoutes.VERIFICATION_CODE;
 	}
@@ -53,6 +53,7 @@ public class VerificationCodeController
 		}		
 	}
 	
+	//Remove the attributes that were set during the password reset process
 	private void removeSessionAttribute(HttpSession session)
 	{
 		session.removeAttribute("username");

@@ -22,6 +22,7 @@ public enum Weekday
 		return order;
 	}
 	
+	//Returns the enum value with the specified order
 	public static Weekday getIndex(int index)
 	{
 		for(Weekday slot : values())

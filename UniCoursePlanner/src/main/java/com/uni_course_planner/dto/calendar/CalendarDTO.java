@@ -61,6 +61,7 @@ public class CalendarDTO extends FieldDTO
 		return extension;
 	}
 
+	//Allows the user to optionally add a further description to a calendar entry
 	public void setExtension(String extension) 
 	{
 		if(extension == null)

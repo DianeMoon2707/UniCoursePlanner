@@ -25,9 +25,11 @@ public class EditController
 		this.serviceFactory = serviceFactory;
 	}
 	
+	// Create the DTO based on the selected edit-type and the chosen dataset
 	@ModelAttribute("fieldDTO")
 	public FieldDTO fieldDTO(@RequestParam ModalType editType, @RequestParam(required = false) String data) 
 	{
+		//If no data is available: Create DTO with dummy-datas
 		if(data == null)
 		{
 			return serviceFactory.getEditService(editType).createDTO();
