@@ -45,23 +45,23 @@ public interface TimetableRepository extends JpaRepository<Timetable, Long>
 				(:room IS NULL AND t.room IS NULL)
 				OR t.room = :room
 			)
-			AND t.event = :module
+			AND t.event = :event
 			""")
-	Timetable findByAttributs(
+	Timetable findByTimeDayRoomAndEvent(
 			@Param("time") Timeslot time, 
 			@Param("day") Weekday day,
 			@Param("room") String room,
-			@Param("module") EventType module);
+			@Param("event") EventType event);
 	
 	@Query("""
 			SELECT t
 			FROM timetable t
 			WHERE t.time = :time
 			AND t.day = :day
-			AND t.event = :module
+			AND t.event = :event
 			""")
-	Optional<Timetable> findEntryOfACell(
+	Optional<Timetable> findByTimeDayAndEvent(
 			@Param("time") Timeslot time, 
 			@Param("day") Weekday day,
-			@Param("module") EventType module);
+			@Param("event") EventType event);
 }

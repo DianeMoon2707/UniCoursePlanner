@@ -55,7 +55,7 @@ public class TimetableInsertService implements InsertStrategy
 		LectureInsertDTO lectureDTO = (LectureInsertDTO) dto;
 		
 		String[]modulOption = lectureDTO.getSelectedModule().split(" - ");
-		EventType event = eventTypeRep.getByModulnameAndType(
+		EventType event = eventTypeRep.getByModulenameAndType(
 				modulOption[0], 
 				EventTypes.fromDescriptionToEnum(modulOption[1]), 
 				user.getId()

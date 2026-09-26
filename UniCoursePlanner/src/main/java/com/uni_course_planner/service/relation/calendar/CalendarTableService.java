@@ -22,7 +22,7 @@ public class CalendarTableService
 	public List<CalendarDTOWithID> fillCalendarTable(Long user, LocalDate date)
 	{
 		List<CalendarDTOWithID> tableData = new ArrayList<CalendarDTOWithID>();
-		List<Calendar> events = calendarRep.getEventsOfDay(user, date);
+		List<Calendar> events = calendarRep.findEventsOfDay(user, date);
 		
 		for(Calendar event : events)
 		{
@@ -42,6 +42,6 @@ public class CalendarTableService
 		LocalDate startDate = LocalDate.of(year, month, 1);
 		LocalDate endDate = startDate.withDayOfMonth(startDate.lengthOfMonth());
 		
-		return calendarRep.getEventDates(user, startDate, endDate);
+		return calendarRep.findEventDates(user, startDate, endDate);
 	}
 }

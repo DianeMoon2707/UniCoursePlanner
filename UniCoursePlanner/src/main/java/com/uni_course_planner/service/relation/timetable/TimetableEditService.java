@@ -77,13 +77,13 @@ public class TimetableEditService implements EditStrategy
 		LectureEditDTO lectureDTO = (LectureEditDTO) dto;
 		
 		String[]modulParts = lectureDTO.getModulename().split(" - ");
-		EventType modul = eventTypeRep.getByModulnameAndType(
+		EventType modul = eventTypeRep.getByModulenameAndType(
 			modulParts[0],
 			EventTypes.fromDescriptionToEnum(modulParts[1]),
 			user.getId()
 		);
 		
-		Timetable entry = timetableRep.findByAttributs(
+		Timetable entry = timetableRep.findByTimeDayRoomAndEvent(
 			lectureDTO.getTime(),
 			lectureDTO.getWeekday(),
 			lectureDTO.getRoom(), 

@@ -12,8 +12,8 @@ import com.uni_course_planner.entity.user.User;
 public interface UserRepository extends JpaRepository<User, Long>
 {	
 	@Query("SELECT u FROM users u WHERE u.email = :email")
-	Optional<User> findUserByEmail(@Param("email") String email);
+	Optional<User> findByEmail(@Param("email") String email);
 	
 	@Query("SELECT u.email FROM users u WHERE u.id = :id")
-	String getEmail(@Param("id") Long id);
+	String findEmailById(@Param("id") Long id);
 }

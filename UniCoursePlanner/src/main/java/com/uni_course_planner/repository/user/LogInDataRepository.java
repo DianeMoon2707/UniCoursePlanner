@@ -12,8 +12,8 @@ import com.uni_course_planner.entity.user.LogInData;
 public interface LogInDataRepository extends JpaRepository<LogInData, Long>
 {
 	@Query("SELECT l FROM log_in_data l WHERE l.username = :username")
-	Optional<LogInData> findLogInDataByUsername(@Param("username") String username);
+	Optional<LogInData> findByUsername(@Param("username") String username);
 	
 	@Query("SELECT l.username FROM log_in_data l WHERE l.user.email = :email")
-	String getUsernameByEmail(@Param("email") String email);
+	String findUsernameByEmail(@Param("email") String email);
 }

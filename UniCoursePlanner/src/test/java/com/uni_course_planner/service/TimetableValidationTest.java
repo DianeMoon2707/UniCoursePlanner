@@ -35,13 +35,13 @@ public class TimetableValidationTest
 		EventType event = mock(EventType.class);
 		Timetable entry = mock(Timetable.class);
 		
-		when(timetableRep.findEntryOfACell(time, day, event)).thenReturn(Optional.of(entry));
+		when(timetableRep.findByTimeDayAndEvent(time, day, event)).thenReturn(Optional.of(entry));
 		
 		assertThrows(
 			IllegalArgumentException.class,
 			() -> timetableValidation.validateUserAlreadyGeneratedEntryForCell(event, day, time));
 		
-		verify(timetableRep).findEntryOfACell(time, day, event);
+		verify(timetableRep).findByTimeDayAndEvent(time, day, event);
 	}
 	
 	@Test
@@ -49,11 +49,11 @@ public class TimetableValidationTest
 	{	
 		EventType event = mock(EventType.class);
 		
-		when(timetableRep.findEntryOfACell(time, day, event)).thenReturn(Optional.empty());
+		when(timetableRep.findByTimeDayAndEvent(time, day, event)).thenReturn(Optional.empty());
 		
 		assertDoesNotThrow(
 			() -> timetableValidation.validateUserAlreadyGeneratedEntryForCell(event, day, time));
 		
-		verify(timetableRep).findEntryOfACell(time, day, event);
+		verify(timetableRep).findByTimeDayAndEvent(time, day, event);
 	}
 }

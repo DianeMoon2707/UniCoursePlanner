@@ -21,7 +21,7 @@ public class UserValidation
 	
 	public void validateEmailAlreadyExists(String email)
 	{
-		Optional<User> user = userRep.findUserByEmail(email);
+		Optional<User> user = userRep.findByEmail(email);
 		
 		if(user.isPresent())
 		{
@@ -31,7 +31,7 @@ public class UserValidation
 	
 	public void validateUsernameAlreadyExists(String username)
 	{
-		Optional<LogInData> user = logInDataRep.findLogInDataByUsername(username);
+		Optional<LogInData> user = logInDataRep.findByUsername(username);
 		
 		if(user.isPresent())
 		{
@@ -41,7 +41,7 @@ public class UserValidation
 	
 	public void validateOtherUserHasEmail(Long id, String email)
 	{
-		Optional<User> user = userRep.findUserByEmail(email);
+		Optional<User> user = userRep.findByEmail(email);
 
 		if(user.isPresent())
 		{
@@ -54,7 +54,7 @@ public class UserValidation
 	
 	public void validatOtherUserHasUsername(Long id, String username)
 	{
-		Optional<LogInData> user = logInDataRep.findLogInDataByUsername(username);
+		Optional<LogInData> user = logInDataRep.findByUsername(username);
 		
 		if(user.isPresent())
 		{

@@ -52,7 +52,7 @@ public class ModuleDeleteService implements DeleteStrategy
 		dto.setModulename(modul.getModulename());
 		dto.setCredits(modul.getCredits());
 		
-		Set<EventTypes> events = eventTypeRep.findAllByModul(modul)
+		Set<EventTypes> events = eventTypeRep.findAllByModule(modul)
 				.stream()
 				.map(eventType -> eventType.geteId().getType())
 				.collect(Collectors.toSet());

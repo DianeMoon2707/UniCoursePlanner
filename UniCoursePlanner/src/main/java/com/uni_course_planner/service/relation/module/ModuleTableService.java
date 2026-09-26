@@ -30,7 +30,7 @@ public class ModuleTableService
 		
 		for(Module modul : module)
 		{
-			List<EventType> eventTypesOfModul = eventTypeRep.findAllByModul(modul);
+			List<EventType> eventTypesOfModul = eventTypeRep.findAllByModule(modul);
 			Set<EventTypes> eventSet =  new HashSet<EventTypes>();
 			
 			for(EventType e : eventTypesOfModul)

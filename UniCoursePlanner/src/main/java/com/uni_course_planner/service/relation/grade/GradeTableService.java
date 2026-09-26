@@ -52,7 +52,7 @@ public class GradeTableService
 	
 	public int sumByUserId(Long user)
 	{
-		Integer sum = modulRep.sumByUserId(user);
+		Integer sum = modulRep.getTotalCreditsByUserId(user);
 		return sum == null ? 0 : sum;
 	}
 }

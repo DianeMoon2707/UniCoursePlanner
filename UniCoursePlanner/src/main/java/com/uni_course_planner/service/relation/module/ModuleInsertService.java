@@ -52,7 +52,7 @@ public class ModuleInsertService implements InsertStrategy
 	public void save(FieldDTO dto, LogInData currentUser) 
 	{
 		ModuleDTO modulDTO = (ModuleDTO) dto;
-		Long mId = modulRep.getMaxModuleId(currentUser.getId()) + 1;
+		Long mId = modulRep.findMaxModuleId(currentUser.getId()) + 1;
 		
 		Module modul = new Module(
 				new ModuleId(currentUser.getId(), mId),

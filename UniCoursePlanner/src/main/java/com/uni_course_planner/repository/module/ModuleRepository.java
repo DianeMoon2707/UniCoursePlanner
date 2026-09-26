@@ -13,10 +13,10 @@ import com.uni_course_planner.entity.module.module.Module;
 public interface ModuleRepository extends JpaRepository<Module, ModuleId>
 {
 	@Query("SELECT COALESCE(MAX(m.mId.moduleId), 0) FROM module m WHERE m.mId.userId = :userId")
-	Long getMaxModuleId(@Param("userId") Long user);
+	Long findMaxModuleId(@Param("userId") Long user);
 	
 	@Query("SELECT SUM(m.credits) FROM module m WHERE m.mId.userId = :userId AND m.grade IS NOT NULL")
-	Integer sumByUserId(@Param("userId") Long user);
+	Integer getTotalCreditsByUserId(@Param("userId") Long user);
 	
 	@Query("SELECT m FROM module m WHERE m.mId.userId = :userId ORDER BY m.modulename ASC")
 	List<Module> findAllByUserId(@Param("userId") Long user);

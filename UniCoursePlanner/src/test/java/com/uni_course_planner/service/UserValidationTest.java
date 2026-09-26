@@ -38,26 +38,26 @@ public class UserValidationTest
 	{		
 		User user = mock(User.class);
 		
-		when(userRep.findUserByEmail(email)).thenReturn(Optional.of(user));
+		when(userRep.findByEmail(email)).thenReturn(Optional.of(user));
 		
 		assertThrows(
 			IllegalArgumentException.class,
 			() -> userValidation.validateEmailAlreadyExists(email)
 		);
 		
-		verify(userRep).findUserByEmail(email);
+		verify(userRep).findByEmail(email);
 	}
 	
 	@Test
 	public void testEmailAlreadyExists_emailDoesNotExist_throwsNoException()
 	{		
-		when(userRep.findUserByEmail(email)).thenReturn(Optional.empty());
+		when(userRep.findByEmail(email)).thenReturn(Optional.empty());
 		
 		assertDoesNotThrow(
 			() -> userValidation.validateEmailAlreadyExists(email)
 		);
 		
-		verify(userRep).findUserByEmail(email);
+		verify(userRep).findByEmail(email);
 	}
 	
 	//Username
@@ -66,26 +66,26 @@ public class UserValidationTest
 	{
 		LogInData user = mock(LogInData.class);
 		
-		when(logInDataRep.findLogInDataByUsername(username)).thenReturn(Optional.of(user));
+		when(logInDataRep.findByUsername(username)).thenReturn(Optional.of(user));
 		
 		assertThrows(
 			IllegalArgumentException.class,
 			() -> userValidation.validateUsernameAlreadyExists(username)
 		);
 		
-		verify(logInDataRep).findLogInDataByUsername(username);
+		verify(logInDataRep).findByUsername(username);
 	}
 	
 	@Test
 	public void testUsernameAlreadyExists_usernameDoesNotExist_throwsNoException()
 	{
-		when(logInDataRep.findLogInDataByUsername(username)).thenReturn(Optional.empty());
+		when(logInDataRep.findByUsername(username)).thenReturn(Optional.empty());
 		
 		assertDoesNotThrow(
 			() -> userValidation.validateUsernameAlreadyExists(username)
 		);
 		
-		verify(logInDataRep).findLogInDataByUsername(username);
+		verify(logInDataRep).findByUsername(username);
 	}
 	
 	//Update-Tests
@@ -95,7 +95,7 @@ public class UserValidationTest
 	{
 		User user = mock(User.class);
 		
-		when(userRep.findUserByEmail(email)).thenReturn(Optional.of(user));
+		when(userRep.findByEmail(email)).thenReturn(Optional.of(user));
 		when(user.getId()).thenReturn(2L);
 		
 		assertThrows(
@@ -103,7 +103,7 @@ public class UserValidationTest
 			() -> userValidation.validateOtherUserHasEmail(id, email)
 		);
 		
-		verify(userRep).findUserByEmail(email);
+		verify(userRep).findByEmail(email);
 		verify(user).getId();
 	}
 	
@@ -112,26 +112,26 @@ public class UserValidationTest
 	{		
 		User user = mock(User.class);
 		
-		when(userRep.findUserByEmail(email)).thenReturn(Optional.of(user));
+		when(userRep.findByEmail(email)).thenReturn(Optional.of(user));
 		when(user.getId()).thenReturn(id);
 		
 		assertDoesNotThrow(
 			() -> userValidation.validateOtherUserHasEmail(id, email)
 		);
 		
-		verify(userRep).findUserByEmail(email);
+		verify(userRep).findByEmail(email);
 		verify(user).getId();
 	}
 	
 	@Test
 	public void testOtherUserHasEmail_emailDoesNotExist_throwsNoException()
 	{		
-		when(userRep.findUserByEmail(email)).thenReturn(Optional.empty());
+		when(userRep.findByEmail(email)).thenReturn(Optional.empty());
 		assertDoesNotThrow(
 			() -> userValidation.validateOtherUserHasEmail(id, email)
 		);
 		
-		verify(userRep).findUserByEmail(email);
+		verify(userRep).findByEmail(email);
 	}
 	
 	//Username
@@ -140,7 +140,7 @@ public class UserValidationTest
 	{		
 		LogInData user = mock(LogInData.class);
 		
-		when(logInDataRep.findLogInDataByUsername(username)).thenReturn(Optional.of(user));
+		when(logInDataRep.findByUsername(username)).thenReturn(Optional.of(user));
 		when(user.getId()).thenReturn(2L);
 		
 		assertThrows(
@@ -148,7 +148,7 @@ public class UserValidationTest
 			() -> userValidation.validatOtherUserHasUsername(id, username)
 		);
 		
-		verify(logInDataRep).findLogInDataByUsername(username);
+		verify(logInDataRep).findByUsername(username);
 		verify(user).getId();
 	}
 	
@@ -157,25 +157,25 @@ public class UserValidationTest
 	{
 		LogInData user = mock(LogInData.class);
 		
-		when(logInDataRep.findLogInDataByUsername(username)).thenReturn(Optional.of(user));
+		when(logInDataRep.findByUsername(username)).thenReturn(Optional.of(user));
 		when(user.getId()).thenReturn(id);
 		
 		assertDoesNotThrow(
 			() -> userValidation.validatOtherUserHasUsername(id, username)
 		);
 		
-		verify(logInDataRep).findLogInDataByUsername(username);
+		verify(logInDataRep).findByUsername(username);
 		verify(user).getId();
 	}
 	
 	@Test
 	public void testOtherUserHasUsername_usernameDoesNotExist_throwsNoException()
 	{
-		when(logInDataRep.findLogInDataByUsername(username)).thenReturn(Optional.empty());
+		when(logInDataRep.findByUsername(username)).thenReturn(Optional.empty());
 		assertDoesNotThrow(
 			() -> userValidation.validatOtherUserHasUsername(id, username)
 		);
 		
-		verify(logInDataRep).findLogInDataByUsername(username);
+		verify(logInDataRep).findByUsername(username);
 	}
 }

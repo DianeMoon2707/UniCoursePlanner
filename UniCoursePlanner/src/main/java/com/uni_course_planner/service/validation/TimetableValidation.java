@@ -21,7 +21,7 @@ public class TimetableValidation
 	
 	public void validateUserAlreadyGeneratedEntryForCell(EventType event, Weekday weekday, Timeslot timeslot)
 	{
-		Optional<Timetable> entry = timetableRep.findEntryOfACell(timeslot, weekday, event);
+		Optional<Timetable> entry = timetableRep.findByTimeDayAndEvent(timeslot, weekday, event);
 		
 		if(entry.isPresent())
 		{
