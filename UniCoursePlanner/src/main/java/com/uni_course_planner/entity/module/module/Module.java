@@ -7,17 +7,21 @@ import com.uni_course_planner.entity.user.User;
 
 import jakarta.persistence.*;
 
-@Entity(name = "modul")
+/**
+ * Represents a module assigned to a user.
+ * Uses a composite key consisting of the user ID and module ID.
+ */
+@Entity(name = "module")
 public class Module 
 {
 	@EmbeddedId
 	private ModuleId mId;
 	
 	@Column(nullable = false)
-	private String modulname;
+	private String modulename;
 	
 	@Column(nullable = false)
-	private int lp;
+	private int credits;
 	
 	@Embedded
 	private Grade grade;
@@ -30,11 +34,11 @@ public class Module
 	
 	protected Module() {}
 
-	public Module(ModuleId mId, String modulname, int lp, User user)
+	public Module(ModuleId mId, String modulename, int credits, User user)
 	{
 		this.mId = mId;
-		this.modulname = modulname;
-		this.lp = lp;
+		this.modulename = modulename;
+		this.credits = credits;
 		
 		this.user = user;
 	}
@@ -49,24 +53,24 @@ public class Module
 		this.mId = mId;
 	}
 
-	public String getModulname()
+	public String getModulename()
 	{
-		return modulname;
+		return modulename;
 	}
 
-	public void setModulname(String modulname) 
+	public void setModulename(String modulename) 
 	{
-		this.modulname = modulname;
+		this.modulename = modulename;
 	}
 
-	public int getLp() 
+	public int getCredits() 
 	{
-		return lp;
+		return credits;
 	}
 
-	public void setLp(int lp) 
+	public void setCredits(int credits) 
 	{
-		this.lp = lp;
+		this.credits = credits;
 	}
 
 	public Grade getGrade() 

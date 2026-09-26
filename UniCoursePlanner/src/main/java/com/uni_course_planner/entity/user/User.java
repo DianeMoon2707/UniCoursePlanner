@@ -2,6 +2,7 @@ package com.uni_course_planner.entity.user;
 
 import jakarta.persistence.*;
 
+//Represents a user account and its associated login data.
 @Entity(name="users")
 public class User 
 {

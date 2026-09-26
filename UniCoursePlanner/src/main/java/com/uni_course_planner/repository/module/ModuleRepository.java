@@ -12,20 +12,20 @@ import com.uni_course_planner.entity.module.module.Module;
 @Repository
 public interface ModuleRepository extends JpaRepository<Module, ModuleId>
 {
-	@Query("SELECT COALESCE(MAX(m.mId.modulId), 0) FROM modul m WHERE m.mId.userId = :userId")
-	Long getMaxModulId(@Param("userId") Long user);
+	@Query("SELECT COALESCE(MAX(m.mId.moduleId), 0) FROM module m WHERE m.mId.userId = :userId")
+	Long getMaxModuleId(@Param("userId") Long user);
 	
-	@Query("SELECT SUM(m.lp) FROM modul m WHERE m.mId.userId = :userId AND m.grade IS NOT NULL")
+	@Query("SELECT SUM(m.credits) FROM module m WHERE m.mId.userId = :userId AND m.grade IS NOT NULL")
 	Integer sumByUserId(@Param("userId") Long user);
 	
-	@Query("SELECT m FROM modul m WHERE m.mId.userId = :userId ORDER BY m.modulname ASC")
+	@Query("SELECT m FROM module m WHERE m.mId.userId = :userId ORDER BY m.modulename ASC")
 	List<Module> findAllByUserId(@Param("userId") Long user);
 	
 	@Query("""
 		SELECT m
-		FROM modul m
-		WHERE m.modulname = :modulname
+		FROM module m
+		WHERE m.modulename = :modulename
 		AND m.mId.userId = :userId
 	""")
-	Optional<Module> findModulByModulnameAndUserId(@Param("modulname") String modulname, @Param("userId") Long user);
+	Optional<Module> findModuleByModulenameAndUserId(@Param("modulename") String modulename, @Param("userId") Long user);
 }

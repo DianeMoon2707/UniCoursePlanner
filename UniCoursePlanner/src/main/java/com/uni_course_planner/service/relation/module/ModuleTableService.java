@@ -40,10 +40,10 @@ public class ModuleTableService
 			
 			tableData.add(
 				new ModuleDTOWithID(
-					modul.getModulname(),
-					modul.getLp(),
+					modul.getModulename(),
+					modul.getCredits(),
 					eventSet,
-					modul.getmId().getModulId()
+					modul.getmId().getModuleId()
 				));
 		}
 		

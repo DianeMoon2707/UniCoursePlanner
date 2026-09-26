@@ -9,6 +9,7 @@ import com.uni_course_planner.entity.user.User;
 
 import jakarta.persistence.*;
 
+//Represents a calendar entry assigned to a user
 @Entity(name="calendar")
 public class Calendar 
 {

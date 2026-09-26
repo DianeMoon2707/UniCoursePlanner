@@ -53,12 +53,12 @@ public class ModuleEditService implements EditStrategy
 		ModuleId mId = new ModuleId(user.getId(), Long.parseLong(data));
 		Module modul = modulRep.findById(mId).get();
 		
-		dto.setModuleId(mId.getModulId());
+		dto.setModuleId(mId.getModuleId());
 		
-		dto.setModulename(modul.getModulname());
+		dto.setModulename(modul.getModulename());
 		dto.setModulenameNew(dto.getModulename());
 		
-		dto.setCredits(modul.getLp());
+		dto.setCredits(modul.getCredits());
 		dto.setCreditsNew(dto.getCredits());
 		
 		Set<EventTypes> events = eventTypeRep.findAllByModul(modul)
@@ -85,8 +85,8 @@ public class ModuleEditService implements EditStrategy
 		);
 		
 		//Standarddaten
-		modul.setModulname(modulDTO.getModulenameNew());
-		modul.setLp(modulDTO.getCreditsNew());
+		modul.setModulename(modulDTO.getModulenameNew());
+		modul.setCredits(modulDTO.getCreditsNew());
 		
 		modulRep.save(modul);
 		

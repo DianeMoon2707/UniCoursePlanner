@@ -18,14 +18,14 @@ public interface EventTypeRepository extends JpaRepository<EventType, EventTypeI
 	@Query("""
 			SELECT e 
 			FROM event_type e
-			WHERE e.modul.modulname = :modul 
+			WHERE e.module.modulename = :module 
 			AND e.eId.type = :type
-			AND e.modul.user.id = :user
+			AND e.module.user.id = :user
 			""")
-	EventType getByModulnameAndType(@Param("modul") String modul, @Param("type") EventTypes type, @Param("user") Long user);
+	EventType getByModulnameAndType(@Param("module") String module, @Param("type") EventTypes type, @Param("user") Long user);
 	
-	@Query("SELECT e FROM event_type e WHERE e.modul = :modul")
-	List<EventType> findAllByModul(@Param("modul") Module modul);
+	@Query("SELECT e FROM event_type e WHERE e.module = :module")
+	List<EventType> findAllByModul(@Param("module") Module module);
 	
 	@Query("SELECT e FROM event_type e WHERE e.eId.mId.userId = :userId")
 	List<EventType> findAllByUserId(@Param("userId") Long user);

@@ -42,9 +42,9 @@ public class GradeEditService implements EditStrategy
 		ModuleId mId = new ModuleId(user.getId(), Long.parseLong(data));
 		Module modul = modulRep.findById(mId).get();
 		
-		dto.setModuleId(mId.getModulId());
-		dto.setModulename(modul.getModulname());
-		dto.setCredits(modul.getLp());
+		dto.setModuleId(mId.getModuleId());
+		dto.setModulename(modul.getModulename());
+		dto.setCredits(modul.getCredits());
 		
 		dto.setGrade(
 			    modul.getGrade() == null

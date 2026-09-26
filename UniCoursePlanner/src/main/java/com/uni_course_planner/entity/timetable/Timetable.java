@@ -8,6 +8,7 @@ import com.uni_course_planner.entity.module.event_type.EventType;
 
 import jakarta.persistence.*;
 
+//Represents a timetable entry linking a time slot and weekday to an event type.
 @Entity(name="timetable")
 public class Timetable 
 {
@@ -30,7 +31,7 @@ public class Timetable
 	@ManyToOne(optional = false)
 	@JoinColumns({
 		@JoinColumn(name = "user_id", referencedColumnName = "user_id"),
-		@JoinColumn(name = "modul_id", referencedColumnName = "modul_id"),
+		@JoinColumn(name = "module_id", referencedColumnName = "module_id"),
 		@JoinColumn(name = "type", referencedColumnName = "type")
 	})
 	private EventType event;

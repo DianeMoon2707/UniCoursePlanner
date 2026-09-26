@@ -8,6 +8,7 @@ import com.uni_course_planner.entity.module.module.ModuleId;
 
 import jakarta.persistence.*;
 
+//Composite key for an event type consisting of the module ID and event type.
 @Embeddable
 public class EventTypeId implements Serializable
 {

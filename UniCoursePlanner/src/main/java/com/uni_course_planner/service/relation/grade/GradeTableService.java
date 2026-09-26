@@ -33,13 +33,13 @@ public class GradeTableService
 				lastModulId = tableData.get(tableData.size()-1).getModuleId();
 			}
 			
-			if(lastModulId != modul.getmId().getModulId())
+			if(lastModulId != modul.getmId().getModuleId())
 			{	
 				Grade grade = modul.getGrade();
 				GradeDTO dto = new GradeDTO(
-					modul.getmId().getModulId(),
-					modul.getModulname(),
-					modul.getLp(),
+					modul.getmId().getModuleId(),
+					modul.getModulename(),
+					modul.getCredits(),
 					grade != null ? grade.getGrade() : null
 				);
 				

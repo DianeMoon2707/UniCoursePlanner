@@ -36,7 +36,7 @@ public class TimetableTableService
 			colNumber = dataSet.getDay().getOrder();
 			
 			lecture = new LectureDTO(
-				dataSet.getEvent().getModul().getModulname(),
+				dataSet.getEvent().getModule().getModulename(),
 				dataSet.getEvent().geteId().getType(),
 				dataSet.getRoom()
 			);	

@@ -5,6 +5,7 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import jakarta.persistence.*;
 
+//Stores Password and username to each user
 @Entity(name="log_in_data")
 public class LogInData 
 {

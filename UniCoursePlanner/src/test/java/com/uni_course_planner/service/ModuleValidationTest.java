@@ -24,85 +24,85 @@ public class ModuleValidationTest
 	@InjectMocks
 	private ModuleValidation modulValidation;
 	
-	private final String modulname = "OoP Java";
-	private final Long modulId = 1L;
+	private final String modulename = "OoP Java";
+	private final Long moduleId = 1L;
 	private final Long userId = 1L;
 	
 	//Modul-Erstellung
 	@Test
 	public void testUserAlreadyGeneratedModul_modulExists_ThrowsException()
 	{
-		Module modul = mock(Module.class);
+		Module module = mock(Module.class);
 		
-		when(modulRep.findModulByModulnameAndUserId(modulname, userId)).thenReturn(Optional.of(modul));
+		when(modulRep.findModuleByModulenameAndUserId(modulename, userId)).thenReturn(Optional.of(module));
 		
 		assertThrows(
 			IllegalArgumentException.class,
-			() -> modulValidation.validateUserAlreadyGeneratedModul(modulname, userId));
+			() -> modulValidation.validateUserAlreadyGeneratedModul(modulename, userId));
 		
-		verify(modulRep).findModulByModulnameAndUserId(modulname, userId);
+		verify(modulRep).findModuleByModulenameAndUserId(modulename, userId);
 	}
 	
 	@Test
 	public void testUserAlreadyGeneratedModul_modulDoesNotExist_ThrowsNoException()
 	{
-		when(modulRep.findModulByModulnameAndUserId(modulname, userId)).thenReturn(Optional.empty());
+		when(modulRep.findModuleByModulenameAndUserId(modulename, userId)).thenReturn(Optional.empty());
 		
 		assertDoesNotThrow(
-			() -> modulValidation.validateUserAlreadyGeneratedModul(modulname, userId));
+			() -> modulValidation.validateUserAlreadyGeneratedModul(modulename, userId));
 		
-		verify(modulRep).findModulByModulnameAndUserId(modulname, userId);
+		verify(modulRep).findModuleByModulenameAndUserId(modulename, userId);
 	}
 	
 	//Modul-Änderung
 	@Test
 	public void testUserChangesModulnameToAExistingOne_otherModulExists_ThrowsException()
 	{
-		Module modul = mock(Module.class);
+		Module module = mock(Module.class);
 		ModuleId mId = mock(ModuleId.class);
 		
-		when(modulRep.findModulByModulnameAndUserId(modulname, userId)).thenReturn(Optional.of(modul));
-		when(modul.getmId()).thenReturn(mId);
-		when(mId.getModulId()).thenReturn(2L);
+		when(modulRep.findModuleByModulenameAndUserId(modulename, userId)).thenReturn(Optional.of(module));
+		when(module.getmId()).thenReturn(mId);
+		when(mId.getModuleId()).thenReturn(2L);
 		
 		assertThrows(
 			IllegalArgumentException.class,
-			() -> modulValidation.validateUserChangesModulnameToAExistingOne(modulname, modulId, userId)
+			() -> modulValidation.validateUserChangesModulnameToAExistingOne(modulename, moduleId, userId)
 		);
 		
-		verify(modulRep).findModulByModulnameAndUserId(modulname, userId);
-		verify(modul).getmId();
-		verify(mId).getModulId();
+		verify(modulRep).findModuleByModulenameAndUserId(modulename, userId);
+		verify(module).getmId();
+		verify(mId).getModuleId();
 	}
 	
 	@Test
 	public void testUserChangesModulnameToAExistingOne_thisModulExists_ThrowsNoException()
 	{
-		Module modul = mock(Module.class);
+		Module module = mock(Module.class);
 		ModuleId mId = mock(ModuleId.class);
 		
-		when(modulRep.findModulByModulnameAndUserId(modulname, userId)).thenReturn(Optional.of(modul));
-		when(modul.getmId()).thenReturn(mId);
-		when(mId.getModulId()).thenReturn(modulId);
+		when(modulRep.findModuleByModulenameAndUserId(modulename, userId)).thenReturn(Optional.of(module));
+		when(module.getmId()).thenReturn(mId);
+		when(mId.getModuleId()).thenReturn(moduleId);
 		
 		assertDoesNotThrow(
-			() -> modulValidation.validateUserChangesModulnameToAExistingOne(modulname, modulId, userId)
+			() -> modulValidation.validateUserChangesModulnameToAExistingOne(modulename, moduleId, userId)
 		);
 		
-		verify(modulRep).findModulByModulnameAndUserId(modulname, userId);
-		verify(modul).getmId();
-		verify(mId).getModulId();
+		verify(modulRep).findModuleByModulenameAndUserId(modulename, userId);
+		verify(module).getmId();
+		verify(mId).getModuleId();
 	}
 	
 	@Test
 	public void testUserChangesModulnameToAExistingOne_modulDoesNotExist_ThrowsNoException()
 	{
-		when(modulRep.findModulByModulnameAndUserId(modulname, userId)).thenReturn(Optional.empty());
+		when(modulRep.findModuleByModulenameAndUserId(modulename, userId)).thenReturn(Optional.empty());
 		
 		assertDoesNotThrow(
-			() -> modulValidation.validateUserChangesModulnameToAExistingOne(modulname, modulId, userId)
+			() -> modulValidation.validateUserChangesModulnameToAExistingOne(modulename, moduleId, userId)
 		);
 		
-		verify(modulRep).findModulByModulnameAndUserId(modulname, userId);
+		verify(modulRep).findModuleByModulenameAndUserId(modulename, userId);
 	}
 }

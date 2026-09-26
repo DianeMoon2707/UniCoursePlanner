@@ -52,7 +52,7 @@ public class ModuleInsertService implements InsertStrategy
 	public void save(FieldDTO dto, LogInData currentUser) 
 	{
 		ModuleDTO modulDTO = (ModuleDTO) dto;
-		Long mId = modulRep.getMaxModulId(currentUser.getId()) + 1;
+		Long mId = modulRep.getMaxModuleId(currentUser.getId()) + 1;
 		
 		Module modul = new Module(
 				new ModuleId(currentUser.getId(), mId),
@@ -61,7 +61,7 @@ public class ModuleInsertService implements InsertStrategy
 				userRep.findById(currentUser.getId()).get()
 			);
 		
-		validation.validateUserAlreadyGeneratedModul(modul.getModulname(), currentUser.getId());
+		validation.validateUserAlreadyGeneratedModul(modul.getModulename(), currentUser.getId());
 		
 		modulRep.save(modul);
 		this.saveEvents(modulDTO, modul);

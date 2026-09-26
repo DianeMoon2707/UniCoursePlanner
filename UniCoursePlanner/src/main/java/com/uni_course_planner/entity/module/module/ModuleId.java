@@ -5,31 +5,32 @@ import java.util.Objects;
 
 import jakarta.persistence.*;
 
+//Composite key for a module consisting of the user ID and module ID.
 @Embeddable
 public class ModuleId implements Serializable
 {
 	@Column(name = "user_id")
 	private Long userId;
 	
-	@Column(name = "modul_id")
-	private Long modulId;
+	@Column(name = "module_id")
+	private Long moduleId;
 
 	public ModuleId() {}
 	
-	public ModuleId(Long userId, Long modulId)
+	public ModuleId(Long userId, Long moduleId)
 	{
 		this.userId = userId;
-		this.modulId = modulId;
+		this.moduleId = moduleId;
 	}
 
-	public Long getModulId() 
+	public Long getModuleId() 
 	{
-		return modulId;
+		return moduleId;
 	}
 
-	public void setModulId(Long modulId) 
+	public void setModulId(Long moduleId) 
 	{
-		this.modulId = modulId;
+		this.moduleId = moduleId;
 	}
 
 	public Long getUserId() 
@@ -45,7 +46,7 @@ public class ModuleId implements Serializable
 	@Override
 	public int hashCode() 
 	{
-		return Objects.hash(modulId, userId);
+		return Objects.hash(moduleId, userId);
 	}
 
 	@Override
@@ -58,6 +59,6 @@ public class ModuleId implements Serializable
 		if (getClass() != obj.getClass())
 			return false;
 		ModuleId other = (ModuleId) obj;
-		return Objects.equals(modulId, other.modulId) && Objects.equals(userId, other.userId);
+		return Objects.equals(moduleId, other.moduleId) && Objects.equals(userId, other.userId);
 	}
 }

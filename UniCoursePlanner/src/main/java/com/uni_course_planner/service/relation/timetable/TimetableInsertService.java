@@ -44,7 +44,7 @@ public class TimetableInsertService implements InsertStrategy
 	public FieldDTO createDTO(LogInData user) 
 	{
 		List<String> modulnamen = eventTypeRep.findAllByUserId(user.getId()).stream()
-			.map(et -> et.getModul().getModulname() + " - " + et.geteId().getType().getDescription())
+			.map(et -> et.getModule().getModulename() + " - " + et.geteId().getType().getDescription())
 			.toList();
 		return new LectureInsertDTO(modulnamen);
 	}

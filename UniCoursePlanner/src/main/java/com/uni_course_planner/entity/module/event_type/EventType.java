@@ -7,6 +7,10 @@ import com.uni_course_planner.entity.module.module.Module;
 
 import jakarta.persistence.*;
 
+/**
+ * Represents an event type assigned to a module.
+ * Uses a composite key consisting of the user ID, module ID, and event type ID.
+ */
 @Entity(name = "event_type")
 public class EventType 
 {
@@ -17,17 +21,17 @@ public class EventType
 	@ManyToOne(optional = false)
 	@JoinColumns({
 		@JoinColumn(name = "user_id", referencedColumnName = "user_id"),
-		@JoinColumn(name = "modul_id", referencedColumnName = "modul_id")
+		@JoinColumn(name = "module_id", referencedColumnName = "module_id")
 	})
 	@OnDelete(action = OnDeleteAction.CASCADE)
-	private Module modul;
+	private Module module;
 	
 	protected EventType() {}
 	
-	public EventType(EventTypeId eId, Module modul)
+	public EventType(EventTypeId eId, Module module)
 	{
 		this.eId = eId;
-		this.modul = modul;
+		this.module = module;
 	}
 
 	public EventTypeId geteId() 
@@ -35,8 +39,8 @@ public class EventType
 		return eId;
 	}
 	
-	public Module getModul()
+	public Module getModule()
 	{
-		return modul;
+		return module;
 	}
 }

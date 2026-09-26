@@ -48,9 +48,9 @@ public class ModuleDeleteService implements DeleteStrategy
 		ModuleId mId = new ModuleId(user.getId(), Long.parseLong(data));
 		Module modul = modulRep.findById(mId).get();
 		
-		dto.setModuleId(mId.getModulId());
-		dto.setModulename(modul.getModulname());
-		dto.setCredits(modul.getLp());
+		dto.setModuleId(mId.getModuleId());
+		dto.setModulename(modul.getModulename());
+		dto.setCredits(modul.getCredits());
 		
 		Set<EventTypes> events = eventTypeRep.findAllByModul(modul)
 				.stream()
