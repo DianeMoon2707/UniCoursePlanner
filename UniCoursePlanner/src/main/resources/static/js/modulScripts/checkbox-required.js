@@ -1,9 +1,9 @@
+//Validate that at least one checkbox has been selected
 function validateAtLeastOneCheckboxChecked()
 {
 	const checkboxList = document.querySelectorAll("input[type='checkbox']");
 	let oneChecked = false;
 	
-	//Test
 	for(const checkbox of checkboxList)
 	{
 		if(checkbox.checked === true)

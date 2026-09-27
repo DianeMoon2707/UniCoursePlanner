@@ -1,3 +1,4 @@
+//Register the submit handler for each modal form
 function initializeModalForms(validationFunction)
 {
 	registerForm("insertForm", "/insert", validationFunction);
@@ -5,6 +6,7 @@ function initializeModalForms(validationFunction)
 	registerForm("deleteForm", "/delete", validationFunction);
 }
 
+//Handle form submission and send the data to the corresponding controller
 function registerForm(formId, url, validationFunction = null)
 {
 	const form = document.getElementById(formId);
@@ -18,6 +20,7 @@ function registerForm(formId, url, validationFunction = null)
 	{
 		e.preventDefault();
 		
+		//Validate the form before submitting it
 		if(validationFunction && !validationFunction())
 		{
 			return;
@@ -35,6 +38,7 @@ function registerForm(formId, url, validationFunction = null)
 			
 			if(response.ok)
 			{
+				//Close the modal and reload the page after a successful action
 				closeModal();
 				window.location.reload();
 			}

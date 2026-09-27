@@ -1,3 +1,4 @@
+/* Reset default browser styles */
 * {
     margin: 0;
     padding: 0;
@@ -44,6 +45,7 @@ body {
 	font-size: 16px;
 }
 
+/* Password field + visibility button */
 .password-wrapper {
     position: relative;
 }
@@ -83,6 +85,7 @@ body {
 	transition: 0.3s;
 }
 
+/* Remember-me and password forgotten link */
 .login-options {
     display: flex;
     justify-content: space-between;

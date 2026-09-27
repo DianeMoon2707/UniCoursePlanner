@@ -11,7 +11,7 @@ let currentYear = date.getFullYear();
 let daysWithEvents = [];
 loadDaysWithEvents(currentYear, currentMonth);
 
-//Event-Tage des Monats vom Backend laden
+//Load all days of the current month that have events
 async function loadDaysWithEvents(year, month)
 {
 	const response = await fetch(`/calendar/dates?year=${year}&month=${month + 1}`);
@@ -25,16 +25,21 @@ async function loadDaysWithEvents(year, month)
 		daysWithEvents = await response.json();
 	}
 	
+	//then: create the calendar page
 	createCalendar(year, month);
 }
 
-//Aktuellen Monat zeigen
+//Display the name of the current month and the year
 function showMonth(year, month)
 {
 	monthElement.innerHTML = months[month] + " " + year;
 }
 
-//Kalenderblatt erstellen
+/**
+ * Creates the calendar page for a specific month and year.
+ * Adds the days of the previous month if necessary to avoid empty cells,
+ * followed by the days of the current month and the next month.
+ */
 function createCalendar(year, month)
 {
 	calendar.innerHTML = "";
@@ -45,10 +50,13 @@ function createCalendar(year, month)
 	
 	amountDays += createPreviousMonthDays(year, month);
 	amountDays += createCurrentMonthDays(year, month);
-	createNextMonthDays(amountDays);
+	createNextMonthDays(amountDays, month, year);
 }
 
-//Erstelle Tage vom vorherigen Monat
+/**
+ * Creates the remaining days of the previous month
+ * if the first day of the current month is not a Monday.
+ */ 
 function createPreviousMonthDays(year, month)
 {
 	const firstDayOfMonth = new Date(year, month, 1);
@@ -68,14 +76,14 @@ function createPreviousMonthDays(year, month)
 	return daysBefore;
 }
 
-//Tage vom aktuellen Monat erstellen
+//Create all days of the current Month
 function createCurrentMonthDays(year, month)
 {
 	const amountDays = daysInMonth(year, month);
 		
 	for(let i = 1; i <= amountDays; i++)
 	{
-		//Aktuellen Tag und sonstige Tage erstellen
+		//Mark the current day
 		if(date.getDate() === i && month === date.getMonth() && year === date.getFullYear())
 		{
 			createDay(i, month, year, "today");
@@ -89,7 +97,10 @@ function createCurrentMonthDays(year, month)
 	return amountDays;
 }
 
-//Wochenreihe beenden
+/**
+ * Creates the days of the next month needed to complete 
+ * the final row of the calendar.
+ */
 function createNextMonthDays(amountDays, month, year)
 {
 	let day = 1;
@@ -103,18 +114,19 @@ function createNextMonthDays(amountDays, month, year)
 	}
 }
 
-//Hilfsmethode zur Erstellung eines Tages
+//Create a single calendar day
 function createDay(number, month, year, additionalClass = "")
 {
 	const day = document.createElement("div");
 	day.classList.add("raster-cell");
 	
+	//Add a class for days of other months or the current day
 	if(additionalClass)
 	{
 		day.classList.add(additionalClass);
 	}
 	
-	//Tag markieren, wenn Events vorhanden
+	//Mark the day if it has events
 	const currentDay = `${year}-${String(month + 1).padStart(2, "0")}-${String(number).padStart(2, "0")}`;
 	if(daysWithEvents.includes(currentDay))
 	{
@@ -123,6 +135,7 @@ function createDay(number, month, year, additionalClass = "")
 	
 	day.textContent = number;
 	
+	//Open the day schedule when the user clicks on a day
 	day.onclick = function()
 	{
 		openDay(year, month, number);
@@ -131,13 +144,13 @@ function createDay(number, month, year, additionalClass = "")
 	calendar.appendChild(day);
 }
 
-//Tage eines bestimmten Monats ermitteln
+//Calculate the number of days in a specific month
 function daysInMonth(year, month)
 {
 	return new Date(year, month + 1, 0).getDate();
 }
 
-//Monat ändern
+//Load the calendar page of the previous month 
 function previousMonth()
 {	
 	currentMonth--;
@@ -151,6 +164,7 @@ function previousMonth()
 	loadDaysWithEvents(currentYear, currentMonth);
 }
 
+//Load the calendar page of the next month 
 function nextMonth()
 {	
 	currentMonth++;

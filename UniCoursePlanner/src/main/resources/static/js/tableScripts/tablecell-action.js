@@ -1,11 +1,11 @@
 function entryClicked(entry)
 {
-	//Entry-marking and remove marking
-	const entrys = document.querySelectorAll(".raster-entry");
-	entrys.forEach(e => e.classList.remove("active"));
+	//Mark the selected timetable entry
+	const entries = document.querySelectorAll(".raster-entry");
+	entries.forEach(e => e.classList.remove("active"));
 	entry.classList.add("active");
 		
-	//Entry-data saving
+	//Store the entry data in the hidden input
 	const data = [
 		entry.innerText.trim(),
 		entry.dataset.weekday,

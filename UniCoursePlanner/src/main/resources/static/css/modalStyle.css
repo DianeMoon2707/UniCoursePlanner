@@ -48,6 +48,7 @@
 	cursor: pointer;
 }
 
+/* Modal form elements */
 .swal2-container {
 	z-index: 99999 !important;
 }

@@ -1,3 +1,4 @@
+//Display an error message in a message box
 function showErrorMessage(message) 
 {
 	Swal.fire({
@@ -7,6 +8,7 @@ function showErrorMessage(message)
 	});
 }
 
+//Display the message box if a message was provided in the HTML
 document.addEventListener("DOMContentLoaded", function () 
 {
 	const message = document.getElementById("message-box");
