@@ -11,8 +11,8 @@ import com.uni_course_planner.constants.views.ModalType;
 import com.uni_course_planner.constants.views.PageRoutes;
 import com.uni_course_planner.dto.FieldDTO;
 import com.uni_course_planner.entity.user.LogInData;
+import com.uni_course_planner.service.entity.user.UserService;
 import com.uni_course_planner.service.modal.strategy.ModalServiceFactory;
-import com.uni_course_planner.service.relation.user.UserService;
 
 @Controller
 public class DeleteController 

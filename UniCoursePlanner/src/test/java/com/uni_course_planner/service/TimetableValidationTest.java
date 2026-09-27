@@ -30,7 +30,7 @@ public class TimetableValidationTest
 	
 	//Erstellung von Einträgen
 	@Test
-	public void testUserAlreadyGeneratedEntryForCell_entryExists_throwException()
+	public void testCellDoesNotAlreadyContainEvent_entryExists_throwException()
 	{	
 		EventType event = mock(EventType.class);
 		Timetable entry = mock(Timetable.class);
@@ -39,20 +39,20 @@ public class TimetableValidationTest
 		
 		assertThrows(
 			IllegalArgumentException.class,
-			() -> timetableValidation.validateUserAlreadyGeneratedEntryForCell(event, day, time));
+			() -> timetableValidation.validateCellDoesNotAlreadyContainEvent(event, day, time));
 		
 		verify(timetableRep).findByTimeDayAndEvent(time, day, event);
 	}
 	
 	@Test
-	public void testUserAlreadyGeneratedEntryForCell_entryDoesNotExist_throwNoException()
+	public void testCellDoesNotAlreadyContainEvent_entryDoesNotExist_throwNoException()
 	{	
 		EventType event = mock(EventType.class);
 		
 		when(timetableRep.findByTimeDayAndEvent(time, day, event)).thenReturn(Optional.empty());
 		
 		assertDoesNotThrow(
-			() -> timetableValidation.validateUserAlreadyGeneratedEntryForCell(event, day, time));
+			() -> timetableValidation.validateCellDoesNotAlreadyContainEvent(event, day, time));
 		
 		verify(timetableRep).findByTimeDayAndEvent(time, day, event);
 	}

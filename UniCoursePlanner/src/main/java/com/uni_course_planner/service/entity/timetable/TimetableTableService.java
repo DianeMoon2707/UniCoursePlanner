@@ -1,4 +1,4 @@
-package com.uni_course_planner.service.relation.timetable;
+package com.uni_course_planner.service.entity.timetable;
 
 import java.util.*;
 
@@ -11,6 +11,7 @@ import com.uni_course_planner.entity.timetable.Timetable;
 import com.uni_course_planner.entity.user.LogInData;
 import com.uni_course_planner.repository.timetable.TimetableRepository;
 
+//Provides timetable data for the timetable view
 @Service
 public class TimetableTableService 
 {
@@ -48,6 +49,7 @@ public class TimetableTableService
 	    return timetable;
 	}
 	
+	//Creates an empty timetable structure for all time slots and weekdays
 	private List<TimetableRowDTO> createBlankTimetable()
 	{
 		List<TimetableRowDTO> timetable = new ArrayList<>();

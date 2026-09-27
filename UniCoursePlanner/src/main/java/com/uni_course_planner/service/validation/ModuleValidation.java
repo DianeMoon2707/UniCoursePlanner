@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.uni_course_planner.entity.module.module.Module;
 import com.uni_course_planner.repository.module.*;
 
+//Validates module data
 @Service
 public class ModuleValidation 
 {
@@ -15,6 +16,14 @@ public class ModuleValidation
 	public ModuleValidation(ModuleRepository modulRep) 
 	{
 		this.modulRep = modulRep;
+	}
+	
+	public void validateModulenameDoesNotContainHyphen(String modulename)
+	{
+		if(modulename.contains("-"))
+		{
+			throw new IllegalArgumentException("Module dürfen kein '-' enthalten.");
+		}
 	}
 	
 	public void validateUserAlreadyGeneratedModul(String modulname, Long userId)

@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import org.springframework.stereotype.Service;
 
+//Validates calendar entry data
 @Service
 public class CalendarValidation
 {	

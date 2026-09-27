@@ -1,4 +1,4 @@
-package com.uni_course_planner.service.relation.module;
+package com.uni_course_planner.service.entity.module;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -16,15 +16,16 @@ import com.uni_course_planner.entity.user.LogInData;
 import com.uni_course_planner.repository.module.*;
 import com.uni_course_planner.service.modal.strategy.DeleteStrategy;
 
+//Deletes modules or their selected event types
 @Service
 public class ModuleDeleteService implements DeleteStrategy
 {
-	private ModuleRepository modulRep;
+	private ModuleRepository moduleRep;
 	private EventTypeRepository eventTypeRep;
 
-	public ModuleDeleteService(ModuleRepository modulRep, EventTypeRepository eventTypeRep) 
+	public ModuleDeleteService(ModuleRepository moduleRep, EventTypeRepository eventTypeRep) 
 	{
-		this.modulRep = modulRep;
+		this.moduleRep = moduleRep;
 		this.eventTypeRep = eventTypeRep;
 	}
 
@@ -46,13 +47,13 @@ public class ModuleDeleteService implements DeleteStrategy
 		ModuleDTOWithID dto = new ModuleDTOWithID();
 
 		ModuleId mId = new ModuleId(user.getId(), Long.parseLong(data));
-		Module modul = modulRep.findById(mId).get();
+		Module module = moduleRep.findById(mId).get();
 		
 		dto.setModuleId(mId.getModuleId());
-		dto.setModulename(modul.getModulename());
-		dto.setCredits(modul.getCredits());
+		dto.setModulename(module.getModulename());
+		dto.setCredits(module.getCredits());
 		
-		Set<EventTypes> events = eventTypeRep.findAllByModule(modul)
+		Set<EventTypes> events = eventTypeRep.findAllByModule(module)
 				.stream()
 				.map(eventType -> eventType.geteId().getType())
 				.collect(Collectors.toSet());
@@ -65,10 +66,10 @@ public class ModuleDeleteService implements DeleteStrategy
 	@Override
 	public void delete(FieldDTO dto, LogInData user) 
 	{
-		ModuleDTOWithID modulDTO = (ModuleDTOWithID)dto;
+		ModuleDTOWithID moduleDTO = (ModuleDTOWithID)dto;
 		
-		ModuleId mId = new ModuleId(user.getId(), modulDTO.getModuleId());
-		Set<EventTypes> selectedEvents = modulDTO.getEventTypes();
+		ModuleId mId = new ModuleId(user.getId(), moduleDTO.getModuleId());
+		Set<EventTypes> selectedEvents = moduleDTO.getEventTypes();
 
 		for(EventTypes type : selectedEvents)
 		{
@@ -77,7 +78,7 @@ public class ModuleDeleteService implements DeleteStrategy
 		
 		if(!eventTypeRep.existsByMId(mId))
 		{
-			modulRep.deleteById(mId);
+			moduleRep.deleteById(mId);
 		}
 	}
 }

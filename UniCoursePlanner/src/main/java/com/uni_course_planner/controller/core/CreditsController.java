@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.uni_course_planner.constants.views.PageRoutes;
 import com.uni_course_planner.entity.user.LogInData;
-import com.uni_course_planner.service.relation.grade.GradeTableService;
-import com.uni_course_planner.service.relation.user.UserService;
+import com.uni_course_planner.service.entity.grade.GradeTableService;
+import com.uni_course_planner.service.entity.user.UserService;
 
 @Controller
 public class CreditsController 
@@ -30,7 +30,7 @@ public class CreditsController
 		LogInData user = userService.getUserByUsername(auth.getName());
 		
 		model.addAttribute("grades", gradeTableService.fillCreditsTable(user.getId()));
-		model.addAttribute("totalCredits", gradeTableService.sumByUserId(user.getId()));
+		model.addAttribute("totalCredits", gradeTableService.getTotalCreditsByUserId(user.getId()));
 		
 		return PageRoutes.CREDITS;
 	}

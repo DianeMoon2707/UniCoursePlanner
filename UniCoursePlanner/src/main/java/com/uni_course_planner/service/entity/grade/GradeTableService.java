@@ -1,4 +1,4 @@
-package com.uni_course_planner.service.relation.grade;
+package com.uni_course_planner.service.entity.grade;
 
 import java.util.*;
 
@@ -9,37 +9,38 @@ import com.uni_course_planner.entity.module.module.*;
 import com.uni_course_planner.entity.module.module.Module;
 import com.uni_course_planner.repository.module.*;
 
+//Provides grade data for the credits table
 @Service
 public class GradeTableService 
 {
-	private ModuleRepository modulRep;
+	private ModuleRepository moduleRep;
 	
-	public GradeTableService(ModuleRepository modulRep)
+	public GradeTableService(ModuleRepository moduleRep)
 	{
-		this.modulRep = modulRep;
+		this.moduleRep = moduleRep;
 	}
 	
 	public List<GradeDTO> fillCreditsTable(Long user)
 	{
 		List<GradeDTO> tableData = new ArrayList<GradeDTO>();
 		
-		List<Module> module = modulRep.findAllByUserId(user);
+		List<Module> modules = moduleRep.findAllByUserId(user);
 		
-		for(Module modul : module)
+		for(Module module : modules)
 		{
-			Long lastModulId = -1l;
+			Long lastModuleId = -1l;
 			if(!tableData.isEmpty())
 			{
-				lastModulId = tableData.get(tableData.size()-1).getModuleId();
+				lastModuleId = tableData.get(tableData.size()-1).getModuleId();
 			}
 			
-			if(lastModulId != modul.getmId().getModuleId())
+			if(lastModuleId != module.getmId().getModuleId())
 			{	
-				Grade grade = modul.getGrade();
+				Grade grade = module.getGrade();
 				GradeDTO dto = new GradeDTO(
-					modul.getmId().getModuleId(),
-					modul.getModulename(),
-					modul.getCredits(),
+					module.getmId().getModuleId(),
+					module.getModulename(),
+					module.getCredits(),
 					grade != null ? grade.getGrade() : null
 				);
 				
@@ -50,9 +51,9 @@ public class GradeTableService
 		return tableData;
 	}
 	
-	public int sumByUserId(Long user)
+	public int getTotalCreditsByUserId(Long user)
 	{
-		Integer sum = modulRep.getTotalCreditsByUserId(user);
+		Integer sum = moduleRep.getTotalCreditsByUserId(user);
 		return sum == null ? 0 : sum;
 	}
 }

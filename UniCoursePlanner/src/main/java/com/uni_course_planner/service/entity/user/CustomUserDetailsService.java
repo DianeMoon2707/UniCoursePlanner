@@ -1,4 +1,4 @@
-package com.uni_course_planner.service.relation.user;
+package com.uni_course_planner.service.entity.user;
 
 import java.util.Optional;
 
@@ -15,7 +15,7 @@ public class CustomUserDetailsService implements UserDetailsService
 	@Autowired
 	private LogInDataRepository logInDataRep;
 
-	//Für die Authentifizierung durch Spring Security: Lade einen Benutzer anhand seines Benutzernamens
+	//Loads a user by username for authentication by Spring Security
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException
 	{
@@ -26,7 +26,7 @@ public class CustomUserDetailsService implements UserDetailsService
 			throw new UsernameNotFoundException("Benutzer nicht gefunden");
 		}
 		
-		//Datenbankeintrag in ein für Spring Security verwendbares UserDetails-Objekt umwandeln
+		//Convert the database entity into a UserDetails object that can be used by Spring Security
 		return User.builder()
                 .username(user.get().getUsername())
                 .password(user.get().getPassword())

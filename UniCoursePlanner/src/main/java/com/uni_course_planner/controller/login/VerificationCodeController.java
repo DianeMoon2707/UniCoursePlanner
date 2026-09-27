@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import com.uni_course_planner.constants.views.PageRoutes;
 import com.uni_course_planner.service.email.EmailService;
 import com.uni_course_planner.service.email.text.CodeText;
-import com.uni_course_planner.service.relation.user.UserService;
+import com.uni_course_planner.service.entity.user.UserService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -44,7 +44,7 @@ public class VerificationCodeController
 			
 			this.removeSessionAttribute(session);
 			
-			return PageRoutes.LOGIN;
+			return "redirect:/" + PageRoutes.LOGIN;
 		}
 		else
 		{

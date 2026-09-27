@@ -1,4 +1,4 @@
-package com.uni_course_planner.service.relation.calendar;
+package com.uni_course_planner.service.entity.calendar;
 
 import java.time.LocalDate;
 
@@ -13,6 +13,7 @@ import com.uni_course_planner.repository.calendar.CalendarRepository;
 import com.uni_course_planner.service.modal.strategy.InsertStrategy;
 import com.uni_course_planner.service.validation.CalendarValidation;
 
+//Saves calendar entries
 @Service
 public class CalendarInsertService implements InsertStrategy
 {

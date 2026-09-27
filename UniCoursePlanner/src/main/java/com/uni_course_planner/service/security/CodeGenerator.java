@@ -4,6 +4,7 @@ import java.security.SecureRandom;
 
 import org.springframework.stereotype.Service;
 
+//Generates verification codes for password changes
 @Service
 public class CodeGenerator 
 {

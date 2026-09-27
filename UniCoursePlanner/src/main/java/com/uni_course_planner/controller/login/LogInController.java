@@ -9,7 +9,7 @@ import com.uni_course_planner.constants.views.PageRoutes;
 @Controller
 public class LogInController
 {	
-	@GetMapping("/login")
+	@GetMapping(PageRoutes.LOGIN)
 	public String loadLogInPage(Model model, @RequestParam(required = false) String error)
 	{
 		if(error != null)

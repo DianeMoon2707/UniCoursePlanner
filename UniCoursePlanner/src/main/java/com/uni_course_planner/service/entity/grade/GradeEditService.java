@@ -1,4 +1,4 @@
-package com.uni_course_planner.service.relation.grade;
+package com.uni_course_planner.service.entity.grade;
 
 import org.springframework.stereotype.Service;
 
@@ -12,14 +12,15 @@ import com.uni_course_planner.entity.user.LogInData;
 import com.uni_course_planner.repository.module.*;
 import com.uni_course_planner.service.modal.strategy.EditStrategy;
 
+//Edits module grades
 @Service
 public class GradeEditService implements EditStrategy
 {
-	private ModuleRepository modulRep;
+	private ModuleRepository moduleRep;
 
-	public GradeEditService(ModuleRepository modulRep)
+	public GradeEditService(ModuleRepository moduleRep)
 	{
-		this.modulRep = modulRep;
+		this.moduleRep = moduleRep;
 	}
 
 	@Override
@@ -40,16 +41,16 @@ public class GradeEditService implements EditStrategy
 		GradeDTOWithEdit dto = new GradeDTOWithEdit();
 		
 		ModuleId mId = new ModuleId(user.getId(), Long.parseLong(data));
-		Module modul = modulRep.findById(mId).get();
+		Module module = moduleRep.findById(mId).get();
 		
 		dto.setModuleId(mId.getModuleId());
-		dto.setModulename(modul.getModulename());
-		dto.setCredits(modul.getCredits());
+		dto.setModulename(module.getModulename());
+		dto.setCredits(module.getCredits());
 		
 		dto.setGrade(
-			    modul.getGrade() == null
+			    module.getGrade() == null
 			        ? null
-			        : modul.getGrade().getGrade()
+			        : module.getGrade().getGrade()
 			);
 		
 		dto.setGradeNew(dto.getGrade());
@@ -63,10 +64,10 @@ public class GradeEditService implements EditStrategy
 		GradeDTOWithEdit noteDTO = (GradeDTOWithEdit) dto;
 		
 		ModuleId mId = new ModuleId(user.getId(), noteDTO.getModuleId());
-		Module modul = modulRep.findById(mId).get();
+		Module module = moduleRep.findById(mId).get();
 		
 		Grades grade = noteDTO.getGradeNew();
-		modul.setGrade(new Grade(grade));
-		modulRep.save(modul);
+		module.setGrade(new Grade(grade));
+		moduleRep.save(module);
 	}
 }

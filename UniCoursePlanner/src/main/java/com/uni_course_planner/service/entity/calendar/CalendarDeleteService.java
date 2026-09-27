@@ -1,4 +1,4 @@
-package com.uni_course_planner.service.relation.calendar;
+package com.uni_course_planner.service.entity.calendar;
 
 import org.springframework.stereotype.Service;
 
@@ -10,6 +10,7 @@ import com.uni_course_planner.entity.user.LogInData;
 import com.uni_course_planner.repository.calendar.CalendarRepository;
 import com.uni_course_planner.service.modal.strategy.DeleteStrategy;
 
+//Deletes calendar entries
 @Service
 public class CalendarDeleteService implements DeleteStrategy
 {
@@ -55,5 +56,4 @@ public class CalendarDeleteService implements DeleteStrategy
 		CalendarDTOWithID calendarDTO = (CalendarDTOWithID)dto;
 		calendarRep.deleteById(calendarDTO.getId());
 	}
-
 }

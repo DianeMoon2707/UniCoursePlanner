@@ -1,4 +1,4 @@
-package com.uni_course_planner.service.relation.module;
+package com.uni_course_planner.service.entity.module;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -17,17 +17,18 @@ import com.uni_course_planner.repository.module.*;
 import com.uni_course_planner.service.modal.strategy.EditStrategy;
 import com.uni_course_planner.service.validation.ModuleValidation;
 
+//Edits modules and adds event types
 @Service
 public class ModuleEditService implements EditStrategy
 {
-	private ModuleRepository modulRep;
+	private ModuleRepository moduleRep;
 	private EventTypeRepository eventTypeRep;
 	
 	private ModuleValidation validation;
 
-	public ModuleEditService(ModuleRepository modulRep, EventTypeRepository eventTypeRep, ModuleValidation validation)
+	public ModuleEditService(ModuleRepository moduleRep, EventTypeRepository eventTypeRep, ModuleValidation validation)
 	{
-		this.modulRep = modulRep;
+		this.moduleRep = moduleRep;
 		this.eventTypeRep = eventTypeRep;
 		
 		this.validation = validation;
@@ -51,17 +52,17 @@ public class ModuleEditService implements EditStrategy
 		ModuleDTOWithEdit dto = new ModuleDTOWithEdit();
 		
 		ModuleId mId = new ModuleId(user.getId(), Long.parseLong(data));
-		Module modul = modulRep.findById(mId).get();
+		Module module = moduleRep.findById(mId).get();
 		
 		dto.setModuleId(mId.getModuleId());
 		
-		dto.setModulename(modul.getModulename());
+		dto.setModulename(module.getModulename());
 		dto.setModulenameNew(dto.getModulename());
 		
-		dto.setCredits(modul.getCredits());
+		dto.setCredits(module.getCredits());
 		dto.setCreditsNew(dto.getCredits());
 		
-		Set<EventTypes> events = eventTypeRep.findAllByModule(modul)
+		Set<EventTypes> events = eventTypeRep.findAllByModule(module)
 				.stream()
 				.map(eventType -> eventType.geteId().getType())
 				.collect(Collectors.toSet());
@@ -74,27 +75,27 @@ public class ModuleEditService implements EditStrategy
 	@Override
 	public void edit(FieldDTO dto, LogInData user) 
 	{
-		ModuleDTOWithEdit modulDTO = (ModuleDTOWithEdit)dto;
-		ModuleId mId = new ModuleId(user.getId(), modulDTO.getModuleId());
-		Module modul = modulRep.findById(mId).orElseThrow();
+		ModuleDTOWithEdit moduleDTO = (ModuleDTOWithEdit)dto;
+		ModuleId mId = new ModuleId(user.getId(), moduleDTO.getModuleId());
+		Module module = moduleRep.findById(mId).orElseThrow();
 		
+		validation.validateModulenameDoesNotContainHyphen(module.getModulename());
 		validation.validateUserChangesModulnameToAExistingOne(
-			modulDTO.getModulenameNew(), 
-			modulDTO.getModuleId(), 
+			moduleDTO.getModulenameNew(), 
+			moduleDTO.getModuleId(), 
 			user.getId()
 		);
 		
-		//Standarddaten
-		modul.setModulename(modulDTO.getModulenameNew());
-		modul.setCredits(modulDTO.getCreditsNew());
+		module.setModulename(moduleDTO.getModulenameNew());
+		module.setCredits(moduleDTO.getCreditsNew());
 		
-		modulRep.save(modul);
+		moduleRep.save(module);
 		
-		//EventTypes
-		for(EventTypes type : modulDTO.getEventTypes())
+		//add new event types
+		for(EventTypes type : moduleDTO.getEventTypes())
 		{
 			EventTypeId eId = new EventTypeId(mId, type);
-			eventTypeRep.save(new EventType(eId, modul));
+			eventTypeRep.save(new EventType(eId, module));
 		}
 	}	
 }

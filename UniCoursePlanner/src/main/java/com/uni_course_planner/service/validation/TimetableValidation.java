@@ -9,6 +9,7 @@ import com.uni_course_planner.entity.module.event_type.EventType;
 import com.uni_course_planner.entity.timetable.Timetable;
 import com.uni_course_planner.repository.timetable.TimetableRepository;
 
+//Validates timetable entries
 @Service
 public class TimetableValidation
 {
@@ -19,7 +20,7 @@ public class TimetableValidation
 		this.timetableRep = timetableRep;
 	}
 	
-	public void validateUserAlreadyGeneratedEntryForCell(EventType event, Weekday weekday, Timeslot timeslot)
+	public void validateCellDoesNotAlreadyContainEvent(EventType event, Weekday weekday, Timeslot timeslot)
 	{
 		Optional<Timetable> entry = timetableRep.findByTimeDayAndEvent(timeslot, weekday, event);
 		

@@ -1,4 +1,4 @@
-package com.uni_course_planner.service.relation.module;
+package com.uni_course_planner.service.entity.module;
 
 import java.util.*;
 
@@ -10,6 +10,7 @@ import com.uni_course_planner.entity.module.event_type.EventType;
 import com.uni_course_planner.entity.module.module.Module;
 import com.uni_course_planner.repository.module.*;
 
+//Provides module data for the module table
 @Service
 public class ModuleTableService 
 {
@@ -26,24 +27,24 @@ public class ModuleTableService
 	{
 		List<ModuleDTOWithID> tableData = new ArrayList<ModuleDTOWithID>();
 		
-		List<Module> module = moduleRep.findAllByUserId(user);
+		List<Module> modules = moduleRep.findAllByUserId(user);
 		
-		for(Module modul : module)
+		for(Module module : modules)
 		{
-			List<EventType> eventTypesOfModul = eventTypeRep.findAllByModule(modul);
+			List<EventType> eventTypesOfModule = eventTypeRep.findAllByModule(module);
 			Set<EventTypes> eventSet =  new HashSet<EventTypes>();
 			
-			for(EventType e : eventTypesOfModul)
+			for(EventType e : eventTypesOfModule)
 			{
 				eventSet.add(e.geteId().getType());
 			}
 			
 			tableData.add(
 				new ModuleDTOWithID(
-					modul.getModulename(),
-					modul.getCredits(),
+					module.getModulename(),
+					module.getCredits(),
 					eventSet,
-					modul.getmId().getModuleId()
+					module.getmId().getModuleId()
 				));
 		}
 		

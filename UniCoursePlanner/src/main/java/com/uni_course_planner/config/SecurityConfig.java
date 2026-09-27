@@ -7,7 +7,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 import com.uni_course_planner.constants.views.PageRoutes;
-import com.uni_course_planner.service.relation.user.CustomUserDetailsService;
+import com.uni_course_planner.service.entity.user.CustomUserDetailsService;
 
 @Configuration
 public class SecurityConfig 
@@ -30,6 +30,7 @@ public class SecurityConfig
 					"/login",
 					"/changePassword",
 					"/verifyCode",
+					"/" + PageRoutes.LOGIN,
 					"/" + PageRoutes.FORGOT_PASSWORD,
 					"/" + PageRoutes.VERIFICATION_CODE,
 					"/" + PageRoutes.REGISTER,
@@ -40,7 +41,7 @@ public class SecurityConfig
 		)
 		//Configure the custom logIn-form
 		.formLogin(form -> form
-			.loginPage("/login")
+			.loginPage("/" + PageRoutes.LOGIN)
 			.loginProcessingUrl("/login")
 			.usernameParameter("user-field")
 		    .passwordParameter("password-field")
@@ -49,7 +50,7 @@ public class SecurityConfig
 			.defaultSuccessUrl("/" + PageRoutes.HOME, true)
 			
 			//Redirect back to the login page after a failed login attempt
-			.failureUrl("/login?error=true")
+			.failureUrl("/" + PageRoutes.LOGIN + "?error=true")
 			.permitAll()
 		)
 		//Keep users signed in for up to seven days
@@ -62,7 +63,7 @@ public class SecurityConfig
 		//Configure the logout process
 		.logout(logout -> logout
 			.logoutUrl("/logout")
-			.logoutSuccessUrl("/login")
+			.logoutSuccessUrl("/" + PageRoutes.LOGIN)
 			.permitAll()
 		)
 		

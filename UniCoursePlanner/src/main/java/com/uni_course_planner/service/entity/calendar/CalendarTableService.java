@@ -1,4 +1,4 @@
-package com.uni_course_planner.service.relation.calendar;
+package com.uni_course_planner.service.entity.calendar;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -9,6 +9,7 @@ import com.uni_course_planner.dto.calendar.CalendarDTOWithID;
 import com.uni_course_planner.entity.calendar.Calendar;
 import com.uni_course_planner.repository.calendar.CalendarRepository;
 
+//Provides calendar data for tables and calendar views
 @Service
 public class CalendarTableService 
 {

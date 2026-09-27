@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.uni_course_planner.constants.views.ModalType;
 
+//Provides the appropriate strategy for each modal type and operation
 @Service
 public class ModalServiceFactory
 {

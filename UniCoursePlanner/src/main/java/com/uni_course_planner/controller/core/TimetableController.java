@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.*;
 
 import com.uni_course_planner.constants.views.PageRoutes;
 import com.uni_course_planner.entity.user.LogInData;
-import com.uni_course_planner.service.relation.timetable.TimetableTableService;
-import com.uni_course_planner.service.relation.user.UserService;
+import com.uni_course_planner.service.entity.timetable.TimetableTableService;
+import com.uni_course_planner.service.entity.user.UserService;
 
 @Controller
 public class TimetableController 

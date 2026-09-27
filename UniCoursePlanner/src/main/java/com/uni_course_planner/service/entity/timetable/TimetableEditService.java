@@ -1,4 +1,4 @@
-package com.uni_course_planner.service.relation.timetable;
+package com.uni_course_planner.service.entity.timetable;
 
 import java.util.List;
 
@@ -20,7 +20,7 @@ import com.uni_course_planner.repository.module.EventTypeRepository;
 import com.uni_course_planner.repository.timetable.TimetableRepository;
 import com.uni_course_planner.service.modal.strategy.EditStrategy;
 
-
+//Edits the room of a lecture
 @Service
 public class TimetableEditService implements EditStrategy
 {
@@ -76,10 +76,10 @@ public class TimetableEditService implements EditStrategy
 	{
 		LectureEditDTO lectureDTO = (LectureEditDTO) dto;
 		
-		String[]modulParts = lectureDTO.getModulename().split(" - ");
-		EventType modul = eventTypeRep.getByModulenameAndType(
-			modulParts[0],
-			EventTypes.fromDescriptionToEnum(modulParts[1]),
+		String[]moduleParts = lectureDTO.getModulename().split(" - ");
+		EventType event = eventTypeRep.getByModulenameAndType(
+			moduleParts[0],
+			EventTypes.fromDescriptionToEnum(moduleParts[1]),
 			user.getId()
 		);
 		
@@ -87,7 +87,7 @@ public class TimetableEditService implements EditStrategy
 			lectureDTO.getTime(),
 			lectureDTO.getWeekday(),
 			lectureDTO.getRoom(), 
-			modul);
+			event);
 		
 		entry.setRoom(lectureDTO.getRoomNew());
 		

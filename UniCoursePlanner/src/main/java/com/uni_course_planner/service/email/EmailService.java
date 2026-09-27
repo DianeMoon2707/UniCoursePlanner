@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.uni_course_planner.service.email.text.EmailText;
 
+//Service for sending emails
 @Service
 public class EmailService 
 {

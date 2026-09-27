@@ -1,5 +1,6 @@
 package com.uni_course_planner.service.email.text;
 
+//Base class for email texts containing the message and subject
 public abstract class EmailText 
 {
 	protected String text;

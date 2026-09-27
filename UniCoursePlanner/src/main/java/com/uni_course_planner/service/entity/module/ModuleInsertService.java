@@ -1,4 +1,4 @@
-package com.uni_course_planner.service.relation.module;
+package com.uni_course_planner.service.entity.module;
 
 import org.springframework.stereotype.Service;
 
@@ -15,20 +15,21 @@ import com.uni_course_planner.repository.user.UserRepository;
 import com.uni_course_planner.service.modal.strategy.InsertStrategy;
 import com.uni_course_planner.service.validation.ModuleValidation;
 
+//Save modules and their event types
 @Service
 public class ModuleInsertService implements InsertStrategy
 {
-	private ModuleRepository modulRep;
+	private ModuleRepository moduleRep;
 	private EventTypeRepository eventTypeRep;
 	
 	private UserRepository userRep;	
 	
 	private ModuleValidation validation;
 
-	public ModuleInsertService(ModuleRepository modulRep, EventTypeRepository eventTypeRep, UserRepository userRep,
+	public ModuleInsertService(ModuleRepository moduleRep, EventTypeRepository eventTypeRep, UserRepository userRep,
 			ModuleValidation validation) 
 	{
-		this.modulRep = modulRep;
+		this.moduleRep = moduleRep;
 		this.eventTypeRep = eventTypeRep;
 		
 		this.userRep = userRep;
@@ -51,28 +52,29 @@ public class ModuleInsertService implements InsertStrategy
 	@Override
 	public void save(FieldDTO dto, LogInData currentUser) 
 	{
-		ModuleDTO modulDTO = (ModuleDTO) dto;
-		Long mId = modulRep.findMaxModuleId(currentUser.getId()) + 1;
+		ModuleDTO moduleDTO = (ModuleDTO) dto;
+		Long mId = moduleRep.findMaxModuleId(currentUser.getId()) + 1;
 		
-		Module modul = new Module(
+		Module module = new Module(
 				new ModuleId(currentUser.getId(), mId),
-				modulDTO.getModulename(),
-				modulDTO.getCredits(),
+				moduleDTO.getModulename(),
+				moduleDTO.getCredits(),
 				userRep.findById(currentUser.getId()).get()
 			);
 		
-		validation.validateUserAlreadyGeneratedModul(modul.getModulename(), currentUser.getId());
+		validation.validateModulenameDoesNotContainHyphen(module.getModulename());
+		validation.validateUserAlreadyGeneratedModul(module.getModulename(), currentUser.getId());
 		
-		modulRep.save(modul);
-		this.saveEvents(modulDTO, modul);
+		moduleRep.save(module);
+		this.saveEvents(moduleDTO, module);
 	}
 	
-	private void saveEvents(ModuleDTO modulDTO, Module modul)
+	private void saveEvents(ModuleDTO moduleDTO, Module module)
 	{
-		for(EventTypes type : modulDTO.getEventTypes())
+		for(EventTypes type : moduleDTO.getEventTypes())
 		{
-			EventTypeId eId = new EventTypeId(modul.getmId(), type);
-			EventType et = new EventType(eId, modul);
+			EventTypeId eId = new EventTypeId(module.getmId(), type);
+			EventType et = new EventType(eId, module);
 			eventTypeRep.save(et);
 		}
 	}

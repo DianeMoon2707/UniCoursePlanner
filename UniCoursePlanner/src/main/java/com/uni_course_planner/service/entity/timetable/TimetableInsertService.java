@@ -1,4 +1,4 @@
-package com.uni_course_planner.service.relation.timetable;
+package com.uni_course_planner.service.entity.timetable;
 
 import java.util.List;
 
@@ -17,6 +17,7 @@ import com.uni_course_planner.repository.timetable.TimetableRepository;
 import com.uni_course_planner.service.modal.strategy.InsertStrategy;
 import com.uni_course_planner.service.validation.TimetableValidation;
 
+//Saves lectures in the timetable
 @Service
 public class TimetableInsertService implements InsertStrategy
 {
@@ -43,10 +44,10 @@ public class TimetableInsertService implements InsertStrategy
 	@Override
 	public FieldDTO createDTO(LogInData user) 
 	{
-		List<String> modulnamen = eventTypeRep.findAllByUserId(user.getId()).stream()
+		List<String> modulenames = eventTypeRep.findAllByUserId(user.getId()).stream()
 			.map(et -> et.getModule().getModulename() + " - " + et.geteId().getType().getDescription())
 			.toList();
-		return new LectureInsertDTO(modulnamen);
+		return new LectureInsertDTO(modulenames);
 	}
 
 	@Override
@@ -54,17 +55,17 @@ public class TimetableInsertService implements InsertStrategy
 	{
 		LectureInsertDTO lectureDTO = (LectureInsertDTO) dto;
 		
-		String[]modulOption = lectureDTO.getSelectedModule().split(" - ");
+		String[]moduleOption = lectureDTO.getSelectedModule().split(" - ");
 		EventType event = eventTypeRep.getByModulenameAndType(
-				modulOption[0], 
-				EventTypes.fromDescriptionToEnum(modulOption[1]), 
+				moduleOption[0], 
+				EventTypes.fromDescriptionToEnum(moduleOption[1]), 
 				user.getId()
 		);
 		
 		Weekday day = lectureDTO.getDay();
 		Timeslot time = lectureDTO.getTime();
 		
-		validation.validateUserAlreadyGeneratedEntryForCell(event, day, time);
+		validation.validateCellDoesNotAlreadyContainEvent(event, day, time);
 		
 		Timetable entry = new Timetable(
 			time,

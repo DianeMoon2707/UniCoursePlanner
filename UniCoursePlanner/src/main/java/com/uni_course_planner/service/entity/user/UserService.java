@@ -1,4 +1,4 @@
-package com.uni_course_planner.service.relation.user;
+package com.uni_course_planner.service.entity.user;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -27,11 +27,11 @@ public class UserService
 		
 		this.validation = validation;
 	}
-
-	// User speichern	
+	
 	public void registerUser(String email, String username, String password)
 	{
 		validation.validateEmailAlreadyExists(email);
+		validation.validateUsernameDoesNotContainAt(username);
 		validation.validateUsernameAlreadyExists(username);
 		
 		User user = userRep.save(new User(email));
@@ -42,6 +42,7 @@ public class UserService
 	public void changeUserData(LogInData user, String username, String email)
 	{
 		validation.validateOtherUserHasEmail(user.getId(), email);
+		validation.validateUsernameDoesNotContainAt(username);
 		validation.validatOtherUserHasUsername(user.getId(), username);
 
 		User userForEmail = userRep.findById(user.getId()).get();
@@ -63,12 +64,12 @@ public class UserService
 		logInDataRep.save(user);
 	}
 	
-	//User laden
 	public LogInData getUserByUsername(String username)
 	{
 		return logInDataRep.findByUsername(username).get();
 	}
 	
+	//Extract the username from the forgot password page authentication field
 	public String getUsernameFromAuthenticationField(String authentication)
 	{
 		if(authentication.contains("@"))
@@ -81,6 +82,7 @@ public class UserService
 		}
 	}
 	
+	//Extract the email from the forgot password page authentication field
 	public String getEmailFromAuthenticationField(String authentication)
 	{
 		if(!authentication.contains("@"))

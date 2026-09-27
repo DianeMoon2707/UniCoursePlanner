@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.uni_course_planner.entity.user.*;
 import com.uni_course_planner.repository.user.*;
 
+//Validates user data
 @Service
 public class UserValidation 
 {
@@ -17,6 +18,14 @@ public class UserValidation
 	{
 		this.userRep = userRep;
 		this.logInDataRep = logInDataRep;
+	}
+	
+	public void validateUsernameDoesNotContainAt(String username)
+	{
+		if(username.contains("@"))
+		{
+			throw new IllegalArgumentException("Der Benutzername darf kein '@' enthalten.");
+		}
 	}
 	
 	public void validateEmailAlreadyExists(String email)
