@@ -7,11 +7,14 @@
 		<link rel="stylesheet" th:href="@{/css/profileStyle.css}">	
 	</head>
 	<body>
+		<!-- Main navigation -->
 		<div th:replace="~{fragments/core-fragments :: menu}"></div>
 		
+		<!-- Profile settings -->
 		<div class="content">
 			<h1>Einstellungen</h1>
 			
+			<!-- Form for changing username and email -->
 			<form th:action="@{/changeUserData}" method="post">
 				<label>Benutzername: </label>
 				<input type="text" name="user-field" th:value="${username}" required> <br>
@@ -22,15 +25,16 @@
 				<button type="submit">User-Data ändern</button>
 			</form>
 			
+			<!-- Link for changing the password -->
 			<a th:href="@{/page/logIn/forgotPassword}">Passwort ändern</a>
 			
+			<!-- Display error messages -->
 			<div th:replace="~{fragments/core-fragments :: error-message}"></div>
 			
+			<!-- Form for logging out -->
 			<form th:action="@{/logout}" method="post">
 				<button type="submit">Logout</button>
 			</form>
 		</div>
-		
-		<script th:src="@{/js/logInScripts/password-eye-script.js}"></script>
 	</body>
 </html>

@@ -8,11 +8,17 @@
 		<link rel="stylesheet" th:href="@{/css/coreFragmentStyle.css}">	
 	</head>
 	<body>
+		<!-- Main navigation -->
 		<div th:replace="~{fragments/core-fragments :: menu}"></div>
 		
 		<div class="content">
+			
+			<!-- Calendar and day schedule -->
 			<div class="calendar-view">
+				
+				<!-- Monthly calendar -->
 				<div class="calendar">
+					
 					<h1>Kalender</h1>
 					
 					<div class="calendar-headline">
@@ -40,7 +46,10 @@
 						<div class="raster-row" id="days"></div>
 					</div>
 				</div>
+				
+				<!-- Day schedule for the selected date -->
 				<div class="day-schedule">
+					
 					<h1>Tagesplan</h1>
 					<h2 id="selectedDate"></h2>
 					
@@ -59,6 +68,7 @@
 						<tbody id="eventList"></tbody>
 					</table>
 					
+					<!-- Modal container -->
 					<div id="modalOverlay" class="modal-overlay hidden">
 						<div class="modal-window">
 							
@@ -70,6 +80,7 @@
 						</div>
 					</div>
 					
+					<!-- Buttons for inserting, editing, and deleting entries -->
 					<div class="data-handling-btn">
 						<button type="button" onclick="openCalendarModal('insert')">
 							<i class="bi bi-plus-circle"></i>
@@ -86,9 +97,11 @@
 				</div>
 			</div>
 			
+			<!-- Display error messages -->
 			<div th:replace="~{fragments/core-fragments :: error-message}"></div>
 		</div>
-				
+		
+		<!-- Calendar and modal scripts -->		
 		<script th:src="@{/js/tableScripts/tablerow-action.js}"></script>
 		
 		<script th:src="@{/js/calendarScripts/fill-days.js}"></script>

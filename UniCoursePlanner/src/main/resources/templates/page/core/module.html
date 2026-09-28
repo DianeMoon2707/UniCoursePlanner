@@ -8,6 +8,7 @@
 		<link rel="stylesheet" th:href="@{/css/coreFragmentStyle.css}">	
 	</head>
 	<body>
+		<!-- Main navigation -->
 		<div th:replace="~{fragments/core-fragments :: menu}"></div>
 		
 		<div class="content">
@@ -15,6 +16,7 @@
 			
 			<input hidden id="data">
 			
+			<!-- Modules and events -->
 			<table id="main-table">
 				<thead>
 					<tr>
@@ -38,6 +40,7 @@
 				</tbody>
 			</table>
 			
+			<!-- Modal container -->
 			<div id="modalOverlay" class="modal-overlay hidden">
 				<div class="modal-window">
 					
@@ -49,6 +52,7 @@
 				</div>
 			</div>
 			
+			<!-- Buttons for inserting, editing, and deleting modules -->
 			<div class="data-handling-btn">
 				<button type="button" onclick="openModal('insert', 'MODULE', validateAtLeastOneCheckboxChecked)">
 					<i class="bi bi-plus-circle"></i>
@@ -63,9 +67,11 @@
 				</button>
 			</div>
 			
+			<!-- Display error messages -->
 			<div th:replace="~{fragments/core-fragments :: error-message}"></div>
 		</div>
 		
+		<!-- Table, modal and validation scripts -->
 		<script th:src="@{/js/tableScripts/tablerow-action.js}"></script>
 		<script th:src="@{/js/modulScripts/checkbox-required.js}"></script>
 		<script th:src="@{/js/modal/modal-opening.js}"></script>

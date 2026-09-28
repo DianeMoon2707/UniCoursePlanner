@@ -8,6 +8,7 @@
 		<link rel="stylesheet" th:href="@{/css/coreFragmentStyle.css}">	
 	</head>
 	<body>
+		<!-- Main navigation -->
 		<div th:replace="~{fragments/core-fragments :: menu}"></div>
 		
 		<div class="content">
@@ -15,6 +16,7 @@
 			
 			<input hidden id="data">
 			
+			<!-- Module grades and credits -->
 			<table id="main-table">
 				<thead>
 					<tr>
@@ -39,6 +41,7 @@
 			    <span th:text="${totalCredits}"></span>
 			</p>
 			
+			<!-- Modal container -->
 			<div id="modalOverlay" class="modal-overlay hidden">
 				<div class="modal-window">
 					<button type="button" class="modal-close" onclick="closeModal()">
@@ -49,15 +52,18 @@
 				</div>
 			</div>
 			
+			<!-- Edit actions -->
 			<div class="data-handling-btn">				
 				<button type="button" onclick="openModal('edit', 'CREDITS')">
 					<i class="bi bi-pencil"></i>
 				</button>
 			</div>
 			
+			<!-- Display error messages -->
 			<div th:replace="~{fragments/core-fragments :: error-message}"></div>
 		</div>
 		
+		<!-- Table and modal scripts -->
 		<script th:src="@{/js/tableScripts/tablerow-action.js}"></script>
 		<script th:src="@{/js/modal/modal-opening.js}"></script>
 		<script th:src="@{/js/modal/modal-actions.js}"></script>

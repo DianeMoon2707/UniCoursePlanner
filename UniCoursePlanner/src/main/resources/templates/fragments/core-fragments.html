@@ -1,3 +1,4 @@
+<!-- Navigation menu -->
 <div th:fragment="menu">
 	<nav>
 		<div class="logo">Uni-Course-Planner</div>
@@ -15,6 +16,7 @@
 	</nav>
 </div>
 
+<!-- Display error messages using SweetAlert2 -->
 <div th:fragment="error-message">
 	<div id="message-box" th:if="${errorMessage}" th:data-message="${errorMessage}"></div>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

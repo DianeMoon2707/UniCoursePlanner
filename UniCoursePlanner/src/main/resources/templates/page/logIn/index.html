@@ -6,6 +6,7 @@
 		<link rel="stylesheet" th:href="@{/css/logInStyle.css}">		
 	</head>
 	<body>
+		<!-- LogIn form -->
 		<div class="logInContainer">
 			<h1>LogIn</h1>
 			
@@ -40,10 +41,11 @@
 				<p>Don't hava an account? <a th:href="@{/page/logIn/register}">Register</a></p>
 			</form>
 			
+			<!-- Display error messages -->
 			<div th:replace="~{fragments/core-fragments :: error-message}"></div>
 		</div>
 		
+		<!-- Password visibility script -->
 		<script th:src="@{/js/logInScripts/password-eye-script.js}"></script>
-		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	</body>
 </html>

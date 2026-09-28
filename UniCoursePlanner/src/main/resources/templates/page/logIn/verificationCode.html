@@ -6,6 +6,7 @@
 		<link rel="stylesheet" th:href="@{/css/logInStyle.css}">
 	</head>
 	<body>
+		<!-- Verification code form -->
 		<div class="logInContainer">
 			<h1>Passwort ändern</h1>
 			
@@ -18,6 +19,7 @@
 				<button class="button" type="submit">Email bestätigen</button>
 			</form>
 			
+			<!-- Display error messages -->
 			<div th:replace="~{fragments/core-fragments :: error-message}"></div>
 		</div>
 	</body>
