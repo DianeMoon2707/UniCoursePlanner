@@ -2,6 +2,17 @@
 A web application for planning and managing university courses, modules and events.
 
 ## Motivation:
+In my Bachelor's thesis, I decided to develop a full-stack web application using Java and Spring Boot. The resulting application, **MyCourse**, was designed to manage extracurricular activities (AGs) and automatically assign students to their selected activities. It was my first project using Java Spring Boot.
+
+After completing my Bachelor's thesis, I wanted to further improve my skills in Java Spring Boot and web development. I therefore revisited the fundamentals of **HTML, CSS and JavaScript** and realized that there was still considerable room for improvement, particularly in creating modern and professional user interfaces.
+
+To improve in this area, I studied different approaches to designing and implementing web interfaces, including **navigation menus and logIn pages**. I used tutorials and examples as a starting point, experimented with the techniques myself and adapted them to my own applications. Through this process, I developed a better understanding of how to create and implement professional-looking interfaces independently.
+
+Testing was another area I wanted to improve. Since automated testing had not been part of my Bachelor's thesis, I specifically learned how to write and apply unit tests for a Spring Boot application.
+
+For this project, I therefore chose technologies that allowed me to build on my existing knowledge while addressing these areas of improvement, including **Thymeleaf, JPA, PostgreSQL, Spring Security and email functionality**, as well as **unit testing**.
+
+I also decided to use **Git and GitHub** throughout the development process in order to gain practical experience with version control and Git-based development workflows.
 
 ## Pages:
 ### Register
