@@ -1,8 +1,11 @@
 # UniCoursePlanner
-University Course planning platform with scheduling and ECTS tracking.
+A web application for planning and managing university courses, modules and events.
 
-# Folien:
-  - LogIn
+# Screenshots:
+## LogIn
+
+## Home
+![Home page] (N:/Jessica/GitHub/Bilder/UniCoursePlanner/Home.png)
   - Register
   - Passwort vergessen
   - Profile
