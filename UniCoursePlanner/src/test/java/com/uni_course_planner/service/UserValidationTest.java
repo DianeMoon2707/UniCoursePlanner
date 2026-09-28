@@ -31,7 +31,25 @@ public class UserValidationTest
 	String username = "Max";
 	Long id = 1L;
 	
-	//Register-Tests
+	//Username @ Test
+	@Test 
+	public void testUsernameDoesNotContainAt_usernameContainsAt_throwsException()
+	{
+		String usernameAt = username + "@";
+		
+		assertThrows(
+			IllegalArgumentException.class,	
+			() -> userValidation.validateUsernameDoesNotContainAt(usernameAt));
+	}
+	
+	@Test 
+	public void testUsernameDoesNotContainAt_usernameDoesNotContainAt_throwsNoException()
+	{		
+		assertDoesNotThrow(
+			() -> userValidation.validateUsernameDoesNotContainAt(username));
+	}
+	
+	//User registration
 	//Email
 	@Test
 	public void testEmailAlreadyExists_emailExists_throwsException()
@@ -88,7 +106,7 @@ public class UserValidationTest
 		verify(logInDataRep).findByUsername(username);
 	}
 	
-	//Update-Tests
+	//User update
 	//Email
 	@Test
 	public void testOtherUserHasEmail_emailExistsByOtherUser_throwsException()

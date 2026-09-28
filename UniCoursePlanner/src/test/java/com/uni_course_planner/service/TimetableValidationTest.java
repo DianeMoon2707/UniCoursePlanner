@@ -28,7 +28,6 @@ public class TimetableValidationTest
 	private Weekday day = Weekday.MI;
 	private Timeslot time = Timeslot.SLOT_10_12;
 	
-	//Erstellung von Einträgen
 	@Test
 	public void testCellDoesNotAlreadyContainEvent_entryExists_throwException()
 	{	

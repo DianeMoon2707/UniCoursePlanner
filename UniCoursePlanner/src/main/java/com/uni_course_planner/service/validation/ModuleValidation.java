@@ -11,11 +11,11 @@ import com.uni_course_planner.repository.module.*;
 @Service
 public class ModuleValidation 
 {
-	private ModuleRepository modulRep;
+	private ModuleRepository moduleRep;
 	
 	public ModuleValidation(ModuleRepository modulRep) 
 	{
-		this.modulRep = modulRep;
+		this.moduleRep = modulRep;
 	}
 	
 	public void validateModulenameDoesNotContainHyphen(String modulename)
@@ -28,7 +28,7 @@ public class ModuleValidation
 	
 	public void validateUserAlreadyGeneratedModul(String modulname, Long userId)
 	{
-		Optional<Module> modul = modulRep.findModuleByModulenameAndUserId(modulname, userId);
+		Optional<Module> modul = moduleRep.findModuleByModulenameAndUserId(modulname, userId);
 		
 		if(modul.isPresent())
 		{
@@ -38,7 +38,7 @@ public class ModuleValidation
 	
 	public void validateUserChangesModulnameToAExistingOne(String modulname, Long modulId, Long userId)
 	{
-		Optional<Module> modul = modulRep.findModuleByModulenameAndUserId(modulname, userId);
+		Optional<Module> modul = moduleRep.findModuleByModulenameAndUserId(modulname, userId);
 		
 		if(modul.isPresent())
 		{
