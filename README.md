@@ -141,6 +141,10 @@ The following class diagram shows the structure and interactions of the classes 
 ### Modal
 The following class diagram illustrates the classes used for the modal functionality and the implementation of the Strategy Pattern.
 
+![Class Diagram Modal pic](images/Class%20Diagram%20Modal%20Auszug.png)
+
+All classes from package **service/entity** with the exception of the user-specifical-services implements one of the strategy types.
+
 ## Authentication & Security
 Authentication and authorization are implemented using Spring Security.
 
