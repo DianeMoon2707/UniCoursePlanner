@@ -1,6 +1,8 @@
 # UniCoursePlanner
 A web application for planning and managing university courses, modules and events.
 
+![Home pic](images/Home.png)
+
 ## Motivation:
 In my Bachelor's thesis, I decided to develop a full-stack web application using Java and Spring Boot. The resulting application, **MyCourse**, was designed to manage extracurricular activities (AGs) and automatically assign students to their selected activities. It was my first project using Java Spring Boot.
 
@@ -17,74 +19,72 @@ I also decided to use **Git and GitHub** throughout the development process in o
 ## Features:
 ### Register
 ![Register pic](images/Register.png)
-- Register Users (with hashed passwords)
-- Proofing, if the new user choose an already exisisting username or email
-- Visibility of the password field
+- User registration with password hashing
+- Validation to ensure that the username and email are not already in use
+- Password visibility toggle
 
 ### LogIn
 ![LogIn pic](images/LogIn.png)
-- User authentication (with Spring Security)
-- "Remember me"-Checkbox
+- User authentication using Spring Security
+- "Remember me" functionality
 
-### Home
-![Home pic](images/Home.png)
-Home menu
-
-### Module
+### Modules
 ![Module pic](images/Module.png)
-Table with modules and their events
+Overview of all modules and their associated events
 
 ![Edit Module pic](images/ModulEdit.png)
-- Modal of editing one existing module
-- A table row must be clicked to edit or delete data
-- User input will be validated
+- Modal dialog for editing existing modules
+- Edit and delete modules by selecting a table row
+- User input validation
 
 ### Timetable
 ![Timetable pic](images/Timetable.png)
-- Timetable with Gridlayout
-- Lectures can take place at the same time
-- Colors vary depending on the event type
+- Weekly timetable using a CSS grid layout
+- Multiple lectures can take place at the same time
+- Events are visually distinguished by their event type
 
 ![Insert Lecture in the timetable pic](images/TimetableInsert.png)
-- Modal of saving a new lecture
-- Lectures have to be clicked to become changed or deleted
+- Modal dialog for adding a new lecture
+- Lectures can be edited or deleted by selecting them
 
 ### Calendar
 ![Calendar pic](images/Calendar.png)
-- Calendar with Gridlayout
-- Arrow-Buttons lead to other months
-- Days with events are marked red
-- The current day has a blue background
+- Monthly calendar using a grid layout
+- Navigation between months
+- Days containing events are visually marked
+- The current day is highlighted
 
 ![Calendar with day schedule pic](images/CalendarAndDaySchedule.png)
-- A container that includes the day schedule pops up next to the calendar by clicking on a specific day
-- All events of the day are list in a table
+- Selecting a day displays its schedule next to the calendar
+- All events of the selected day are displayed in a table
 
-![Delete Event in Calendar pic](images/CalendarDelete.png)Modal (Delete) opens by choosing a row
+![Delete Event in Calendar pic](images/CalendarDelete.png)
+Events can be deleted by selecting them from the day's schedule
 
 ### Credits
 ![Credits pic](images/Credits.png)
-- Grands table
-- Grands of a specific module can be added, changed or deleted by clicking at a row
-- Credits of modules that have grade are summed up under the table
+- Overview of credit points and grades for modules
+- Grades can be added, edited and deleted
+- Credit points of graded modules are automatically summed up
 
 ### Profile
 ![Profile pic](images/Profile.png)
-- Profile page for handling their own datas
-- Username and Email can be changed right here
-- For changing a password, the link will guid the user to another page
+- Users can manage their own profile data
+- Username and email can be changed
+- Password changes are handled on a separate page
 
 ### Forgot Password
 ![Change password to test456! pic](images/ForgotPassword.png)
-- If the user gets to the page by clicking at the link on the profile page, his username will be print in the first input box
-- Unless, the user have to enter his username by himself or alternativ his email
+- Users can reset their password using their username or email address
+- The username is automatically pre-filled when the password reset is accessed from the profile page
+- A verification code is sent via email when a valid username or email address is provided
 
 ![Give the code pic](images/VerifyCode.png)
-- If the user enter an existing email or username, he will get an email with a code.
-- Right code = new password activate
+- Users can enter the verification code received by email
+- A correct code allows the user to set a new password
   
 ![Wrong code pic](images/VerifyCodeWrongCode.png)
-Wrong code = try again
+Invalid verification codes are rejected and the user can try again
 
 ## Technologies
 ### Backend
@@ -104,37 +104,51 @@ Wrong code = try again
 ### Database
 - PostgreSQL
 
-### Development Tools
+### Tools
 - Eclipse
-- Git(Hub)
+- Git
+- GitHub
 - pgAdmin
 
 ## Architecture
 Packet-Diagramm
 
 ## Database
+The application uses PostgreSQL as its relational database.
+JPA and Hibernate are used for object-relational mapping.
 ER-Diagramm
 
 ## Authentication & Security
-Authentication is implemented using Spring Security.
+Authentication and authorization are implemented using Spring Security.
 
 The application provides:
-- LogIn and LogOut
+- LogIn and Logout
 - User authentication
-- User authorization
-- Secured password saving and encoding with bcrypt
+- Authorization for protected pages
+- Password hashing using BCrypt
+- Password reset via email verification code
+- "Remember me" functionality
 
 ## Testing
-The project contains tests for validation components.
+Testing was one of the main areas I wanted to improve after my Bachelor's thesis.
+
+The project contains unit tests for validation components.
 
 Testing technologies include:
 - JUnit
 - Mockito
 
+## Version Control
+Git and GitHub were used throughout the development process.
+
+The project uses Git for:
+- Version control
+- Feature branches
+- Merging changes
+
 ## Future Improvements
 Possible future improvements include:
 - Integration tests
-- Additional user roles (eg. Student, Pupil)
-- Module Folders (eg. Mathematic BA, Informatic BA, Informatic MA)
-- Button to insert timetable lectures in the calendar.
-- Print timetable as PDF
+- Module folders (e.g. B.A. Mathematics, B.A. Computer Science, M.A. Computer Science)
+- Option to transfer timetable events to the calendar
+- Export timetable as PDF
