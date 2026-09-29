@@ -111,12 +111,35 @@ Invalid verification codes are rejected and the user can try again
 - pgAdmin
 
 ## Architecture
-Packet-Diagramm
+### Main Structure
+The application is structured into several packages according to their responsibilities.
 
-## Database
+![Package Diagram pic](images/Package%20Diagramm.png)
+
+The main layers are:
+- **Controller** – handles incoming requests, primarily for displaying and processing pages
+- **Service** – contains application and business logic
+  - **Email** – handles email sending and contains email templates/content
+  - **Security** – handles security-related operations, such as password changes
+  - **Modal** – implements the Strategy Pattern for insert, edit and delete operations
+  - **Entity** – contains services for entity-related operations and database queries
+  - **Validation** – contains validation rules and corresponding error messages
+- **Repository** – handles database access
+- **Entity** – represents persistent data
+- **DTO** – transfers data between application layers
+- **Config** – contains application and security configuration
+- **Constants** – contains enums and constants used throughout the application
+
+### Database
 The application uses PostgreSQL as its relational database.
 JPA and Hibernate are used for object-relational mapping.
 ER-Diagramm
+
+### Example: Module Page
+The following class diagram shows the structure and interactions of the classes involved in the Module page.
+
+### Modal
+The following class diagram illustrates the classes used for the modal functionality and the implementation of the Strategy Pattern.
 
 ## Authentication & Security
 Authentication and authorization are implemented using Spring Security.
