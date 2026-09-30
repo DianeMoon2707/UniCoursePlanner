@@ -139,11 +139,15 @@ ER-Diagramm
 The following class diagram shows the structure and interactions of the classes involved in the Module page.
 
 ### Modal
-The following class diagram illustrates the classes used for the modal functionality and the implementation of the Strategy Pattern.
+The following class diagram shows a selected excerpt of the classes and packages directly involved in the modal functionality and the implementation of the Strategy Pattern.
 
 ![Class Diagram Modal pic](images/Class%20Diagram%20Modal%20Auszug.png)
 
-All classes from package **service/entity** with the exception of the user-specifical-services implements one of the strategy types.
+The diagram focuses on the classes directly related to the **ModalServiceFactory**. For readability, only the relevant packages, classes and relationships are shown. Other related packages, such as repositories, entities and validation components, are intentionally omitted.
+
+The **service.entity** package is shown with selected subpackages to indicate that additional entity-related packages exist. The diagram does not represent the complete package structure of the application.
+
+The classes in the **module**, **calendar** and **timetable** packages implement the available **InsertStrategy**, **EditStrategy** and **DeleteStrategy** interfaces. Classes in the **credits** package implement only the **EditStrategy**, while user-specific services do not implement any of the modal strategies.
 
 ## Authentication & Security
 Authentication and authorization are implemented using Spring Security.
