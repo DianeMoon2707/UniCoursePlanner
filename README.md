@@ -135,8 +135,10 @@ The application uses PostgreSQL as its relational database.
 JPA and Hibernate are used for object-relational mapping.
 ER-Diagramm
 
-### Example: Module Page
+### Example: Calendar Page
 The following class diagram shows the structure and interactions of the classes involved in the Module page.
+
+![Class Diagram Calendar pic](images/Class%20Diagram%20Calendar%20Auszug.png)
 
 ### Modal
 The following class diagram shows a selected excerpt of the classes and packages directly involved in the modal functionality and the implementation of the Strategy Pattern.
