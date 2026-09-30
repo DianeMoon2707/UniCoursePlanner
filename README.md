@@ -136,9 +136,13 @@ JPA and Hibernate are used for object-relational mapping.
 ER-Diagramm
 
 ### Example: Calendar Page
-The following class diagram shows the structure and interactions of the classes involved in the Module page.
+The following class diagram shows a selected excerpt of the structure and interactions of the classes and packages involved in the Calendar page.
 
 ![Class Diagram Calendar pic](images/Class%20Diagram%20Calendar%20Auszug.png)
+
+For readability, only the most relevant packages, classes and relationships are shown. The diagram does not represent the complete class structure of the application.
+
+**UserService** and **User** are shown as attributes rather than as separate classes, as they are only included to illustrate their relevance to the classes shown in the diagram.
 
 ### Modal
 The following class diagram shows a selected excerpt of the classes and packages directly involved in the modal functionality and the implementation of the Strategy Pattern.
